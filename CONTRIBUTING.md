@@ -1,4 +1,4 @@
-# Descent Dapp
+# Descent Protocol
 
 ## CONTRIBUTING
 
