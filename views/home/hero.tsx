@@ -1,0 +1,87 @@
+import Link from "next/link";
+import { DescentButton, DescentClickAnimation } from "@/components";
+import { ArrowRightAlt, ArrowRightIcon, BaseIcon } from "@/public/icons";
+import classNames from "classnames";
+
+const HeroSection = () => {
+  const content = [
+    {
+      title: "- - -",
+      description: "xNGN total supply",
+    },
+    {
+      title: "₦990.50",
+      description: "xNGN price",
+    },
+    {
+      title: "- - -",
+      description: "xNGN volume",
+    },
+  ];
+  return (
+    <section className="w-full mt-24 md:mt-32 xl:mt-24 flex flex-col justify-center items-center">
+      <Link
+        href="#"
+        className="rounded-3xl group py-2 px-4 flex items-center gap-4 bg-white-50 shadow-alt cursor-pointer"
+      >
+        <BaseIcon />
+        <div className="text-[10px] lg:text-sm text-black-50">
+          Descent protocol is built on Base
+        </div>
+        <div className="w-[1px] h-4 bg-grey-150" />
+        <div className="flex items-center gap-2 group-hover:scale-105 transition-all duration-200">
+          <div className="text-[10px] lg:text-sm text-black-50 group-hover:text-blue-150">
+            Read more
+          </div>
+          <ArrowRightIcon />
+        </div>
+      </Link>
+
+      <h1 className="text-center font-normal leading-[50px] lg:leading-[80px] text-4xl lg:text-[54px] text-black-50 mt-10 w-full md:w-[70%] xl:w-3/5 2xl:w-2/4">
+        Decentralized <span className="text-green-150">protocol</span> powering
+        digital currencies
+      </h1>
+
+      <h3 className="md:w-[70%] xl:w-2/4 2xl:w-2/5 xl:px-5 text-lg lg:text-2xl xl:text-xl leading-[32px] text-center text-grey-200 mt-6 font-normal">
+        Over-collateralized and capital efficient protocol powering xNGN, the
+        most liquid Naira stablecoin
+      </h3>
+
+      <div className="mt-12 flex items-center justify-center gap-8">
+        <div className="w-[150px]">
+          <DescentButton text="Enter App" />
+        </div>
+
+        <DescentClickAnimation>
+          <Link href="#" className="flex">
+            <div className="text-grey-250 text-lg">Read docts</div>
+            <ArrowRightAlt />
+          </Link>
+        </DescentClickAnimation>
+      </div>
+
+      <div className="mt-20 bg-black-200 rounded-3xl w-full py-8 flex flex-row justify-around lg:justify-center items-center lg:gap-0">
+        {content.map((item, index) => (
+          <div
+            className={classNames(
+              "flex flex-col justify-center items-center lg:w-1/4",
+              {
+                "md:border-x md:border-grey-300": index === 1,
+              }
+            )}
+            key={index}
+          >
+            <div className="text-xl lg:text-[32px] text-white-50 text-center">
+              {item.title}
+            </div>
+            <div className="text-xs lg:text-base text-white-50 text-center">
+              {item.description}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default HeroSection;

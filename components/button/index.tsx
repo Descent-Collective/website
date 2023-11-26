@@ -17,7 +17,7 @@ const DescentButton = ({
         <motion.button
           onClick={onClick}
           whileHover={{ top: 0, left: 0 }}
-          whileTap={{ scale: 0.97 }}
+          whileTap={{ scale: 0.9 }}
           initial={{ top: "-9.5%", left: "-0.4%" }}
           transition={{ ease: "backOut" }}
           className={classNames(
@@ -36,14 +36,14 @@ const DescentButton = ({
   return (
     <motion.button
       onClick={onClick}
-      whileHover={{ scale: 1.01 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.9 }}
       transition={{ ease: "backOut" }}
       className={classNames(
         "w-full h-12 rounded-lg flex justify-center items-center gap-2",
         {
           "pointer-events-none": loading || disabled,
-          "bg-blue-100 text-black-50 shadow-lg font-medium text-lg border border-black-100":
+          "bg-blue-100 text-black-50 shadow-alt font-medium text-lg border border-black-100":
             variant === "primary",
 
           "bg-transparent text-green-50 text-base border-[1.5px] border-green-500":
