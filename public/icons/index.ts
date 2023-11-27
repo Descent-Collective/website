@@ -11,6 +11,9 @@ import UsdcFlag from "./usdc-alt.svg";
 import NigeriaFlag from "./nigeria.svg";
 import ArgentinaFlag from "./argentina.svg";
 import KenyaFlag from "./kenya.svg";
+import GithubIcon from "./github-icon.svg";
+import TwiiterIcon from "./twitter-icon.svg";
+import DiscordIcon from "./discord-icon.svg";
 
 export {
   CancelIcon,
@@ -26,4 +29,7 @@ export {
   NigeriaFlag,
   ArgentinaFlag,
   KenyaFlag,
+  GithubIcon,
+  TwiiterIcon,
+  DiscordIcon,
 };
