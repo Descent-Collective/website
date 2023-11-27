@@ -60,21 +60,21 @@ const HeroSection = () => {
         </DescentClickAnimation>
       </div>
 
-      <div className="mt-10 md:mt-20 bg-black-200 rounded-3xl w-full py-8 flex flex-row justify-around lg:justify-center items-center lg:gap-0">
+      <div className="mt-10 md:mt-20 bg-black-200 rounded-3xl w-full py-8 flex flex-row justify-around md:justify-center items-center lg:gap-0">
         {content.map((item, index) => (
           <div
             className={classNames(
-              "flex flex-col justify-center items-center lg:w-1/4",
+              "flex flex-col justify-center items-center gap-4 md:w-1/4",
               {
                 "md:border-x md:border-grey-300": index === 1,
               }
             )}
             key={index}
           >
-            <div className="text-xl lg:text-[32px] text-white-50 text-center">
+            <div className="text-lg md:text-2xl lg:text-[32px] text-white-50 text-center">
               {item.title}
             </div>
-            <div className="text-xs lg:text-base text-white-50 text-center">
+            <div className="text-[10px] md:text-sm lg:text-base text-white-50 text-center">
               {item.description}
             </div>
           </div>

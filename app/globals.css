@@ -10,3 +10,30 @@ body {
 .shadow-alt {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+.rangeslider,
+.rangeslider-horizontal .rangeslider__fill {
+  background-color: #030303 !important;
+  height: 7px !important;
+}
+
+.rangeslider-horizontal .rangeslider__handle {
+  height: 24px !important;
+  width: 24px !important;
+  background-color: #030303 !important;
+}
+
+.rangeslider .rangeslider__handle {
+  box-shadow: none !important;
+  border: none !important;
+  background-color: #030303 !important;
+}
+
+.rangeslider-horizontal .rangeslider__handle:after {
+  background-color: #bcfd00 !important;
+  width: 16px !important;
+  height: 16px !important;
+  box-shadow: none !important;
+  top: 4px !important;
+  left: 4px !important;
+}

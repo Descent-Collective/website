@@ -44,18 +44,19 @@ const DescentButton = ({
         "w-full h-12 rounded-lg flex justify-center items-center gap-1",
         {
           "pointer-events-none": loading || disabled,
-          "bg-blue-100 text-black-50 shadow-alt font-medium text-lg border border-black-100":
+          "bg-blue-100 text-black-50 shadow-alt font-medium text-base md:text-lg border border-black-100":
             variant === "primary",
 
-          "bg-transparent text-green-50 text-base border-[1.5px] border-green-500":
+          "bg-transparent text-green-50 text-sm md:text-base border-[1.5px] border-green-500":
             variant === "accent",
 
-          "bg-black-150 text-blue-100 text-base": variant === "tertiary",
+          "bg-black-150 text-blue-100 text-sm md:text-base":
+            variant === "tertiary",
 
           "bg-green-100 text-white-50 text-xs":
             variant === "action" && !disabled,
 
-          "bg-grey-100 text-grey-50 text-base": disabled,
+          "bg-grey-100 text-grey-50": disabled,
         }
       )}
       disabled={disabled}
