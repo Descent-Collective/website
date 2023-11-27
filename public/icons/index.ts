@@ -7,6 +7,10 @@ import LogoSmIcon from "./logo-sm.svg";
 import ArrowRightAlt from "./arrow-right-alt.svg";
 import ArrowRightAccent from "./arrow-right-accent.svg";
 import UsdcIcon from "./usdc-icon.svg";
+import UsdcFlag from "./usdc-alt.svg";
+import NigeriaFlag from "./nigeria.svg";
+import ArgentinaFlag from "./argentina.svg";
+import KenyaFlag from "./kenya.svg";
 
 export {
   CancelIcon,
@@ -18,4 +22,8 @@ export {
   ArrowRightAlt,
   ArrowRightAccent,
   UsdcIcon,
+  UsdcFlag,
+  NigeriaFlag,
+  ArgentinaFlag,
+  KenyaFlag,
 };

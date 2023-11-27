@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { motion } from "framer-motion";
 
-import { DescentButton } from "@/components";
+import { DescentButton, DescentContainer } from "@/components";
 import { ArrowRightAccent, UsdcIcon } from "@/public/icons";
 import { useEffect, useState } from "react";
 
@@ -51,35 +51,37 @@ const SecondSection = () => {
     return () => clearInterval(interval);
   }, [sections.length]);
   return (
-    <section className="mt-20 md:mt-[100px] flex flex-col md:flex-row items-center justify-between gap-3 md:gap-8 xl:gap-12">
-      <div className="flex items-center gap-6 md:w-[60%] h-56">
-        <div className="flex flex-col items-center justify-center gap-2">
-          {sections.map((_, index) => (
-            <AnimatedTab key={index} isActive={index === currentTab} />
-          ))}
+    <DescentContainer>
+      <section className="mt-20 md:mt-[100px] flex flex-col md:flex-row items-center justify-between gap-3 md:gap-8 xl:gap-12">
+        <div className="flex items-center gap-6 md:w-[60%] h-56">
+          <div className="flex flex-col items-center justify-center gap-2">
+            {sections.map((_, index) => (
+              <AnimatedTab key={index} isActive={index === currentTab} />
+            ))}
+          </div>
+
+          {sections[currentTab]}
         </div>
 
-        {sections[currentTab]}
-      </div>
-
-      <div className="border-[0.5px] border-green-50 bg-white-200 rounded-3xl p-9 xl:p-[58px] flex flex-col justify-center items-start gap-5 md:w-[40%]">
-        <p className="text-base font-bold text-grey-400">Discover xNGN</p>
-        <h4 className="text-2xl md:text-3xl xl:text-[40px] font-bold text-black-100">
-          1xNGN ≈ 1NGN
-        </h4>
-        <p className="text-sm md:text-lg md:leading-[30px]  text-black-100">
-          A digital currency independent from banks. Generate or buy at ease.
-          Spend on your own terms.
-        </p>
-        <div className="min-w-[210px]">
-          <DescentButton
-            variant="accent"
-            icon={<ArrowRightAccent />}
-            text="Read more in Docs"
-          />
+        <div className="border-[0.5px] border-green-50 bg-white-200 rounded-3xl p-9 xl:p-[58px] flex flex-col justify-center items-start gap-5 md:w-[40%]">
+          <p className="text-base font-bold text-grey-400">Discover xNGN</p>
+          <h4 className="text-2xl md:text-3xl xl:text-[40px] font-bold text-black-100">
+            1xNGN ≈ 1NGN
+          </h4>
+          <p className="text-sm md:text-lg md:leading-[30px]  text-black-100">
+            A digital currency independent from banks. Generate or buy at ease.
+            Spend on your own terms.
+          </p>
+          <div className="min-w-[210px]">
+            <DescentButton
+              variant="accent"
+              icon={<ArrowRightAccent />}
+              text="Read more in Docs"
+            />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </DescentContainer>
   );
 };
 

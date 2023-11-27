@@ -1,15 +1,7 @@
-import {
-  ArrowRightIcon,
-  BaseIcon,
-  LogoIcon,
-  MetamaskIcon,
-} from "@/public/icons";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import DescentHeader from "@/components/header";
 import HeroSection from "./hero";
 import SecondSection from "./second-section";
 import ThirdSection from "./third-section";
+import FourthStep from "./fourth-step";
 
 const HomeView = () => {
   return (
@@ -17,6 +9,7 @@ const HomeView = () => {
       <HeroSection />
       <SecondSection />
       <ThirdSection />
+      <FourthStep />
     </div>
   );
 };
