@@ -10,6 +10,7 @@ const DescentButton = ({
   disabled,
   loading,
   variant = "primary",
+  icon,
 }: Button) => {
   if (variant === "secondary") {
     return (
@@ -40,7 +41,7 @@ const DescentButton = ({
       whileTap={{ scale: 0.9 }}
       transition={{ ease: "backOut" }}
       className={classNames(
-        "w-full h-12 rounded-lg flex justify-center items-center gap-2",
+        "w-full h-12 rounded-lg flex justify-center items-center gap-1",
         {
           "pointer-events-none": loading || disabled,
           "bg-blue-100 text-black-50 shadow-alt font-medium text-lg border border-black-100":
@@ -61,6 +62,8 @@ const DescentButton = ({
       type={type}
     >
       {text}
+
+      {icon && icon}
     </motion.button>
   );
 };

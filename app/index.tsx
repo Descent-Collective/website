@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 const AppHome = ({ children }: { children: ReactNode }) => {
   return (
-    <main className="container mx-auto px-5 2xl:px-0">
+    <main className="max-w-[1440px] mx-auto px-4 md:px-6">
       <DescentHeader />
       {children}
     </main>

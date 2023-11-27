@@ -19,30 +19,30 @@ const HeroSection = () => {
     },
   ];
   return (
-    <section className="w-full mt-24 md:mt-32 xl:mt-24 flex flex-col justify-center items-center">
+    <section className="w-full mt-32 xl:mt-24 flex flex-col justify-center items-center">
       <Link
         href="#"
         className="rounded-3xl group py-2 px-4 flex items-center gap-4 bg-white-50 shadow-alt cursor-pointer"
       >
         <BaseIcon />
-        <div className="text-[10px] lg:text-sm text-black-50">
+        <div className="text-[10px] md:text-sm text-black-50">
           Descent protocol is built on Base
         </div>
         <div className="w-[1px] h-4 bg-grey-150" />
         <div className="flex items-center gap-2 group-hover:scale-105 transition-all duration-200">
-          <div className="text-[10px] lg:text-sm text-black-50 group-hover:text-blue-150">
+          <div className="text-[10px] md:text-sm text-black-50 group-hover:text-blue-150">
             Read more
           </div>
           <ArrowRightIcon />
         </div>
       </Link>
 
-      <h1 className="text-center font-normal leading-[50px] lg:leading-[80px] text-4xl lg:text-[54px] text-black-50 mt-10 w-full md:w-[70%] xl:w-3/5 2xl:w-2/4">
+      <h1 className="text-center font-normal leading-[40px] md:leading-[50px] lg:leading-[80px] text-[26px] md:text-5xl lg:text-[54px] text-black-50 mt-6 md:mt-10 w-full md:w-[80%] xl:w-3/5 2xl:w-2/4">
         Decentralized <span className="text-green-150">protocol</span> powering
         digital currencies
       </h1>
 
-      <h3 className="md:w-[70%] xl:w-2/4 2xl:w-2/5 xl:px-5 text-lg lg:text-2xl xl:text-xl leading-[32px] text-center text-grey-200 mt-6 font-normal">
+      <h3 className="md:w-[73%] xl:w-2/4 2xl:w-2/5 xl:px-5 text-sm md:text-xl xl:text-xl leading-[27px] md:leading-[32px] text-center text-grey-200 mt-3 md:mt-6 font-normal">
         Over-collateralized and capital efficient protocol powering xNGN, the
         most liquid Naira stablecoin
       </h3>
@@ -60,7 +60,7 @@ const HeroSection = () => {
         </DescentClickAnimation>
       </div>
 
-      <div className="mt-20 bg-black-200 rounded-3xl w-full py-8 flex flex-row justify-around lg:justify-center items-center lg:gap-0">
+      <div className="mt-10 md:mt-20 bg-black-200 rounded-3xl w-full py-8 flex flex-row justify-around lg:justify-center items-center lg:gap-0">
         {content.map((item, index) => (
           <div
             className={classNames(
