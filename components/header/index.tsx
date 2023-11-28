@@ -2,11 +2,12 @@ import { useState } from "react";
 import Link from "next/link";
 
 import { BaseIcon, LogoIcon, MenuIcon, MetamaskIcon } from "@/public/icons";
-import { DescentClickAnimation, DescentContainer } from "..";
+import { DescentButton, DescentClickAnimation, DescentContainer } from "..";
 import MenuComponent from "./menu";
 
 const DescentHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [connected, setConnected] = useState(false);
 
   return (
     <>
@@ -27,33 +28,39 @@ const DescentHeader = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-2">
-            <div className="hidden md:flex">
+          {!connected ? (
+            <div className="min-w-[180px]">
+              <DescentButton variant="info" text="Connect Wallet" />
+            </div>
+          ) : (
+            <div className="flex items-center justify-end gap-2">
+              <div className="hidden md:flex">
+                <DescentClickAnimation>
+                  <div className="bg-white-50 cursor-pointer border border-white-100 rounded-md h-10 lg:h-12 p-3 flex justify-center items-center gap-[6px]">
+                    <BaseIcon />
+                    <div className="lg:text-lg text-xs font-medium text-black-100">
+                      0 ETH
+                    </div>
+                  </div>
+                </DescentClickAnimation>
+              </div>
+
               <DescentClickAnimation>
-                <div className="bg-white-50 cursor-pointer border border-white-100 rounded-md h-10 lg:h-12 p-3 flex justify-center items-center gap-[6px]">
-                  <BaseIcon />
-                  <div className="lg:text-lg text-xs font-medium text-black-100">
-                    0 ETH
+                <div className="bg-white-150 cursor-pointer border border-white-100 rounded-2xl md:rounded-md h-8 md:h-12 px-[6px] py-[7px] md:p-3 flex justify-center items-center gap-2">
+                  <MetamaskIcon />
+                  <div className="md:text-lg text-[10px] font-medium text-black-100">
+                    0xE3...4f2E
                   </div>
                 </div>
               </DescentClickAnimation>
-            </div>
 
-            <DescentClickAnimation>
-              <div className="bg-white-150 cursor-pointer border border-white-100 rounded-2xl md:rounded-md h-8 md:h-12 px-[6px] py-[7px] md:p-3 flex justify-center items-center gap-2">
-                <MetamaskIcon />
-                <div className="md:text-lg text-[10px] font-medium text-black-100">
-                  0xE3...4f2E
+              <DescentClickAnimation>
+                <div onClick={() => setIsOpen(true)} className="md:hidden">
+                  <MenuIcon />
                 </div>
-              </div>
-            </DescentClickAnimation>
-
-            <DescentClickAnimation>
-              <div onClick={() => setIsOpen(true)} className="md:hidden">
-                <MenuIcon />
-              </div>
-            </DescentClickAnimation>
-          </div>
+              </DescentClickAnimation>
+            </div>
+          )}
         </header>
       </DescentContainer>
 

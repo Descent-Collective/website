@@ -53,6 +53,9 @@ const DescentButton = ({
           "bg-transparent text-red-50 text-sm md:text-base border-[1.5px] border-red-50":
             variant === "danger",
 
+          "bg-transparent text-black-100 text-base md:text-lg border-[1.5px] border-black-100 font-medium":
+            variant === "info",
+
           "bg-black-150 text-blue-100 text-sm md:text-base":
             variant === "tertiary",
 

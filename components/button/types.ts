@@ -10,6 +10,7 @@ export interface Button {
     | "tertiary"
     | "action"
     | "accent"
-    | "danger";
+    | "danger"
+    | "info";
   icon?: React.ReactNode;
 }
