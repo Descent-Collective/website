@@ -62,7 +62,7 @@ const SliderComponent = ({
   title: string;
   isPercentage?: boolean;
 }) => {
-  const [value, setValue] = useState(isPercentage ? 150 : 1000);
+  const [value, setValue] = useState(isPercentage ? 30 : 1000);
 
   const handleChangeStart = () => {
     console.log("Change event started");
@@ -85,8 +85,8 @@ const SliderComponent = ({
 
       <div className="slider">
         <Slider
-          min={isPercentage ? 5 : 50}
-          max={isPercentage ? 2000 : 10000}
+          min={isPercentage ? 1 : 50}
+          max={isPercentage ? 100 : 10000}
           value={value}
           onChangeStart={handleChangeStart}
           onChange={handleChange}
