@@ -1,11 +1,9 @@
-<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_1662_92291)">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M-0.5 -0.5H36.5V36.5H-0.5V-0.5Z" fill="white"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M24.1643 -0.5H36.5V36.5H24.1643V-0.5ZM-0.5 -0.5H11.8357V36.5H-0.5V-0.5Z" fill="#008753"/>
-</g>
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<circle cx="18" cy="18" r="18" fill="url(#pattern0)"/>
 <defs>
-<clipPath id="clip0_1662_92291">
-<rect width="37" height="37" fill="white" transform="translate(-0.5 -0.5)"/>
-</clipPath>
+<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_1719_105590" transform="scale(0.027027)"/>
+</pattern>
+<image id="image0_1719_105590" width="37" height="37" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABhSURBVHgB7c4hGYAwAAXhB33ogEcSgA9PDwoQgBJ4OizQVuHmJu7XJ27Kvdd0eLcrx7Lyvvw5vyc95gzIKcopyinKKcopyinKKcopyinKKcopyinKKcopyinKKcopasipBkciCCNa1IBYAAAAAElFTkSuQmCC"/>
 </defs>
 </svg>

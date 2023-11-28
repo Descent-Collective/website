@@ -14,7 +14,7 @@ const content = [
     volume: "568,990",
     tvl: "568,990",
     borrowRate: "10.50%",
-    icon: <ArgentinaFlag />,
+    icon: <NigeriaFlag />,
   },
   {
     title: "USDC - xARS",
