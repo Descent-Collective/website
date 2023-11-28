@@ -37,7 +37,9 @@ const content = [
 const FourthStep = () => {
   return (
     <section className="bg-green-200 py-10 px-8 pb-14 md:p-12 md:pb-20 xl:pt-[61px] xl:pb-[91px] xl:px-20 2xl:px-44 mt-12 md:mt-[72px]">
-      <h4 className="text-center text-3xl md:text-[40px]">Vaults</h4>
+      <h4 className="font-Space_Mono text-center text-3xl md:text-[40px]">
+        Vaults
+      </h4>
       <p className="text-center text-base md:text-xl text-grey-200 mt-6 xl:max-w-[47%] 2xl:max-w-[26%] mx-auto">
         Borrow against your crypto assets at competitive rates to unlock new
         capital streams.

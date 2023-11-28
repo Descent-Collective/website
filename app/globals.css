@@ -2,6 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "SF UI Display";
+  src: url("../fonts/SF_UI_Display/sf-ui-display-light-58646b33e0551.otf");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF UI Display";
+  src: url("../fonts/SF_UI_Display/SF-UI-Display-Regular.otf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF UI Display";
+  src: url("../fonts/SF_UI_Display/sf-ui-display-medium-58646be638f96.otf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF UI Display";
+  src: url("../fonts/SF_UI_Display/sf-ui-display-semibold-58646eddcae92.otf");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF UI Display";
+  src: url("../fonts/SF_UI_Display/sf-ui-display-bold-58646a511e3d9.otf");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF UI Display";
+  src: url("../fonts/SF_UI_Display/sf-ui-display-bold-58646a511e3d9.otf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF UI Display";
+  src: url("../fonts/SF_UI_Display/sf-ui-display-heavy-586470160b9e5.otf");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Space Mono";
+  src: url("../fonts/Space_Mono/SpaceMono-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Space Mono";
+  src: url("../fonts/Space_Mono/SpaceMono-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Space Mono";
+  src: url("../fonts/Space_Mono/SpaceMono-Bold.ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   padding: 0;

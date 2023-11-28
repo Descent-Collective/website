@@ -64,6 +64,11 @@ const config: Config = {
           50: "#FF7663",
         },
       },
+
+      fontFamily: {
+        SF_UI_Display: ["SF UI Display"],
+        Space_Mono: ["Space Mono"],
+      },
     },
   },
   plugins: [],

@@ -50,12 +50,12 @@ const HeroSection = () => {
             </div>
           </Link>
 
-          <h1 className="text-center font-normal leading-[40px] md:leading-[50px] lg:leading-[80px] text-[26px] md:text-5xl lg:text-[54px] text-black-50 mt-6 md:mt-10 w-full md:w-[80%] xl:w-3/5 2xl:w-2/4">
+          <h1 className="font-Space_Mono text-center font-normal leading-[40px] md:leading-[50px] lg:leading-[80px] text-[26px] md:text-5xl lg:text-[54px] text-black-50 mt-6 md:mt-10 w-full md:w-[95%] xl:w-[65%]">
             Decentralized <span className="text-green-150">protocol</span>{" "}
             powering digital currencies
           </h1>
 
-          <h3 className="md:w-[73%] xl:w-2/4 2xl:w-2/5 xl:px-5 text-sm md:text-xl xl:text-xl leading-[27px] md:leading-[32px] text-center text-grey-200 mt-3 md:mt-6 font-normal">
+          <h3 className="md:w-[55%] xl:w-[40%] xl:px-5 text-sm md:text-xl xl:text-xl leading-[27px] md:leading-[32px] text-center text-grey-200 mt-3 md:mt-6 font-normal">
             Over-collateralized and capital efficient protocol powering xNGN,
             the most liquid Naira stablecoin
           </h3>
@@ -84,7 +84,7 @@ const HeroSection = () => {
                 )}
                 key={index}
               >
-                <div className="text-lg md:text-2xl lg:text-[32px] text-white-50 text-center">
+                <div className="font-Space_Mono text-lg md:text-2xl lg:text-[32px] text-white-50 text-center">
                   {item.title}
                 </div>
                 <div className="text-[10px] md:text-sm lg:text-base text-white-50 text-center">

@@ -65,7 +65,7 @@ const SecondSection = () => {
 
         <div className="border-[0.5px] border-green-50 bg-white-200 rounded-3xl p-9 xl:p-[58px] flex flex-col justify-center items-start gap-5 md:w-[40%]">
           <p className="text-base font-bold text-grey-400">Discover xNGN</p>
-          <h4 className="text-2xl md:text-3xl xl:text-[40px] font-bold text-black-100">
+          <h4 className="font-Space_Mono text-2xl md:text-3xl xl:text-[40px] font-bold text-black-100">
             1xNGN ≈ 1NGN
           </h4>
           <p className="text-sm md:text-lg md:leading-[30px]  text-black-100">
