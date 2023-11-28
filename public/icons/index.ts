@@ -14,6 +14,11 @@ import KenyaFlag from "./kenya.svg";
 import GithubIcon from "./github-icon.svg";
 import TwiiterIcon from "./twitter-icon.svg";
 import DiscordIcon from "./discord-icon.svg";
+import FirstShape from "./first-shape.svg";
+import SecondShape from "./second-shape.svg";
+import ThirdShape from "./third-shape.svg";
+import MenuIcon from "./menu-icon.svg";
+import LinkIcon from "./link-icon.svg";
 
 export {
   CancelIcon,
@@ -32,4 +37,9 @@ export {
   GithubIcon,
   TwiiterIcon,
   DiscordIcon,
+  FirstShape,
+  SecondShape,
+  ThirdShape,
+  MenuIcon,
+  LinkIcon,
 };

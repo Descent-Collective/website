@@ -4,6 +4,12 @@ export interface Button {
   type?: "button" | "submit" | "reset";
   loading?: boolean;
   disabled?: boolean;
-  variant?: "primary" | "secondary" | "tertiary" | "action" | "accent";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "tertiary"
+    | "action"
+    | "accent"
+    | "danger";
   icon?: React.ReactNode;
 }

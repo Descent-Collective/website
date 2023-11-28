@@ -34,6 +34,7 @@ const config: Config = {
           150: "#f8f8f8",
           200: "#FAFFFE",
           250: "#FCFCFC",
+          300: "#FBFAF9",
         },
         green: {
           50: "#26A989",
@@ -57,6 +58,7 @@ const config: Config = {
           550: "#8D8D8D",
           600: "#545454",
           650: "#9F9F9F",
+          700: "#C0C0C0",
         },
         red: {
           50: "#FF7663",

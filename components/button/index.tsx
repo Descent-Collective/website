@@ -50,6 +50,9 @@ const DescentButton = ({
           "bg-transparent text-green-50 text-sm md:text-base border-[1.5px] border-green-500":
             variant === "accent",
 
+          "bg-transparent text-red-50 text-sm md:text-base border-[1.5px] border-red-50":
+            variant === "danger",
+
           "bg-black-150 text-blue-100 text-sm md:text-base":
             variant === "tertiary",
 
