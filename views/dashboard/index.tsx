@@ -5,6 +5,7 @@ import classNames from "classnames";
 import FirstItem from "./first-item";
 import SecondItem from "./second-item";
 import ThirdItem from "./third-item";
+import RightBox from "./right-box";
 
 const DashboardView = () => {
   const firstItems = [
@@ -110,7 +111,7 @@ const DashboardView = () => {
             </div>
           </div>
         </div>
-        <div className="hidden p-10 rounded-xl lg:flex lg:flex-col gap-3 lg:w-[33%] w-[35%] shadow-wide-box"></div>
+        <RightBox />
       </div>
     </DescentContainer>
   );
