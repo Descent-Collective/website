@@ -11,7 +11,7 @@ const SecondItem = ({ item }: { item: any }) => {
           <InfoIcon />
         </div>
       </div>
-      <div className="mt-2 text-[10px] md:text-base font-bold">
+      <div className="mt-2 text-[10px] md:text-base font-medium md:font-bold">
         {item.value}
       </div>
     </div>

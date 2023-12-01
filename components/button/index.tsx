@@ -41,28 +41,31 @@ const DescentButton = ({
       whileTap={{ scale: 0.9 }}
       transition={{ ease: "backOut" }}
       className={classNames(
-        "w-full h-9 md:h-12 rounded-lg flex justify-center items-center gap-1",
+        "w-full rounded-lg flex justify-center items-center gap-1",
         {
           "pointer-events-none": loading || disabled,
-          "bg-blue-100 text-black-50 shadow-alt font-medium text-sm md:text-lg border border-black-100":
+          "bg-blue-100 h-9 md:h-12 text-black-50 shadow-alt font-medium text-sm md:text-lg border border-black-100":
             variant === "primary",
 
-          "bg-transparent text-green-50 text-sm md:text-base border-[1.5px] border-green-500":
+          "bg-transparent h-9 md:h-12 text-green-50 text-sm md:text-base border-[1.5px] border-green-500":
             variant === "accent",
 
-          "bg-transparent text-red-50 text-sm md:text-base border-[1.5px] border-red-50":
+          "bg-transparent h-9 md:h-12 text-red-50 text-sm md:text-base border-[1.5px] border-red-50":
             variant === "danger",
 
-          "bg-transparent text-black-100 text-sm md:text-lg border-[1.5px] border-black-100 font-medium":
+          "bg-transparent h-9 md:h-12 text-black-100 text-sm md:text-lg border-[1.5px] border-black-100 font-medium":
             variant === "info",
 
-          "bg-black-150 text-blue-100 text-sm md:text-base":
+          "bg-black-150 h-9 md:h-12 text-blue-100 text-sm md:text-base":
             variant === "tertiary",
 
-          "bg-green-100 text-white-50 text-xs":
+          "bg-green-100 text-white-50 text-[9px] md:text-xs h-[22px] md:h-7":
             variant === "action" && !disabled,
 
-          "bg-grey-100 text-grey-50": disabled,
+          "bg-grey-100 h-9 md:h-12 text-grey-50": disabled,
+
+          "h-[22px] md:h-7 text-[9px] md:text-xs":
+            disabled && variant === "action",
         }
       )}
       disabled={disabled}

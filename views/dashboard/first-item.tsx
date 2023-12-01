@@ -12,19 +12,21 @@ const FirstItem = ({
 }) => {
   return (
     <div
-      className={classNames("px-3 md:px-6", {
+      className={classNames("", {
+        "pl-3 md:pl-6 pr-10": index === 0,
+        "px-3 md:px-10": index > 0,
         "xl:border-r xl:border-grey-700": index < items.length - 1,
       })}
     >
       <div className="flex items-center xl:justify-center gap-1">
-        <div className="text-[9px] md:text-sm font-medium text-grey-500">
+        <div className="text-[9px] md:text-sm font-medium text-grey-500 whitespace-nowrap">
           {item.title}
         </div>
         <div className="cursor-pointer">
           <InfoIcon />
         </div>
       </div>
-      <div className="mt-2 text-[10px] md:text-base font-bold">
+      <div className="mt-2 text-[9.5px] md:text-base font-medium md:font-bold">
         {item.value}
       </div>
     </div>
