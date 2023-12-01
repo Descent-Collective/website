@@ -19,6 +19,9 @@ import SecondShape from "./second-shape.svg";
 import ThirdShape from "./third-shape.svg";
 import MenuIcon from "./menu-icon.svg";
 import LinkIcon from "./link-icon.svg";
+import FilterIcon from "./filter.svg";
+import ClosedEyeIcon from "./closed-eye-icon.svg";
+import InfoIcon from "./info.svg";
 
 export {
   CancelIcon,
@@ -42,4 +45,7 @@ export {
   ThirdShape,
   MenuIcon,
   LinkIcon,
+  FilterIcon,
+  ClosedEyeIcon,
+  InfoIcon,
 };

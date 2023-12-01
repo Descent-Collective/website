@@ -13,8 +13,10 @@ import {
   ThirdShape,
 } from "@/public/icons";
 import classNames from "classnames";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 
 const HeroSection = () => {
+  const { navigate } = useSystemFunctions();
   const content = [
     {
       title: "- - -",
@@ -62,7 +64,10 @@ const HeroSection = () => {
 
           <div className="mt-12 flex items-center justify-center gap-8">
             <div className="w-[150px]">
-              <DescentButton text="Enter App" />
+              <DescentButton
+                onClick={() => navigate.push("/app")}
+                text="Enter App"
+              />
             </div>
 
             <DescentClickAnimation>

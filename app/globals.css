@@ -81,6 +81,14 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
+.shadow-box {
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+.shadow-wide-box {
+  box-shadow: 0px 0px 8px 0px rgba(42, 56, 0, 0.15);
+}
+
 .rangeslider,
 .rangeslider-horizontal .rangeslider__fill {
   background-color: #030303 !important;

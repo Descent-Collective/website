@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from "./useRedux";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 /**
  *
@@ -11,6 +12,7 @@ import { useRouter } from "next/navigation";
 const useSystemFunctions = () => {
   const dispatch = useAppDispatch();
   const navigate = useRouter();
+  const pathname = usePathname();
 
   // states
   const userState = useAppSelector((state) => state.user);
@@ -18,6 +20,7 @@ const useSystemFunctions = () => {
   return {
     dispatch,
     navigate,
+    pathname,
 
     // states
     userState,
