@@ -1,11 +1,15 @@
-import classNames from "classnames";
 import { useState } from "react";
+import classNames from "classnames";
+import SupplyTab from "./supply-tab";
+import BorrowTab from "./borrow-tab";
 
 const RightBox = () => {
   const [activeTab, setActiveTab] = useState(0);
   const tabs = ["Supply", "Borrow"];
+
+  const tabComponents = [<SupplyTab />, <BorrowTab />];
   return (
-    <div className="hidden p-10 rounded-xl lg:flex lg:flex-col gap-6 lg:w-[33%] w-[35%] shadow-wide-box">
+    <div className="hidden p-10 rounded-xl lg:flex lg:flex-col gap-6 lg:w-[33%] w-[35%] shadow-wide-box lg:-mt-3 transition-all">
       <div className="rounded-lg tab h-8 p-[2px] flex">
         {tabs.map((tab, index) => (
           <div
@@ -23,14 +27,7 @@ const RightBox = () => {
         ))}
       </div>
 
-      <div>
-        <div className="text-black-100 text-lg md:text-xl font-medium">
-          Supply collateral
-        </div>
-        <div className="text-grey-500 font-medium text-xs md:text-sm">
-          Fund your vault with USDC
-        </div>
-      </div>
+      {tabComponents[activeTab]}
     </div>
   );
 };

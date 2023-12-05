@@ -22,6 +22,7 @@ import LinkIcon from "./link-icon.svg";
 import FilterIcon from "./filter.svg";
 import ClosedEyeIcon from "./closed-eye-icon.svg";
 import InfoIcon from "./info.svg";
+import InfoAltIcon from "./info-alt.svg";
 
 export {
   CancelIcon,
@@ -48,4 +49,5 @@ export {
   FilterIcon,
   ClosedEyeIcon,
   InfoIcon,
+  InfoAltIcon,
 };

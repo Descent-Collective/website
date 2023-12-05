@@ -3,6 +3,7 @@ import DescentClickAnimation from "./click-animation";
 import DescentHeader from "./header";
 import DescentContainer from "./container";
 import DescentFooter from "./footer";
+import DescentInput from "./input";
 
 export {
   DescentButton,
@@ -10,4 +11,5 @@ export {
   DescentHeader,
   DescentContainer,
   DescentFooter,
+  DescentInput,
 };
