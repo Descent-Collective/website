@@ -1,13 +1,12 @@
 import classNames from "classnames";
+import { useState } from "react";
 import { Input } from "./types";
 import { DescentClickAnimation } from "..";
-import { useState } from "react";
 
 const DescentInput = (props: Input) => {
   const {
     type,
     disabled,
-    register,
     label,
     labelAlt,
     name,
@@ -60,7 +59,7 @@ const DescentInput = (props: Input) => {
           "rounded-lg bg-white-300 border px-3 py-[5px] md:px-4 md:py-[15px] flex items-center justify-between",
           {
             "border-black-100": !disabled,
-            "border-grey-850": disabled,
+            "border-grey-850": disabled || !valid,
           }
         )}
       >
@@ -70,7 +69,6 @@ const DescentInput = (props: Input) => {
             type={type}
             disabled={disabled}
             placeholder={placeholder}
-            {...register}
             value={value || valueText}
             className={classNames(
               "border-none text-xs md:text-xl font-medium bg-transparent outline-none",

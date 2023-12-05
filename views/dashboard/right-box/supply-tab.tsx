@@ -1,43 +1,26 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { DescentButton, DescentInput } from "@/components";
 import { useState } from "react";
 
-interface FormProp {
-  amount: string;
-}
-
-const schema = yup.object().shape({
-  amount: yup.string().required("Amount is required"),
-});
-
 const SupplyTab = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { isValid },
-  } = useForm<FormProp>({
-    mode: "onChange",
-    resolver: yupResolver(schema),
-  });
+  const [amount, setAmount] = useState("");
   const [generated, setGenerated] = useState("");
 
+  const valid = amount.length > 0;
+
   const handleChange = (val: string) => {
+    setAmount(val);
     const _amount = Number(val);
     const _generated = !_amount ? "" : _amount * 450;
 
     setGenerated(_generated.toString());
   };
 
-  const onSubmit = async (values: FormProp) => {
-    console.log(values);
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    console.log(amount);
   };
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-4 md:gap-6"
-    >
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-6">
       <div>
         <div className="text-black-100 text-lg md:text-xl font-medium">
           Supply collateral
@@ -52,9 +35,8 @@ const SupplyTab = () => {
         valueAlt={"0.00 USD"}
         label="USDC to Supply"
         labelAlt="0 USDC available"
-        register={register("amount")}
         placeholder="0.00"
-        valid={isValid}
+        valid={valid}
         hasMax
         onChange={(val) => handleChange(val)}
       />
@@ -69,7 +51,7 @@ const SupplyTab = () => {
       />
 
       <div className="mt-2">
-        <DescentButton disabled={isValid} type="submit" text="Continue" />
+        <DescentButton disabled={!valid} type="submit" text="Continue" />
       </div>
     </form>
   );

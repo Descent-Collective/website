@@ -6,7 +6,7 @@ import { Button } from "./types";
 const DescentButton = ({
   onClick,
   text,
-  type = "submit",
+  type = "button",
   disabled,
   loading,
   variant = "primary",
@@ -44,10 +44,10 @@ const DescentButton = ({
         "w-full rounded-lg flex justify-center items-center gap-1",
         {
           "pointer-events-none": loading || disabled,
-          "bg-blue-100 h-9 md:h-12 text-black-50 shadow-alt font-medium text-sm md:text-lg border border-black-100":
+          "bg-blue-100 h-9 md:h-12 text-black-50 text-sm md:text-base border border-black-100":
             variant === "primary",
 
-          "bg-blue-100 h-9 md:h-12 text-black-50 shadow-alt font-medium text-sm md:text-lg":
+          "bg-blue-100 h-9 md:h-12 text-black-50 text-sm md:text-base":
             variant === "primary-alt",
 
           "bg-transparent h-9 md:h-12 text-green-50 text-sm md:text-base border-[1.5px] border-green-500":
@@ -56,7 +56,7 @@ const DescentButton = ({
           "bg-transparent h-9 md:h-12 text-red-50 text-sm md:text-base border-[1.5px] border-red-50":
             variant === "danger",
 
-          "bg-transparent h-9 md:h-12 text-black-100 text-sm md:text-lg border-[1.5px] border-black-100 font-medium":
+          "bg-transparent h-9 md:h-12 text-black-100 text-sm md:text-base border-[1.5px] border-black-100":
             variant === "info",
 
           "bg-black-150 h-9 md:h-12 text-blue-100 text-sm md:text-base":
@@ -65,7 +65,8 @@ const DescentButton = ({
           "bg-green-100 text-white-50 text-[9px] md:text-xs h-[22px] md:h-7":
             variant === "action" && !disabled,
 
-          "bg-grey-100 h-9 md:h-12 text-grey-50": disabled,
+          "bg-grey-100 h-9 md:h-12 text-grey-50 border-none shadow-none":
+            disabled,
 
           "h-[22px] md:h-7 text-[9px] md:text-xs":
             disabled && variant === "action",

@@ -34,13 +34,13 @@ const DescentMenu = () => {
       </div>
 
       {menuState.supply && (
-        <DescentModal close={handleSupply}>
+        <DescentModal key={0} close={handleSupply}>
           <RightBox />
         </DescentModal>
       )}
 
       {menuState.borrow && (
-        <DescentModal close={handleBorrow}>
+        <DescentModal key={1} close={handleBorrow}>
           <RightBox active={1} />
         </DescentModal>
       )}

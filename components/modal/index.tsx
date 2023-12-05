@@ -1,13 +1,9 @@
+import classNames from "classnames";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
+import { Modal } from "./types";
 
-const DescentModal = ({
-  close,
-  children,
-}: {
-  close: () => void;
-  children: React.ReactNode;
-}) => {
+const DescentModal = ({ close, children, variant = "normal" }: Modal) => {
   useEffect(() => {
     // Add no-scroll class to body when the modal opens
     document.body.classList.add("no-scroll");
@@ -29,13 +25,19 @@ const DescentModal = ({
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 50, opacity: 0 }}
         onClick={close}
-        className="z-10 absolute w-full h-full bg-black-100 bg-opacity-[0.08] backdrop-blur-[0.8px]"
+        className="z-10 absolute w-full h-full bg-black-100 bg-opacity-10 backdrop-blur-[0.8px]"
       />
       <motion.div
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 50, opacity: 0 }}
-        className="z-20 w-[72%] max-h-[65%] overflow-y-auto bg-white-50 rounded-xl shadow-xl p-6"
+        className={classNames(
+          "z-20 max-h-[65%] overflow-y-auto bg-white-50 rounded-xl shadow-wide-box p-6 lg:p-12",
+          {
+            "w-[72%] xl:w-[470px]": variant === "normal",
+            "w-[85%] xl:w-[78%]": variant === "large",
+          }
+        )}
       >
         {children}
       </motion.div>
