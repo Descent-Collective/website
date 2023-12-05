@@ -16,7 +16,7 @@ const BorrowTab = () => {
   const {
     register,
     handleSubmit,
-    formState: { isValid },
+    formState: { isValid, isDirty },
   } = useForm<FormProp>({
     mode: "onChange",
     resolver: yupResolver(schema),
@@ -64,7 +64,7 @@ const BorrowTab = () => {
       </div>
 
       <div className="mt-2">
-        <DescentButton type="submit" text="Continue" />
+        <DescentButton disabled={true} type="submit" text="Continue" />
       </div>
     </form>
   );

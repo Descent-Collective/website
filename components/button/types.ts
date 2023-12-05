@@ -6,6 +6,7 @@ export interface Button {
   disabled?: boolean;
   variant?:
     | "primary"
+    | "primary-alt"
     | "secondary"
     | "tertiary"
     | "action"

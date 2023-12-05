@@ -1,5 +1,5 @@
 "use client";
-import { DescentFooter } from "@/components";
+import { DescentFooter, DescentMenu } from "@/components";
 import DescentHeader from "@/components/header";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import classNames from "classnames";
@@ -21,6 +21,7 @@ const AppHome = ({ children }: { children: ReactNode }) => {
         {children}
       </div>
       <DescentFooter />
+      <DescentMenu />
     </main>
   );
 };

@@ -101,13 +101,13 @@ const DescentHeader = () => {
                   </div>
 
                   <DescentClickAnimation onClick={() => null}>
-                    <div className="flex justify-center items-center p-2 bg-white-150 shadow-box rounded-lg cursor-pointer">
+                    <div className="flex justify-center items-center p-1 lg:p-2 bg-white-150 shadow-box rounded-lg cursor-pointer">
                       <FilterIcon />
                     </div>
                   </DescentClickAnimation>
 
                   <DescentClickAnimation onClick={() => null}>
-                    <div className="flex justify-center items-center p-2 bg-white-150 shadow-box rounded-lg cursor-pointer">
+                    <div className="flex justify-center items-center p-1 lg:p-2 bg-white-150 shadow-box rounded-lg cursor-pointer">
                       <ClosedEyeIcon />
                     </div>
                   </DescentClickAnimation>

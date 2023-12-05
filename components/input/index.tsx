@@ -48,10 +48,10 @@ const DescentInput = (props: Input) => {
   return (
     <div>
       <div className="flex justify-between items-center mb-2">
-        <label htmlFor={name} className="text-[8px] md:text-xs">
+        <label htmlFor={name} className="text-[9px] md:text-xs">
           {label}
         </label>
-        <div className="text-[8px] md:text-xs text-grey-500 font-medium">
+        <div className="text-[9px] md:text-xs text-grey-500 font-medium">
           {labelAlt}
         </div>
       </div>

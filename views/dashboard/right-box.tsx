@@ -3,13 +3,13 @@ import classNames from "classnames";
 import SupplyTab from "./supply-tab";
 import BorrowTab from "./borrow-tab";
 
-const RightBox = () => {
-  const [activeTab, setActiveTab] = useState(0);
+const RightBox = ({ active = 0 }: { active?: number }) => {
+  const [activeTab, setActiveTab] = useState(active);
   const tabs = ["Supply", "Borrow"];
 
   const tabComponents = [<SupplyTab />, <BorrowTab />];
   return (
-    <div className="hidden p-10 rounded-xl lg:flex lg:flex-col gap-6 lg:w-[33%] w-[35%] shadow-wide-box lg:-mt-3 transition-all">
+    <div className="flex flex-col gap-4 xl:gap-6 transition-all w-full">
       <div className="rounded-lg tab h-8 p-[2px] flex">
         {tabs.map((tab, index) => (
           <div

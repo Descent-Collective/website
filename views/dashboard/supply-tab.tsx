@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { DescentButton, DescentInput } from "@/components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface FormProp {
   amount: string;
@@ -16,9 +16,7 @@ const SupplyTab = () => {
   const {
     register,
     handleSubmit,
-    setValue,
-    watch,
-    formState: { errors, isValid },
+    formState: { isValid },
   } = useForm<FormProp>({
     mode: "onChange",
     resolver: yupResolver(schema),
@@ -71,7 +69,7 @@ const SupplyTab = () => {
       />
 
       <div className="mt-2">
-        <DescentButton type="submit" text="Continue" />
+        <DescentButton disabled={isValid} type="submit" text="Continue" />
       </div>
     </form>
   );

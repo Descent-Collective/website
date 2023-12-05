@@ -64,8 +64,8 @@ const DashboardView = () => {
   ];
   return (
     <DescentContainer>
-      <div className="mt-10 md:mt-16 flex flex-col lg:flex-row lg:justify-between gap-12 xl:gap-16">
-        <div className="lg:w-[67%] xl:w-[65%]">
+      <div className="mt-10 md:mt-16 flex flex-col xl:flex-row xl:justify-between gap-12 xl:gap-16">
+        <div className="xl:w-[65%]">
           <div className="py-4 md:py-6 grid grid-cols-2 gap-[22px] xl:gap-0 xl:flex xl:items-center xl:justify-between rounded-xl bg-grey-750 xl:pr-6">
             {firstItems.map((item, index) => (
               <FirstItem
@@ -77,8 +77,8 @@ const DashboardView = () => {
             ))}
           </div>
 
-          <div className="mt-3 lg:mt-5 rounded-xl bg-grey-750 px-3 py-4 md:p-6">
-            <div className="flex justify-between items-center lg:mt-5">
+          <div className="mt-3 xl:mt-5 rounded-xl bg-grey-750 px-3 py-4 md:p-6">
+            <div className="flex justify-between items-center xl:mt-5">
               <div className="text-[11px] md:text-base font-medium text-grey-500">
                 Overview
               </div>
@@ -111,7 +111,9 @@ const DashboardView = () => {
             </div>
           </div>
         </div>
-        <RightBox />
+        <div className="hidden xl:flex xl:w-[33%] xl:shadow-wide-box xl:-mt-3 xl:p-10 xl:rounded-xl bg-white-50 shadow-wide-box">
+          <RightBox />
+        </div>
       </div>
     </DescentContainer>
   );

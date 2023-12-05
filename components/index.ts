@@ -4,6 +4,8 @@ import DescentHeader from "./header";
 import DescentContainer from "./container";
 import DescentFooter from "./footer";
 import DescentInput from "./input";
+import DescentMenu from "./menu";
+import DescentModal from "./modal";
 
 export {
   DescentButton,
@@ -12,4 +14,6 @@ export {
   DescentContainer,
   DescentFooter,
   DescentInput,
+  DescentMenu,
+  DescentModal,
 };
