@@ -71,8 +71,8 @@ const HeroSection = () => {
             </div>
 
             <DescentClickAnimation>
-              <Link href="#" className="flex">
-                <div className="text-grey-250 text-lg">Read docts</div>
+              <Link href="https://docs.descentdao.com/" className="flex">
+                <div className="text-grey-250 text-lg">Read docs</div>
                 <ArrowRightAlt />
               </Link>
             </DescentClickAnimation>

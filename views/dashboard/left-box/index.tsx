@@ -7,7 +7,7 @@ const LeftBox = () => {
   const firstItems = [
     {
       title: "Total Amount Minted",
-      value: "0.00 xNGN",
+      value: "12,000 xNGN",
     },
     {
       title: "Debt Limit",
@@ -29,7 +29,7 @@ const LeftBox = () => {
       value: "0.00 xNGN",
     },
     {
-      title: "Available Collateral",
+      title: "Deposited Collateral",
       value: "0.00 USDC",
     },
     {
@@ -45,19 +45,19 @@ const LeftBox = () => {
   const thirdItems = [
     {
       title: "Vault xNGN Debt",
-      value: "0.00 xNGN",
+      value: "12,000 xNGN",
+      buttonText: "Repay",
+      disabled: false,
     },
     {
-      title: "Available to Withdraw",
+      title: "Available Collateral",
       value: "0.00 USDC",
       buttonText: "Withdraw",
       disabled: true,
     },
     {
       title: "Available to Borrow",
-      value: "12,000.00 xNGN",
-      buttonText: "Repay",
-      disabled: false,
+      value: "0.00 xNGN",
     },
   ];
   return (
