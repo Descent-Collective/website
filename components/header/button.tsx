@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useAccount, useConnect } from "wagmi";
+import Descent from "@descent-protocol/sdk";
 
 import { MenuIcon, MetamaskIcon } from "@/public/icons";
 import { DescentButton, DescentClickAnimation } from "..";
@@ -14,9 +15,23 @@ const Button = ({ setOpen }: { setOpen: (val: boolean) => void }) => {
 
   const [showButton, setShowButton] = useState(false);
 
+  const connectToDescent = async () => {
+    try {
+      //   const descent = await Descent.create("browser");
+      //   const a = await Descent.getVaultInfo(address);
+      //   console.log(a);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     const show = !isConnected || isDisconnected;
     setShowButton(show);
+
+    if (isConnected) {
+      connectToDescent();
+    }
   }, [isConnected, isDisconnected]);
 
   return (
