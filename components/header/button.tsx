@@ -17,9 +17,11 @@ const Button = ({ setOpen }: { setOpen: (val: boolean) => void }) => {
 
   const connectToDescent = async () => {
     try {
-      //   const descent = await Descent.create("browser");
+      const descent = await Descent.create("browser", {
+        collateral: "USDC",
+      });
       //   const a = await Descent.getVaultInfo(address);
-      //   console.log(a);
+      console.log(descent);
     } catch (error) {
       console.log(error);
     }
