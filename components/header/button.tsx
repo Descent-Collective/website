@@ -17,11 +17,16 @@ const Button = ({ setOpen }: { setOpen: (val: boolean) => void }) => {
 
   const connectToDescent = async () => {
     try {
-      const descent = await Descent.create("browser", {
-        collateral: "USDC",
+      connectors.map(async (connector: any) => {
+        const connectedProvider = await connector.getProvider();
+        const descent = await Descent.create("browser", {
+          collateral: "USDC",
+          ethereum: connectedProvider,
+        });
+        const a = await descent.getVaultInfo(address);
+        const vaultSetup = await descent.setupVault();
+        console.log(a, "provider");
       });
-      //   const a = await Descent.getVaultInfo(address);
-      console.log(descent);
     } catch (error) {
       console.log(error);
     }
