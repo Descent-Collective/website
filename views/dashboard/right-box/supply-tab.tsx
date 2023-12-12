@@ -1,3 +1,4 @@
+import useAlertActions from "@/application/alert/actions";
 import useCollateralActions from "@/application/collateral/actions";
 import useUserActions from "@/application/user/actions";
 import { DescentButton, DescentInput } from "@/components";
@@ -7,6 +8,7 @@ import { useState } from "react";
 
 const SupplyTab = () => {
   const { collateralState, userState } = useSystemFunctions();
+  const { alertUser } = useAlertActions();
   const { depositCollateral } = useCollateralActions();
   const { getVaultInfo } = useUserActions();
   const [amount, setAmount] = useState("");
@@ -39,6 +41,14 @@ const SupplyTab = () => {
     e.preventDefault();
 
     const amountWithoutComma = amount.replace(/,/g, "");
+
+    if (Number(amountWithoutComma) > Number(user.usdcWalletBalance)) {
+      return alertUser({
+        title: "Insufficient USDC balance.",
+        variant: "error",
+        message: "You do not have enough USDC in your wallet",
+      });
+    }
 
     depositCollateral(amountWithoutComma, {
       onSuccess: () => {

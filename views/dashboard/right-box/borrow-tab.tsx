@@ -1,3 +1,4 @@
+import useAlertActions from "@/application/alert/actions";
 import useCollateralActions from "@/application/collateral/actions";
 import useUserActions from "@/application/user/actions";
 import { DescentButton, DescentInput } from "@/components";
@@ -8,6 +9,7 @@ import { useState } from "react";
 
 const BorrowTab = () => {
   const { collateralState, userState } = useSystemFunctions();
+  const { alertUser } = useAlertActions();
   const { borrowXNGN } = useCollateralActions();
   const { getVaultInfo } = useUserActions();
 
@@ -35,6 +37,15 @@ const BorrowTab = () => {
     e.preventDefault();
 
     const amountWithoutComma = amount.replace(/,/g, "");
+
+    if (Number(amountWithoutComma) > Number(availablexNGN)) {
+      return alertUser({
+        title: "Insufficient xNGN balance",
+        variant: "error",
+        message: "You do not have enough xNGN in your vault",
+      });
+    }
+
     borrowXNGN(amountWithoutComma, {
       onSuccess: () => {
         setAmount("");

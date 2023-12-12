@@ -4,6 +4,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./user";
 import menuReducer from "./menu";
 import collateralReducer from "./collateral";
+import alertReducer from "./alert";
 
 export interface CallbackProps {
   onSuccess?: Function;
@@ -15,6 +16,7 @@ export const store = configureStore({
     user: userReducer,
     menu: menuReducer,
     collateral: collateralReducer,
+    alert: alertReducer,
   },
 });
 

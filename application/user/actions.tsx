@@ -56,6 +56,7 @@ const useUserActions = () => {
         setUser({ ...vaultInfo, hasSetupVault, usdcWalletBalance })
       );
     } catch (error: any) {
+      console.log(error);
       callback?.onError?.(error);
     } finally {
       dispatch(setLoading(false));

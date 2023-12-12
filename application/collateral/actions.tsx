@@ -12,10 +12,12 @@ import {
   setLoadingSupply,
 } from ".";
 import { CallbackProps } from "../store";
+import useAlertActions from "../alert/actions";
 
 const useCollateralActions = () => {
   const { dispatch } = useSystemFunctions();
   const { connector: activeConnector } = useAccount();
+  const { alertUser } = useAlertActions();
 
   const _descentProvider = async () => {
     try {
@@ -65,12 +67,39 @@ const useCollateralActions = () => {
 
       dispatch(setLoadingSupply(true));
       const response = await descent.depositCollateral(amount);
-      console.log(response);
+
+      alertUser({
+        title: "Bravo! Collateral deposited.",
+        variant: "success",
+        message: (
+          <div>
+            Your collateral deposit of{" "}
+            <span className="text-black-100">
+              {Number(amount).toLocaleString()} USDC
+            </span>{" "}
+            was successful.
+          </div>
+        ),
+      });
 
       return callback?.onSuccess?.(response);
     } catch (error: any) {
       console.log(error);
       callback?.onError?.(error);
+
+      alertUser({
+        title: "Collateral deposited unsuccessful.",
+        variant: "error",
+        message: (
+          <div>
+            Your collateral deposit of{" "}
+            <span className="text-black-100">
+              {Number(amount).toLocaleString()} USDC
+            </span>{" "}
+            was not successful. Please try again.
+          </div>
+        ),
+      });
     } finally {
       dispatch(setLoadingApproveSupply(false));
       dispatch(setLoadingSupply(false));
@@ -79,17 +108,44 @@ const useCollateralActions = () => {
 
   const borrowXNGN = async (amount: string, callback?: CallbackProps) => {
     try {
-      dispatch(setLoadingApproveBorrow(true));
+      dispatch(setLoadingBorrow(true));
 
       const descent = await _descentProvider();
 
-      dispatch(setLoadingBorrow(true));
       const response = await descent.borrowCurrency(amount);
+
+      alertUser({
+        title: "Bravo! Loan Approved.",
+        variant: "success",
+        message: (
+          <div>
+            Your loan of{" "}
+            <span className="text-black-100">
+              {Number(amount).toLocaleString()} xNGN
+            </span>{" "}
+            has been approved and successfully disbursed. Congratulations!
+          </div>
+        ),
+      });
 
       return callback?.onSuccess?.(response);
     } catch (error: any) {
       console.log(error);
       callback?.onError?.(error);
+
+      alertUser({
+        title: "Loan request unsuccessful.",
+        variant: "error",
+        message: (
+          <div>
+            Your loan of{" "}
+            <span className="text-black-100">
+              {Number(amount).toLocaleString()} xNGN
+            </span>{" "}
+            was not successful. Please try again.
+          </div>
+        ),
+      });
     } finally {
       dispatch(setLoadingApproveBorrow(false));
       dispatch(setLoadingBorrow(false));

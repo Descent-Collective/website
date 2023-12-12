@@ -9,7 +9,7 @@ import {
   NigeriaFlag,
   UsdcFlag,
 } from "@/public/icons";
-import { DescentClickAnimation, DescentContainer } from "..";
+import { DescentAlert, DescentClickAnimation, DescentContainer } from "..";
 import MenuComponent from "./menu";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import classNames from "classnames";
@@ -103,6 +103,8 @@ const DescentHeader = () => {
             </div>
           )}
         </header>
+
+        <DescentAlert />
       </DescentContainer>
 
       <MenuComponent isOpen={isOpen} setIsOpen={setIsOpen} />
