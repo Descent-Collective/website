@@ -3,7 +3,7 @@ import { Alert } from "./types";
 import classNames from "classnames";
 import { ErrorIcon, SuccessIcon } from "@/public/icons";
 
-const Notification = ({ message, show, title, variant }: Alert) => {
+const DescentAlert = ({ message, show, title, variant }: Alert) => {
   const variants = {
     initial: { x: "100%", opacity: 0 },
     animate: { x: 0, opacity: 1 },
@@ -40,4 +40,4 @@ const Notification = ({ message, show, title, variant }: Alert) => {
   );
 };
 
-export default Notification;
+export default DescentAlert;
