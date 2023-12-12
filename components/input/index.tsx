@@ -31,7 +31,7 @@ const DescentInput = (props: Input) => {
     const value = e.target.value;
     const valueWithoutComma = value.replace(/,/g, "");
 
-    if (Number(valueWithoutComma) === 0) {
+    if (valueWithoutComma.length === 0 || Number(valueWithoutComma) === 0) {
       setValue("");
       onChange && onChange("");
       return;

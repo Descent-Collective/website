@@ -13,19 +13,36 @@ const BorrowTab = () => {
 
   const [amount, setAmount] = useState("");
 
-  const { loadingBorrow } = collateralState;
+  const { loadingBorrow, loadingApproveBorrow } = collateralState;
   const { user } = userState;
   const { availablexNGN } = user;
 
+  const loading = loadingApproveBorrow || loadingBorrow;
   const xNgn = formatAmount(availablexNGN);
 
   const valid = amount.length > 0;
 
+  const handleChange = (val: string) => {
+    if (!val) {
+      setAmount("");
+      return;
+    }
+
+    setAmount(Number(val).toLocaleString());
+  };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    borrowXNGN(amount, {
-      onSuccess: () => getVaultInfo(),
+    const amountWithoutComma = amount.replace(/,/g, "");
+    borrowXNGN(amountWithoutComma, {
+      onSuccess: () => {
+        setAmount("");
+
+        setTimeout(() => {
+          getVaultInfo();
+        }, 3000);
+      },
     });
   };
   return (
@@ -47,8 +64,9 @@ const BorrowTab = () => {
           labelAlt={`${xNgn} xNGN available`}
           placeholder="0.00"
           valid={valid}
-          max={() => null}
-          onChange={(val) => setAmount(val)}
+          max={() => handleChange(availablexNGN)}
+          onChange={handleChange}
+          value={amount}
         />
 
         <div className="mt-3 rounded-xl py-3 px-2 flex gap-1 bg-red-100 text-red-150">
@@ -65,8 +83,8 @@ const BorrowTab = () => {
 
       <div className="mt-2">
         <DescentButton
-          loading={loadingBorrow}
-          disabled={!valid || loadingBorrow}
+          loading={loading}
+          disabled={!valid || loading}
           type="submit"
           text="Continue"
         />
