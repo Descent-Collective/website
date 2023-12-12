@@ -1,15 +1,32 @@
+import useCollateralActions from "@/application/collateral/actions";
+import useUserActions from "@/application/user/actions";
 import { DescentButton, DescentInput } from "@/components";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { InfoAltIcon } from "@/public/icons";
+import { formatAmount } from "@/utils";
 import { useState } from "react";
 
 const BorrowTab = () => {
+  const { collateralState, userState } = useSystemFunctions();
+  const { borrowXNGN } = useCollateralActions();
+  const { getVaultInfo } = useUserActions();
+
   const [amount, setAmount] = useState("");
+
+  const { loadingBorrow } = collateralState;
+  const { user } = userState;
+  const { availablexNGN } = user;
+
+  const xNgn = formatAmount(availablexNGN);
 
   const valid = amount.length > 0;
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(amount);
+
+    borrowXNGN(amount, {
+      onSuccess: () => getVaultInfo(),
+    });
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-6">
@@ -27,7 +44,7 @@ const BorrowTab = () => {
           name="amount"
           valueAlt={"0.00 USD"}
           label="xNGN to Borrow"
-          labelAlt="162,000 xNGN available"
+          labelAlt={`${xNgn} xNGN available`}
           placeholder="0.00"
           valid={valid}
           max={() => null}
@@ -47,7 +64,12 @@ const BorrowTab = () => {
       </div>
 
       <div className="mt-2">
-        <DescentButton disabled={!valid} type="submit" text="Continue" />
+        <DescentButton
+          loading={loadingBorrow}
+          disabled={!valid || loadingBorrow}
+          type="submit"
+          text="Continue"
+        />
       </div>
     </form>
   );

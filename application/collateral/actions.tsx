@@ -57,8 +57,10 @@ const useCollateralActions = () => {
       dispatch(setLoadingApprove(true));
 
       const descent = await _descentProvider();
+
       await descent.approveCollateral(amount);
       setLoadingApprove(false);
+
       const response = await descent.depositCollateral(amount);
 
       return callback?.onSuccess?.(response);
@@ -73,12 +75,14 @@ const useCollateralActions = () => {
   const borrowXNGN = async (amount: string, callback?: CallbackProps) => {
     try {
       dispatch(setLoadingBorrow(true));
+      dispatch(setLoadingApprove(true));
 
       const descent = await _descentProvider();
-      const a = await descent.approveCollateral(amount);
-      console.log("approved", a);
-      const response = await descent.depositCollateral(amount);
-      console.log("deposited", response);
+
+      await descent.approvexNGN(amount);
+      setLoadingApprove(false);
+
+      const response = await descent.borrowCurrency(amount);
 
       return callback?.onSuccess?.(response);
     } catch (error: any) {
@@ -92,6 +96,7 @@ const useCollateralActions = () => {
   return {
     getCollateralInfo,
     depositCollateral,
+    borrowXNGN,
   };
 };
 
