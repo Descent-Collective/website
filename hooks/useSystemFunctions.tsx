@@ -17,6 +17,7 @@ const useSystemFunctions = () => {
   // states
   const userState = useAppSelector((state) => state.user);
   const menuState = useAppSelector((state) => state.menu);
+  const collateralState = useAppSelector((state) => state.collateral);
 
   return {
     dispatch,
@@ -26,6 +27,7 @@ const useSystemFunctions = () => {
     // states
     userState,
     menuState,
+    collateralState,
   };
 };
 

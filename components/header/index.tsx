@@ -5,20 +5,16 @@ import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useAccount, useConnect } from "wagmi";
 
 import {
-  BaseIcon,
   ClosedEyeIcon,
   FilterIcon,
   LogoIcon,
-  MenuIcon,
-  MetamaskIcon,
   NigeriaFlag,
   UsdcFlag,
 } from "@/public/icons";
-import { DescentButton, DescentClickAnimation, DescentContainer } from "..";
+import { DescentClickAnimation, DescentContainer } from "..";
 import MenuComponent from "./menu";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import classNames from "classnames";
-import { formatAddress } from "@/utils";
 import Button from "./button";
 
 const DescentHeader = () => {

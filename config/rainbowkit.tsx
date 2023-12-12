@@ -3,15 +3,13 @@ import { ReactNode } from "react";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { baseGoerli } from "wagmi/chains";
-import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
-const { chains, publicClient } = configureChains(
-  [baseGoerli],
-  [
-    publicProvider(),
-  ]
-);
+export const availableChains = [baseGoerli];
+
+const { chains, publicClient } = configureChains(availableChains, [
+  publicProvider(),
+]);
 
 const { connectors } = getDefaultWallets({
   appName: "Descent",

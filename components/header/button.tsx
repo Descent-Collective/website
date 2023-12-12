@@ -1,45 +1,18 @@
 "use client";
-import { useEffect, useState } from "react";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useAccount, useConnect } from "wagmi";
-import Descent from "@descent-protocol/sdk";
 
 import { MenuIcon, MetamaskIcon } from "@/public/icons";
 import { DescentButton, DescentClickAnimation } from "..";
 import { formatAddress } from "@/utils";
+import useDescent from "@/hooks/useDescent";
 
 const Button = ({ setOpen }: { setOpen: (val: boolean) => void }) => {
   const { openConnectModal } = useConnectModal();
-  const { address, isDisconnected, isConnected } = useAccount();
+  const { address } = useAccount();
   const { connectors } = useConnect();
 
-  const [showButton, setShowButton] = useState(false);
-
-  const connectToDescent = async () => {
-    try {
-      connectors.map(async (connector: any) => {
-        const connectedProvider = await connector.getProvider();
-        const descent = await Descent.create("browser", {
-          collateral: "USDC",
-          ethereum: connectedProvider,
-        });
-        const a = await descent.getVaultInfo(address);
-        const vaultSetup = await descent.setupVault();
-        console.log(a, "provider");
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    const show = !isConnected || isDisconnected;
-    setShowButton(show);
-
-    if (isConnected) {
-      connectToDescent();
-    }
-  }, [isConnected, isDisconnected]);
+  const { showButton } = useDescent();
 
   return (
     <div>

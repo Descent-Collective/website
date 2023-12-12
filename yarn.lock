@@ -1068,10 +1068,10 @@
     stream-browserify "^3.0.0"
     util "^0.12.4"
 
-"@descent-protocol/sdk@^0.1.14":
-  version "0.1.14"
-  resolved "https://registry.yarnpkg.com/@descent-protocol/sdk/-/sdk-0.1.14.tgz#df46139c7bbc31198ff6ad8bbcbeafc0d86a78da"
-  integrity sha512-FTiOxZ40fo4GiXBUnSq3sB0/Fu6DSlqDIvoC4XD6Jf0N/LP7Tc2VEy9v2KLF0a1ZCyDoDtY2Foyh92JHLAD/cA==
+"@descent-protocol/sdk@^0.1.15":
+  version "0.1.15"
+  resolved "https://registry.yarnpkg.com/@descent-protocol/sdk/-/sdk-0.1.15.tgz#a3f836ff9fd2c23cdbe659223da97f0acb2f7045"
+  integrity sha512-Lgb6+sDo/TeQLT4c3nuAf0uDo6FW55vxyDELR8Xd7bdtO8r+bQRILPbd0FtsgtLo8JJxeX+ny7CRntjOgc99yQ==
   dependencies:
     ethers "^6.7.1"
     ganache "^7.9.1"
@@ -3828,7 +3828,7 @@ eth-rpc-errors@^4.0.2:
   dependencies:
     fast-safe-stringify "^2.0.6"
 
-ethers@^6.7.1:
+ethers@^6.7.1, ethers@^6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/ethers/-/ethers-6.9.0.tgz#a4534bdcdfde306aee94ef32f3d5c70d7e33fcb9"
   integrity sha512-pmfNyQzc2mseLe91FnT2vmNaTt8dDzhxZ/xItAV7uGsF4dI4ek2ufMu3rAkgQETL/TIs0GS5A+U05g9QyWnv3Q==

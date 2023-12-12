@@ -1,12 +1,14 @@
-const formatAddress = (address: string) => {
-  if (!address || address.length < 9) {
-    return address || "Invalid address";
-  }
+import { formatAddress, formatLargeNumber } from "./methods";
+import {
+  setLocalStorage,
+  getLocalStorage,
+  removeLocalStorage,
+} from "./localStorage";
 
-  const firstFour = address.substring(0, 4);
-  const lastFour = address.substring(address.length - 4);
-
-  return `${firstFour}...${lastFour}`;
+export {
+  formatAddress,
+  setLocalStorage,
+  getLocalStorage,
+  removeLocalStorage,
+  formatLargeNumber,
 };
-
-export { formatAddress };

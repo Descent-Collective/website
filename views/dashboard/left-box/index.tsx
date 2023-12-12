@@ -2,8 +2,15 @@ import { InfoIcon } from "@/public/icons";
 import FirstItem from "./first-item";
 import SecondItem from "./second-item";
 import ThirdItem from "./third-item";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
+import { formatLargeNumber } from "@/utils";
 
 const LeftBox = () => {
+  const { userState, collateralState } = useSystemFunctions();
+
+  const { user } = userState;
+  const { collateral } = collateralState;
+
   const firstItems = [
     {
       title: "Total Amount Minted",
@@ -11,7 +18,7 @@ const LeftBox = () => {
     },
     {
       title: "Debt Limit",
-      value: "12B xNGN",
+      value: `${formatLargeNumber(collateral.debtCeiling)} xNGN`,
     },
     {
       title: "Maximum Collateral Ratio",
@@ -26,34 +33,34 @@ const LeftBox = () => {
   const secondItems = [
     {
       title: "Accrued Interest/Fees",
-      value: "0.00 xNGN",
+      value: `${user?.accruedFees} xNGN`,
     },
     {
       title: "Deposited Collateral",
-      value: "0.00 USDC",
+      value: `${user?.depositedCollateral} USDC`,
     },
     {
       title: "Collateral Ratio",
-      value: "0.00%",
+      value: user?.currentCollateralRatio,
     },
     {
       title: "Collateral Locked",
-      value: "$0.00",
+      value: `$${user?.collateralLocked}`,
     },
   ];
 
   const thirdItems = [
     {
       title: "Vault xNGN Debt",
-      value: "12,000 xNGN",
+      value: `${user?.availablexNGN} xNGN`,
       buttonText: "Repay",
-      disabled: false,
+      disabled: Number(user?.availablexNGN) === 0,
     },
     {
       title: "Available Collateral",
-      value: "0.00 USDC",
+      value: `${user?.availableCollateral} USDC`,
       buttonText: "Withdraw",
-      disabled: true,
+      disabled: Number(user?.availableCollateral) === 0,
     },
     {
       title: "Available to Borrow",
