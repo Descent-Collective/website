@@ -1068,10 +1068,10 @@
     stream-browserify "^3.0.0"
     util "^0.12.4"
 
-"@descent-protocol/sdk@^0.1.16":
-  version "0.1.16"
-  resolved "https://registry.yarnpkg.com/@descent-protocol/sdk/-/sdk-0.1.16.tgz#d0406a35606251e3f773f1f626548eef0ca71008"
-  integrity sha512-E8FFDZF3ZNKBbU/+DSMLFbR4JisqtR/F8/nZQlCFHJpiC7iH1Itn2Ha2g74UKFQZZilv8hoGWTpn5VmSs8JR3A==
+"@descent-protocol/sdk@^0.1.17":
+  version "0.1.17"
+  resolved "https://registry.yarnpkg.com/@descent-protocol/sdk/-/sdk-0.1.17.tgz#33b428c53f7a4a3492e9860e013427fb59172d12"
+  integrity sha512-B5NbNEai2K1X5nwZVEUsBHNzS5E0INTembg1HwwfFViOAElbQqsXffLUOzEYFxWBeSioCunzPO9iSnN+yB+nCQ==
   dependencies:
     ethers "^6.7.1"
     ganache "^7.9.1"

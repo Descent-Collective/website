@@ -96,7 +96,7 @@ const ActionModal = ({ close }: { close: () => void }) => {
           labelAlt="150,000.00 xNGN debt"
           placeholder="0.00"
           valid={valid}
-          hasMax
+          max={() => null}
           onChange={(val) => setAmount(val)}
         />
       </div>

@@ -1,6 +1,6 @@
 "use client";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
-import { useAccount, useConnect } from "wagmi";
+import { useAccount } from "wagmi";
 
 import { MenuIcon, MetamaskIcon } from "@/public/icons";
 import { DescentButton, DescentClickAnimation } from "..";
@@ -9,14 +9,13 @@ import useDescent from "@/hooks/useDescent";
 
 const Button = ({ setOpen }: { setOpen: (val: boolean) => void }) => {
   const { openConnectModal } = useConnectModal();
-  const { address } = useAccount();
-  const { connectors } = useConnect();
+  const { address, connector: activeConnector } = useAccount();
 
   const { showButton } = useDescent();
 
   return (
     <div>
-      {connectors.length > 0 && (
+      {activeConnector && (
         <div>
           {showButton ? (
             <div className="min-w-[120px] md:min-w-[180px]">

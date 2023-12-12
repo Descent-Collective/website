@@ -8,6 +8,7 @@ type User = {
   availableCollateral: string;
   availablexNGN: string;
   hasSetupVault: boolean;
+  usdcWalletBalance: string;
 };
 
 const defaultUser: User = {
@@ -20,6 +21,7 @@ const defaultUser: User = {
   availableCollateral: "0.0",
   availablexNGN: "0.0",
   hasSetupVault: false,
+  usdcWalletBalance: "0.0",
 };
 
 export type { User };

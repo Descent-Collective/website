@@ -3,6 +3,12 @@ import classNames from "classnames";
 
 import { Button } from "./types";
 
+const ButtonLoading = () => (
+  <div className="flex justify-center items-center">
+    <div className="animate-spin rounded-full h-[22px] w-[22px] border-b-4 border-blue-100" />
+  </div>
+);
+
 const DescentButton = ({
   onClick,
   text,
@@ -75,7 +81,7 @@ const DescentButton = ({
       disabled={disabled}
       type={type}
     >
-      {text}
+      <div>{loading ? <ButtonLoading /> : text}</div>
 
       {icon && icon}
     </motion.button>

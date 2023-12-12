@@ -22,7 +22,7 @@ export const userReducer = createSlice({
       state.loading = action.payload;
     },
 
-    setUser: (state, action: PayloadAction<User | undefined>) => {
+    setUser: (state, action: PayloadAction<User>) => {
       state.user = { ...state.user, ...action.payload };
     },
   },

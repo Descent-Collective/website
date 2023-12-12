@@ -1,6 +1,6 @@
 "use client";
-import { useConnect } from "wagmi";
 import Descent from "@descent-protocol/sdk";
+import { useAccount } from "wagmi";
 
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { setCollateral, setLoading, setLoadingSupply } from ".";
@@ -8,15 +8,15 @@ import { CallbackProps } from "../store";
 
 const useCollateralActions = () => {
   const { dispatch } = useSystemFunctions();
-  const { connectors } = useConnect();
+  const { connector: activeConnector } = useAccount();
 
   const _descentProvider = async () => {
     try {
-      const connector = connectors[3];
+      if (!activeConnector) return;
 
-      await connector.connect();
+      await activeConnector.connect();
 
-      const connectedProvider = await connector.getProvider();
+      const connectedProvider = await activeConnector.getProvider();
       const descentApp = await Descent.create("browser", {
         collateral: "USDC",
         ethereum: connectedProvider,
@@ -48,8 +48,12 @@ const useCollateralActions = () => {
   ) => {
     try {
       dispatch(setLoadingSupply(true));
+
       const descent = await _descentProvider();
+      const a = await descent.approveCollateral(amount);
+      console.log("approved", a);
       const response = await descent.depositCollateral(amount);
+      console.log("deposited", response);
 
       return callback?.onSuccess?.(response);
     } catch (error: any) {

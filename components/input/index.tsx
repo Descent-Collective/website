@@ -12,7 +12,7 @@ const DescentInput = (props: Input) => {
     name,
     placeholder,
     valid,
-    hasMax,
+    max,
     valueAlt,
     value,
     onChange,
@@ -22,7 +22,8 @@ const DescentInput = (props: Input) => {
 
   const checkIfNumber = (value: string) => {
     if (value === "") return true;
-    const regex = /^[0-9\b]+$/;
+
+    const regex = /^[0-9]+\.?[0-9]*$/;
     return regex.test(value);
   };
 
@@ -85,8 +86,8 @@ const DescentInput = (props: Input) => {
           </div>
         </div>
 
-        {hasMax && (
-          <DescentClickAnimation>
+        {max && (
+          <DescentClickAnimation onClick={max}>
             <div
               className={classNames(
                 "py-1 px-[10px] bg-white-350 rounded text-[8px] md:text-xs cursor-pointer",

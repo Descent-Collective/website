@@ -1,20 +1,29 @@
 import useCollateralActions from "@/application/collateral/actions";
 import useUserActions from "@/application/user/actions";
 import { DescentButton, DescentInput } from "@/components";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
+import { formatAmount } from "@/utils";
 import { useState } from "react";
 
 const SupplyTab = () => {
+  const { collateralState, userState } = useSystemFunctions();
   const { depositCollateral } = useCollateralActions();
   const { getVaultInfo } = useUserActions();
   const [amount, setAmount] = useState("");
   const [generated, setGenerated] = useState("");
 
+  const { loadingSupply, collateral } = collateralState;
+  const { collateralPrice, liquidationThreshold } = collateral;
+  const { user } = userState;
+
   const valid = amount.length > 0;
+  const usdcBalance = formatAmount(user.usdcWalletBalance);
 
   const handleChange = (val: string) => {
     setAmount(val);
     const _amount = Number(val);
-    const _generated = !_amount ? "" : _amount * 450;
+    const lt = Number(liquidationThreshold.replace("%", ""));
+    const _generated = !_amount ? "" : (_amount * Number(collateralPrice)) / lt;
 
     setGenerated(_generated.toString());
   };
@@ -41,11 +50,12 @@ const SupplyTab = () => {
         name="amount"
         valueAlt={"0.00 USD"}
         label="USDC to Supply"
-        labelAlt="0 USDC available"
+        labelAlt={`${usdcBalance} USDC available`}
         placeholder="0.00"
         valid={valid}
-        hasMax
+        max={() => setAmount(user.usdcWalletBalance)}
         onChange={(val) => handleChange(val)}
+        value={amount}
       />
 
       <DescentInput
@@ -58,7 +68,12 @@ const SupplyTab = () => {
       />
 
       <div className="mt-2">
-        <DescentButton disabled={!valid} type="submit" text="Continue" />
+        <DescentButton
+          loading={loadingSupply}
+          disabled={!valid || loadingSupply}
+          type="submit"
+          text="Continue"
+        />
       </div>
     </form>
   );

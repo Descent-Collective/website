@@ -18,6 +18,7 @@ import classNames from "classnames";
 import Button from "./button";
 
 const DescentHeader = () => {
+  const { connector: activeConnector } = useAccount();
   const { pathname } = useSystemFunctions();
   const [isOpen, setIsOpen] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
@@ -25,8 +26,10 @@ const DescentHeader = () => {
   const isDashboardRoute: boolean = pathname.includes("/app");
 
   useEffect(() => {
-    setDomLoaded(true);
-  }, []);
+    if (activeConnector) {
+      setDomLoaded(true);
+    }
+  }, [activeConnector]);
 
   return (
     <>

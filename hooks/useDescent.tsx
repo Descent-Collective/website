@@ -8,7 +8,7 @@ const useDescent = () => {
   const { isDisconnected, isConnected } = useAccount();
   const { chain } = useNetwork();
   const { switchNetwork } = useSwitchNetwork();
-  const { getVaultInfo, getUsdcBalance } = useUserActions();
+  const { getVaultInfo } = useUserActions();
   const { getCollateralInfo } = useCollateralActions();
 
   const [showButton, setShowButton] = useState(false);
@@ -16,7 +16,6 @@ const useDescent = () => {
   const connectToDescent = async () => {
     getVaultInfo();
     getCollateralInfo();
-    // getUsdcBalance();
   };
 
   const setup = () => {
@@ -39,6 +38,7 @@ const useDescent = () => {
 
   useEffect(() => {
     setup();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chain, isConnected, isDisconnected]);
 
   return { showButton };
