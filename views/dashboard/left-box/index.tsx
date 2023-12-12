@@ -26,7 +26,7 @@ const LeftBox = () => {
     },
     {
       title: "Borrow Interest",
-      value:  `${Number(roundupNumber(collateral.rate)) + Number(1)} %`,
+      value:  `${Number(roundupNumber(collateral.rate)) + Number(1)}%`,
     },
   ];
 
@@ -41,7 +41,7 @@ const LeftBox = () => {
     },
     {
       title: "Collateral Ratio",
-      value: `${roundupNumber(user?.currentCollateralRatio)} %`,
+      value: `${roundupNumber(user?.currentCollateralRatio)}%`,
     },
     {
       title: "Collateral Locked",

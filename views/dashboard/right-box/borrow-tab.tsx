@@ -74,11 +74,13 @@ const BorrowTab = () => {
             <InfoAltIcon />
           </div>
           <div className="text-[10px] md:text-sm">
+            
             Continuing with this amount may risk vault liquidation. Consider a
-            lower value that takes you farther away from the minimum allowable
+            lower value that takes you farther away from the minimum
             <span className="font-semibold"> Collateral Ratio</span>.
           </div>
-        </div>
+          </div>
+
       </div>
 
       <div className="mt-2">
