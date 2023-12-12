@@ -12,15 +12,22 @@ const SupplyTab = () => {
   const [amount, setAmount] = useState("");
   const [generated, setGenerated] = useState("");
 
-  const { loadingSupply, collateral } = collateralState;
+  const { loadingSupply, loadingApproveSupply, collateral } = collateralState;
   const { collateralPrice, liquidationThreshold } = collateral;
   const { user } = userState;
 
+  const loading = loadingApproveSupply || loadingSupply;
   const valid = amount.length > 0;
   const usdcBalance = formatAmount(user.usdcWalletBalance);
 
   const handleChange = (val: string) => {
-    setAmount(val);
+    if (!val) {
+      setAmount("");
+      setGenerated("");
+      return;
+    }
+
+    setAmount(Number(val).toLocaleString());
     const _amount = Number(val);
     const lt = Number(liquidationThreshold.replace("%", ""));
     const _generated = !_amount ? "" : (_amount * Number(collateralPrice)) / lt;
@@ -31,8 +38,17 @@ const SupplyTab = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    depositCollateral(amount, {
-      onSuccess: () => getVaultInfo(),
+    const amountWithoutComma = amount.replace(/,/g, "");
+
+    depositCollateral(amountWithoutComma, {
+      onSuccess: () => {
+        setAmount("");
+        setGenerated("");
+
+        setTimeout(() => {
+          getVaultInfo();
+        }, 3000);
+      },
     });
   };
   return (
@@ -54,7 +70,7 @@ const SupplyTab = () => {
         placeholder="0.00"
         valid={valid}
         max={() => setAmount(user.usdcWalletBalance)}
-        onChange={(val) => handleChange(val)}
+        onChange={handleChange}
         value={amount}
       />
 
@@ -69,8 +85,8 @@ const SupplyTab = () => {
 
       <div className="mt-2">
         <DescentButton
-          loading={loadingSupply}
-          disabled={!valid || loadingSupply}
+          loading={loading}
+          disabled={!valid || loading}
           type="submit"
           text="Continue"
         />

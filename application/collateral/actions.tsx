@@ -6,7 +6,8 @@ import useSystemFunctions from "@/hooks/useSystemFunctions";
 import {
   setCollateral,
   setLoading,
-  setLoadingApprove,
+  setLoadingApproveBorrow,
+  setLoadingApproveSupply,
   setLoadingBorrow,
   setLoadingSupply,
 } from ".";
@@ -53,38 +54,49 @@ const useCollateralActions = () => {
     callback?: CallbackProps
   ) => {
     try {
-      dispatch(setLoadingSupply(true));
-      dispatch(setLoadingApprove(true));
+      dispatch(setLoadingApproveSupply(true));
 
       const descent = await _descentProvider();
-      await descent.approveCollateral(amount);
-      setLoadingApprove(false);
+
+      const amountToApprove = Number(amount) + 0.1;
+
+      await descent.approveCollateral(amountToApprove.toString());
+      dispatch(setLoadingApproveSupply(false));
+
+      dispatch(setLoadingSupply(true));
       const response = await descent.depositCollateral(amount);
+      console.log(response);
 
       return callback?.onSuccess?.(response);
     } catch (error: any) {
       console.log(error);
       callback?.onError?.(error);
     } finally {
+      dispatch(setLoadingApproveSupply(false));
       dispatch(setLoadingSupply(false));
     }
   };
 
   const borrowXNGN = async (amount: string, callback?: CallbackProps) => {
     try {
-      dispatch(setLoadingBorrow(true));
+      dispatch(setLoadingApproveBorrow(true));
 
       const descent = await _descentProvider();
-      const a = await descent.approveCollateral(amount);
-      console.log("approved", a);
-      const response = await descent.depositCollateral(amount);
-      console.log("deposited", response);
+
+      const amountToApprove = Number(amount) + 0.1;
+
+      await descent.approvexNGN(amountToApprove.toString());
+      dispatch(setLoadingApproveBorrow(false));
+
+      dispatch(setLoadingBorrow(true));
+      const response = await descent.borrowCurrency(amount);
 
       return callback?.onSuccess?.(response);
     } catch (error: any) {
       console.log(error);
       callback?.onError?.(error);
     } finally {
+      dispatch(setLoadingApproveBorrow(false));
       dispatch(setLoadingBorrow(false));
     }
   };
@@ -92,6 +104,7 @@ const useCollateralActions = () => {
   return {
     getCollateralInfo,
     depositCollateral,
+    borrowXNGN,
   };
 };
 
