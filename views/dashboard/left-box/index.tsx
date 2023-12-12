@@ -51,20 +51,23 @@ const LeftBox = () => {
 
   const thirdItems = [
     {
-      title: "Vault xNGN Debt",
-      value: `${formatAmount(roundupNumber(user?.borrowedAmount))} xNGN`,
-      buttonText: "Repay",
-      disabled: Number(user?.borrowedAmount) === 0,
+      title: "Available to Borrow",
+      value: `${formatAmount(roundupNumber(user?.availablexNGN))} xNGN`,
+      
     },
+  
     {
       title: "Available Collateral",
       value: `${formatAmount(roundupNumber(user?.availableCollateral))} USDC`,
       buttonText: "Withdraw",
       disabled: Number(user?.availableCollateral) === 0,
     },
-    {
-      title: "Available to Borrow",
-      value:`${formatAmount(roundupNumber(user?.availablexNGN))} xNGN`,
+  
+      {
+      title: "Vault xNGN Debt",
+      value: `${formatAmount(roundupNumber(user?.borrowedAmount))} xNGN`,
+      buttonText: "Repay",
+      disabled: Number(user?.borrowedAmount) === 0,
     },
   ];
   return (
