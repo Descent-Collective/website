@@ -42,7 +42,7 @@ const BorrowTab = () => {
       return alertUser({
         title: "Insufficient xNGN balance",
         variant: "error",
-        message: "You do not have enough xNGN in your vault",
+        message: "You do not have enough xNGN available to borrow",
       });
     }
 
@@ -56,6 +56,7 @@ const BorrowTab = () => {
       },
     });
   };
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-6">
       <div>

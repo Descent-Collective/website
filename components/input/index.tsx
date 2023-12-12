@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "./types";
 import { DescentClickAnimation } from "..";
 
@@ -44,6 +44,10 @@ const DescentInput = (props: Input) => {
       onChange && onChange(valueWithoutComma);
     }
   };
+
+  useEffect(() => {
+    if (value === "") setValue("");
+  }, [value]);
 
   return (
     <div>
