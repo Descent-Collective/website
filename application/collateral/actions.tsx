@@ -83,11 +83,6 @@ const useCollateralActions = () => {
 
       const descent = await _descentProvider();
 
-      const amountToApprove = Number(amount) + 0.1;
-
-      await descent.approvexNGN(amountToApprove.toString());
-      dispatch(setLoadingApproveBorrow(false));
-
       dispatch(setLoadingBorrow(true));
       const response = await descent.borrowCurrency(amount);
 
