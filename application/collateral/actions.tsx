@@ -3,7 +3,13 @@ import Descent from "@descent-protocol/sdk";
 import { useAccount } from "wagmi";
 
 import useSystemFunctions from "@/hooks/useSystemFunctions";
-import { setCollateral, setLoading, setLoadingSupply } from ".";
+import {
+  setCollateral,
+  setLoading,
+  setLoadingApprove,
+  setLoadingBorrow,
+  setLoadingSupply,
+} from ".";
 import { CallbackProps } from "../store";
 
 const useCollateralActions = () => {
@@ -48,6 +54,25 @@ const useCollateralActions = () => {
   ) => {
     try {
       dispatch(setLoadingSupply(true));
+      dispatch(setLoadingApprove(true));
+
+      const descent = await _descentProvider();
+      await descent.approveCollateral(amount);
+      setLoadingApprove(false);
+      const response = await descent.depositCollateral(amount);
+
+      return callback?.onSuccess?.(response);
+    } catch (error: any) {
+      console.log(error);
+      callback?.onError?.(error);
+    } finally {
+      dispatch(setLoadingSupply(false));
+    }
+  };
+
+  const borrowXNGN = async (amount: string, callback?: CallbackProps) => {
+    try {
+      dispatch(setLoadingBorrow(true));
 
       const descent = await _descentProvider();
       const a = await descent.approveCollateral(amount);
@@ -60,7 +85,7 @@ const useCollateralActions = () => {
       console.log(error);
       callback?.onError?.(error);
     } finally {
-      dispatch(setLoadingSupply(false));
+      dispatch(setLoadingBorrow(false));
     }
   };
 

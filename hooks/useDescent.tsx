@@ -5,7 +5,11 @@ import useCollateralActions from "@/application/collateral/actions";
 import { availableChains } from "@/config/rainbowkit";
 
 const useDescent = () => {
-  const { isDisconnected, isConnected } = useAccount();
+  const {
+    isDisconnected,
+    isConnected,
+    connector: activeConnector,
+  } = useAccount();
   const { chain } = useNetwork();
   const { switchNetwork } = useSwitchNetwork();
   const { getVaultInfo } = useUserActions();
@@ -14,8 +18,10 @@ const useDescent = () => {
   const [showButton, setShowButton] = useState(false);
 
   const connectToDescent = async () => {
-    getVaultInfo();
-    getCollateralInfo();
+    if (activeConnector) {
+      getVaultInfo();
+      getCollateralInfo();
+    }
   };
 
   const setup = () => {
@@ -39,7 +45,7 @@ const useDescent = () => {
   useEffect(() => {
     setup();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chain, isConnected, isDisconnected]);
+  }, [chain, isConnected, isDisconnected, activeConnector]);
 
   return { showButton };
 };

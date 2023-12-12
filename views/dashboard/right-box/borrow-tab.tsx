@@ -30,7 +30,7 @@ const BorrowTab = () => {
           labelAlt="162,000 xNGN available"
           placeholder="0.00"
           valid={valid}
-          hasMax
+          max={() => null}
           onChange={(val) => setAmount(val)}
         />
 

@@ -8,6 +8,7 @@ export interface CollateralState {
   collateral: Collateral;
   loadingSupply: boolean;
   loadingBorrow: boolean;
+  loadingApprove: boolean;
   loading: boolean;
 }
 
@@ -15,6 +16,7 @@ const initialState: CollateralState = {
   collateral: defaultCollateral,
   loadingSupply: false,
   loadingBorrow: false,
+  loadingApprove: false,
   loading: false,
 };
 
@@ -30,6 +32,10 @@ export const collateralReducer = createSlice({
       state.loadingBorrow = action.payload;
     },
 
+    setLoadingApprove: (state, action: PayloadAction<boolean>) => {
+      state.loadingApprove = action.payload;
+    },
+
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
@@ -40,7 +46,12 @@ export const collateralReducer = createSlice({
   },
 });
 
-export const { setCollateral, setLoadingBorrow, setLoadingSupply, setLoading } =
-  collateralReducer.actions;
+export const {
+  setCollateral,
+  setLoadingBorrow,
+  setLoadingSupply,
+  setLoading,
+  setLoadingApprove,
+} = collateralReducer.actions;
 
 export default collateralReducer.reducer;

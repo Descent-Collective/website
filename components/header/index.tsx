@@ -1,8 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useConnectModal } from "@rainbow-me/rainbowkit";
-import { useAccount, useConnect } from "wagmi";
 
 import {
   ClosedEyeIcon,
@@ -18,7 +16,6 @@ import classNames from "classnames";
 import Button from "./button";
 
 const DescentHeader = () => {
-  const { connector: activeConnector } = useAccount();
   const { pathname } = useSystemFunctions();
   const [isOpen, setIsOpen] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
@@ -26,10 +23,8 @@ const DescentHeader = () => {
   const isDashboardRoute: boolean = pathname.includes("/app");
 
   useEffect(() => {
-    if (activeConnector) {
-      setDomLoaded(true);
-    }
-  }, [activeConnector]);
+    setDomLoaded(true);
+  }, []);
 
   return (
     <>
