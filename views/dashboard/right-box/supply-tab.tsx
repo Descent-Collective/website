@@ -1,7 +1,11 @@
+import useCollateralActions from "@/application/collateral/actions";
+import useUserActions from "@/application/user/actions";
 import { DescentButton, DescentInput } from "@/components";
 import { useState } from "react";
 
 const SupplyTab = () => {
+  const { depositCollateral } = useCollateralActions();
+  const { getVaultInfo } = useUserActions();
   const [amount, setAmount] = useState("");
   const [generated, setGenerated] = useState("");
 
@@ -17,7 +21,10 @@ const SupplyTab = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(amount);
+
+    depositCollateral(amount, {
+      onSuccess: () => getVaultInfo(),
+    });
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-6">

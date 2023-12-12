@@ -16,7 +16,7 @@ const useDescent = () => {
   const connectToDescent = async () => {
     getVaultInfo();
     getCollateralInfo();
-    getUsdcBalance();
+    // getUsdcBalance();
   };
 
   const setup = () => {

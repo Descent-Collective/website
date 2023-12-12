@@ -3,7 +3,7 @@ import { useConnect } from "wagmi";
 import Descent from "@descent-protocol/sdk";
 
 import useSystemFunctions from "@/hooks/useSystemFunctions";
-import { setCollateral, setLoading } from ".";
+import { setCollateral, setLoading, setLoadingSupply } from ".";
 import { CallbackProps } from "../store";
 
 const useCollateralActions = () => {
@@ -42,8 +42,27 @@ const useCollateralActions = () => {
     }
   };
 
+  const depositCollateral = async (
+    amount: string,
+    callback?: CallbackProps
+  ) => {
+    try {
+      dispatch(setLoadingSupply(true));
+      const descent = await _descentProvider();
+      const response = await descent.depositCollateral(amount);
+
+      return callback?.onSuccess?.(response);
+    } catch (error: any) {
+      console.log(error);
+      callback?.onError?.(error);
+    } finally {
+      dispatch(setLoadingSupply(false));
+    }
+  };
+
   return {
     getCollateralInfo,
+    depositCollateral,
   };
 };
 
