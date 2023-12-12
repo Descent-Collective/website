@@ -21,4 +21,15 @@ const formatLargeNumber = (amount: string | number) => {
   return `${prefix}${suffix}`;
 };
 
-export { formatAddress, formatLargeNumber };
+const roundupNumber = (amount: string | number) => {
+  const num = Number(amount);
+ return num.toFixed(2)
+};
+
+const formatAmount = (amount: string | number) => {
+  const num = Number(amount).toLocaleString();
+
+  return num
+}
+
+export { formatAddress, formatLargeNumber,roundupNumber, formatAmount };

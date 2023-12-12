@@ -3,7 +3,7 @@ import FirstItem from "./first-item";
 import SecondItem from "./second-item";
 import ThirdItem from "./third-item";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
-import { formatLargeNumber } from "@/utils";
+import { formatLargeNumber, roundupNumber, formatAmount } from "@/utils";
 
 const LeftBox = () => {
   const { userState, collateralState } = useSystemFunctions();
@@ -14,7 +14,7 @@ const LeftBox = () => {
   const firstItems = [
     {
       title: "Total Amount Minted",
-      value: "12,000 xNGN",
+      value: `${formatAmount(roundupNumber(collateral?.totalBorrowedAmount))} xNGN`,
     },
     {
       title: "Debt Limit",
@@ -22,49 +22,49 @@ const LeftBox = () => {
     },
     {
       title: "Maximum Collateral Ratio",
-      value: "80%",
+      value: `${(collateral.liquidationThreshold)}`,
     },
     {
       title: "Borrow Interest",
-      value: "5%",
+      value:  `${Number(roundupNumber(collateral.rate)) + Number(1)} %`,
     },
   ];
 
   const secondItems = [
     {
       title: "Accrued Interest/Fees",
-      value: `${user?.accruedFees} xNGN`,
+      value: `${formatAmount(roundupNumber(user?.accruedFees))} xNGN`,
     },
     {
       title: "Deposited Collateral",
-      value: `${user?.depositedCollateral} USDC`,
+      value: `${formatAmount(roundupNumber(user?.depositedCollateral))} USDC`,
     },
     {
       title: "Collateral Ratio",
-      value: user?.currentCollateralRatio,
+      value: `${roundupNumber(user?.currentCollateralRatio)} %`,
     },
     {
       title: "Collateral Locked",
-      value: `$${user?.collateralLocked}`,
+      value: `${formatAmount(roundupNumber(user?.collateralLocked))} USDC`,
     },
   ];
 
   const thirdItems = [
     {
       title: "Vault xNGN Debt",
-      value: `${user?.availablexNGN} xNGN`,
+      value: `${formatAmount(roundupNumber(user?.borrowedAmount))} xNGN`,
       buttonText: "Repay",
-      disabled: Number(user?.availablexNGN) === 0,
+      disabled: Number(user?.borrowedAmount) === 0,
     },
     {
       title: "Available Collateral",
-      value: `${user?.availableCollateral} USDC`,
+      value: `${formatAmount(roundupNumber(user?.availableCollateral))} USDC`,
       buttonText: "Withdraw",
       disabled: Number(user?.availableCollateral) === 0,
     },
     {
       title: "Available to Borrow",
-      value: "0.00 xNGN",
+      value:`${formatAmount(roundupNumber(user?.availablexNGN))} xNGN`,
     },
   ];
   return (
@@ -81,9 +81,9 @@ const LeftBox = () => {
             Overview
           </div>
           <div className="flex items-center gap-1">
-            <div className="w-[7px] h-[7px] rounded-full bg-green-50" />
+            <div className={`w-[7px] h-[7px] rounded-full ${user?.healthFactor === 'Safe'? 'bg-green-50': 'bg-red-50'} `} />
             <div className="text-[9px] md:text-sm font-medium text-grey-500">
-              Healthy
+              {user?.healthFactor === 'Safe'? 'Healthy': 'Unsafe'}
             </div>
             <div className="cursor-pointer">
               <InfoIcon />
