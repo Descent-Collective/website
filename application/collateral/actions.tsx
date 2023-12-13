@@ -137,10 +137,11 @@ const useCollateralActions = () => {
       callback?.onError?.(error);
 
       alertUser({
-        title: "Loan request unsuccessful.",
+        title: "Borrow unsuccessful.",
         variant: "error",
         message: (
           <div>
+            
             Your loan of{" "}
             <span className="text-black-100">
               {Number(amount).toLocaleString()} xNGN

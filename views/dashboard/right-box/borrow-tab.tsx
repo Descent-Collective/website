@@ -40,7 +40,7 @@ const BorrowTab = () => {
 
     if (Number(amountWithoutComma) > Number(availablexNGN)) {
       return alertUser({
-        title: "Insufficient xNGN balance",
+        title: "Insufficient xNGN available",
         variant: "error",
         message: "You do not have enough xNGN available to borrow",
       });

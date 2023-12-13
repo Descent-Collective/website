@@ -32,7 +32,7 @@ const SupplyTab = () => {
     setAmount(Number(val).toLocaleString());
     const _amount = Number(val);
     const lt = Number(liquidationThreshold.replace("%", ""));
-    const _generated = !_amount ? "" : (_amount * Number(collateralPrice)) * (lt/ 100);
+    const _generated = !_amount ? "" : (_amount * Number(collateralPrice)) / (lt/100);
 
     setGenerated(_generated.toString());
   };
@@ -65,7 +65,7 @@ const SupplyTab = () => {
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-6">
       <div>
         <div className="text-black-100 text-lg md:text-xl font-medium">
-          Deposit collateral
+          Supply collateral
         </div>
         <div className="text-grey-500 font-medium text-xs md:text-sm">
           Fund your vault with USDC
@@ -74,6 +74,7 @@ const SupplyTab = () => {
 
       <DescentInput
         name="amount"
+        valueAlt={"0.00 USD"}
         label="USDC to Deposit"
         labelAlt={`Balance: ${usdcBalance}`}
         placeholder="0.00"
@@ -85,6 +86,7 @@ const SupplyTab = () => {
 
       <DescentInput
         name="generated"
+        valueAlt={"0.00 USD"}
         label="Generated xNGN"
         placeholder="0.00"
         disabled
