@@ -74,7 +74,6 @@ const SupplyTab = () => {
 
       <DescentInput
         name="amount"
-        valueAlt={"0.00 USD"}
         label="USDC to Deposit"
         labelAlt={`Balance: ${usdcBalance}`}
         placeholder="0.00"
@@ -86,7 +85,6 @@ const SupplyTab = () => {
 
       <DescentInput
         name="generated"
-        valueAlt={"0.00 USD"}
         label="Generated xNGN"
         placeholder="0.00"
         disabled
