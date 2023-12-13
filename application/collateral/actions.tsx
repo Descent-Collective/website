@@ -118,7 +118,7 @@ const useCollateralActions = () => {
       const response = await descent.borrowCurrency(amount);
 
       alertUser({
-        title: "Bravo! Loan Approved.",
+        title: "Bravo! xNGN borrowed.",
         variant: "success",
         message: (
           <div>
@@ -126,7 +126,7 @@ const useCollateralActions = () => {
             <span className="text-black-100">
               {Number(amount).toLocaleString()} xNGN
             </span>{" "}
-            has been approved and successfully disbursed. Congratulations!
+            has been successfully disbursed. Congratulations!
           </div>
         ),
       });
