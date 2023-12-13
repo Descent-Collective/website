@@ -7,7 +7,7 @@ export interface Input {
   valueAlt?: string;
   placeholder?: string;
   valid?: boolean;
-  hasMax?: boolean;
+  max?: () => void;
   value?: string;
   onChange?: (val: string) => void;
 }

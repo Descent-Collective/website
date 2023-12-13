@@ -1,5 +1,7 @@
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { InfoIcon } from "@/public/icons";
 import classNames from "classnames";
+import { memo } from "react";
 
 const FirstItem = ({
   item,
@@ -10,6 +12,8 @@ const FirstItem = ({
   index: number;
   items: any[];
 }) => {
+  const { userState } = useSystemFunctions();
+
   return (
     <div
       className={classNames("", {
@@ -33,4 +37,4 @@ const FirstItem = ({
   );
 };
 
-export default FirstItem;
+export default memo(FirstItem);

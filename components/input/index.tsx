@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "./types";
 import { DescentClickAnimation } from "..";
 
@@ -12,7 +12,7 @@ const DescentInput = (props: Input) => {
     name,
     placeholder,
     valid,
-    hasMax,
+    max,
     valueAlt,
     value,
     onChange,
@@ -22,7 +22,8 @@ const DescentInput = (props: Input) => {
 
   const checkIfNumber = (value: string) => {
     if (value === "") return true;
-    const regex = /^[0-9\b]+$/;
+
+    const regex = /^[0-9]+\.?[0-9]*$/;
     return regex.test(value);
   };
 
@@ -30,7 +31,7 @@ const DescentInput = (props: Input) => {
     const value = e.target.value;
     const valueWithoutComma = value.replace(/,/g, "");
 
-    if (Number(valueWithoutComma) === 0) {
+    if (valueWithoutComma.length === 0 || Number(valueWithoutComma) === 0) {
       setValue("");
       onChange && onChange("");
       return;
@@ -43,6 +44,10 @@ const DescentInput = (props: Input) => {
       onChange && onChange(valueWithoutComma);
     }
   };
+
+  useEffect(() => {
+    if (value === "") setValue("");
+  }, [value]);
 
   return (
     <div>
@@ -85,8 +90,8 @@ const DescentInput = (props: Input) => {
           </div>
         </div>
 
-        {hasMax && (
-          <DescentClickAnimation>
+        {max && (
+          <DescentClickAnimation onClick={max}>
             <div
               className={classNames(
                 "py-1 px-[10px] bg-white-350 rounded text-[8px] md:text-xs cursor-pointer",

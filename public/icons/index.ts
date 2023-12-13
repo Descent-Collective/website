@@ -23,6 +23,8 @@ import FilterIcon from "./filter.svg";
 import ClosedEyeIcon from "./closed-eye-icon.svg";
 import InfoIcon from "./info.svg";
 import InfoAltIcon from "./info-alt.svg";
+import SuccessIcon from "./success-icon.svg";
+import ErrorIcon from "./error-icon.svg";
 
 export {
   CancelIcon,
@@ -50,4 +52,6 @@ export {
   ClosedEyeIcon,
   InfoIcon,
   InfoAltIcon,
+  SuccessIcon,
+  ErrorIcon,
 };

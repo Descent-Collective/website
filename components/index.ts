@@ -6,6 +6,7 @@ import DescentFooter from "./footer";
 import DescentInput from "./input";
 import DescentMenu from "./menu";
 import DescentModal from "./modal";
+import DescentAlert from "./alert";
 
 export {
   DescentButton,
@@ -16,4 +17,5 @@ export {
   DescentInput,
   DescentMenu,
   DescentModal,
+  DescentAlert,
 };

@@ -2,18 +2,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-import { SignUserResponse, User } from "./types";
+import { User, defaultUser } from "./types";
 
 export interface UserState {
-  user: User | undefined;
+  user: User;
   loading: boolean;
 }
 
 const initialState: UserState = {
-  user: {
-    id: "123hdty",
-    name: "Justice Beaver",
-  },
+  user: defaultUser,
   loading: false,
 };
 
@@ -25,11 +22,7 @@ export const userReducer = createSlice({
       state.loading = action.payload;
     },
 
-    setUser: (state, action: PayloadAction<SignUserResponse | undefined>) => {
-      if (!action.payload) {
-        state.user = undefined;
-        return;
-      }
+    setUser: (state, action: PayloadAction<User>) => {
       state.user = { ...state.user, ...action.payload };
     },
   },

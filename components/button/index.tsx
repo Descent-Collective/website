@@ -2,6 +2,38 @@ import { motion } from "framer-motion";
 import classNames from "classnames";
 
 import { Button } from "./types";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
+
+const ButtonLoading = () => {
+  const { collateralState } = useSystemFunctions();
+  const {
+    loadingApproveSupply,
+    loadingBorrow,
+    loadingSupply,
+    loadingRepay,
+    loadingApproveRepay,
+    loadingWithdraw,
+  } = collateralState;
+
+  return (
+    <div className="flex justify-center items-center gap-2">
+      <div className="animate-spin rounded-full h-[22px] w-[22px] border-b-4 border-blue-100" />
+      <div className="text-grey-50 text-[9px] md:text-xs">
+        {loadingBorrow && "Borrowing..."}
+
+        {loadingApproveSupply && "Approving USDC..."}
+
+        {loadingSupply && "Depositing USDC..."}
+
+        {loadingApproveRepay && "Approving xNGN..."}
+
+        {loadingRepay && "Repaying xNGN..."}
+
+        {loadingWithdraw && "Withdrawing USDC..."}
+      </div>
+    </div>
+  );
+};
 
 const DescentButton = ({
   onClick,
@@ -75,7 +107,7 @@ const DescentButton = ({
       disabled={disabled}
       type={type}
     >
-      {text}
+      <div>{loading ? <ButtonLoading /> : text}</div>
 
       {icon && icon}
     </motion.button>

@@ -1,22 +1,38 @@
 "use client";
+import { useAccount } from "wagmi";
+import Descent from "@descent-protocol/sdk";
 
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { setLoading, setUser } from ".";
-import { SignUser } from "./types";
 import { CallbackProps } from "../store";
-import useUserApi from "./api";
 
 const useUserActions = () => {
   const { dispatch } = useSystemFunctions();
-  const { signUser } = useUserApi();
+  const { address, connector: activeConnector } = useAccount();
 
-  const sign = async (data: SignUser, callback?: CallbackProps) => {
+  const _descentProvider = async () => {
+    try {
+      if (!activeConnector) return;
+
+      await activeConnector.connect();
+
+      const connectedProvider = await activeConnector.getProvider();
+      const descent = await Descent.create("browser", {
+        collateral: "USDC",
+        ethereum: connectedProvider,
+      });
+
+      return descent;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const connect = async (callback?: CallbackProps) => {
     try {
       dispatch(setLoading(true));
-      const response = await signUser(data);
-
-      await dispatch(setUser(response));
-      callback?.onSuccess?.(response);
+      const descent = await _descentProvider();
+      await descent.setupVault();
 
       return;
     } catch (error: any) {
@@ -26,8 +42,30 @@ const useUserActions = () => {
     }
   };
 
+  const getVaultInfo = async (callback?: CallbackProps) => {
+    try {
+      dispatch(setLoading(true));
+      const descent = await _descentProvider();
+      const vaultInfo = await descent.getVaultInfo(address);
+      const hasSetupVault = await descent.getVaultSetupStatus();
+      const usdcWalletBalance = await descent.getCollateralTokenBalance(
+        address
+      );
+
+      return dispatch(
+        setUser({ ...vaultInfo, hasSetupVault, usdcWalletBalance })
+      );
+    } catch (error: any) {
+      console.log(error);
+      callback?.onError?.(error);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+
   return {
-    sign,
+    connect,
+    getVaultInfo,
   };
 };
 

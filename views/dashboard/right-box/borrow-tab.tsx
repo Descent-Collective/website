@@ -1,16 +1,62 @@
+import useAlertActions from "@/application/alert/actions";
+import useCollateralActions from "@/application/collateral/actions";
+import useUserActions from "@/application/user/actions";
 import { DescentButton, DescentInput } from "@/components";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { InfoAltIcon } from "@/public/icons";
+import { formatAmount } from "@/utils";
 import { useState } from "react";
 
 const BorrowTab = () => {
+  const { collateralState, userState } = useSystemFunctions();
+  const { alertUser } = useAlertActions();
+  const { borrowXNGN } = useCollateralActions();
+  const { getVaultInfo } = useUserActions();
+
   const [amount, setAmount] = useState("");
+
+  const { loadingBorrow, loadingApproveBorrow } = collateralState;
+  const { user } = userState;
+  const { availablexNGN } = user;
+
+  const loading = loadingApproveBorrow || loadingBorrow;
+  const xNgn = formatAmount(availablexNGN);
 
   const valid = amount.length > 0;
 
+  const handleChange = (val: string) => {
+    if (!val) {
+      setAmount("");
+      return;
+    }
+
+    setAmount(Number(val).toLocaleString());
+  };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(amount);
+
+    const amountWithoutComma = amount.replace(/,/g, "");
+
+    if (Number(amountWithoutComma) > Number(availablexNGN)) {
+      return alertUser({
+        title: "Insufficient xNGN balance",
+        variant: "error",
+        message: "You do not have enough xNGN available to borrow",
+      });
+    }
+
+    borrowXNGN(amountWithoutComma, {
+      onSuccess: () => {
+        setAmount("");
+
+        setTimeout(() => {
+          getVaultInfo();
+        }, 3000);
+      },
+    });
   };
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-6">
       <div>
@@ -27,11 +73,12 @@ const BorrowTab = () => {
           name="amount"
           valueAlt={"0.00 USD"}
           label="xNGN to Borrow"
-          labelAlt="162,000 xNGN available"
+          labelAlt={`${xNgn} xNGN available`}
           placeholder="0.00"
           valid={valid}
-          hasMax
-          onChange={(val) => setAmount(val)}
+          max={() => handleChange(availablexNGN)}
+          onChange={handleChange}
+          value={amount}
         />
 
         <div className="mt-3 rounded-xl py-3 px-2 flex gap-1 bg-red-100 text-red-150">
@@ -47,7 +94,12 @@ const BorrowTab = () => {
       </div>
 
       <div className="mt-2">
-        <DescentButton disabled={!valid} type="submit" text="Continue" />
+        <DescentButton
+          loading={loading}
+          disabled={!valid || loading}
+          type="submit"
+          text="Continue"
+        />
       </div>
     </form>
   );
