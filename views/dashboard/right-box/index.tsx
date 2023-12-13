@@ -5,7 +5,7 @@ import BorrowTab from "./borrow-tab";
 
 const RightBox = ({ active = 0 }: { active?: number }) => {
   const [activeTab, setActiveTab] = useState(active);
-  const tabs = ["Supply", "Borrow"];
+  const tabs = ["Deposit", "Borrow"];
 
   const tabComponents = [<SupplyTab key={0} />, <BorrowTab key={1} />];
   return (

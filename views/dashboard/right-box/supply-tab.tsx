@@ -32,7 +32,7 @@ const SupplyTab = () => {
     setAmount(Number(val).toLocaleString());
     const _amount = Number(val);
     const lt = Number(liquidationThreshold.replace("%", ""));
-    const _generated = !_amount ? "" : (_amount * Number(collateralPrice)) / lt;
+    const _generated = !_amount ? "" : (_amount * Number(collateralPrice)) * (lt/100);
 
     setGenerated(_generated.toString());
   };
@@ -75,8 +75,8 @@ const SupplyTab = () => {
       <DescentInput
         name="amount"
         valueAlt={"0.00 USD"}
-        label="USDC to Supply"
-        labelAlt={`${usdcBalance} USDC available`}
+        label="USDC to Deposit"
+        labelAlt={`Balance: ${usdcBalance}`}
         placeholder="0.00"
         valid={valid}
         max={() => setAmount(user.usdcWalletBalance)}
