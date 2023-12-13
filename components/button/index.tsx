@@ -7,22 +7,29 @@ import useSystemFunctions from "@/hooks/useSystemFunctions";
 const ButtonLoading = () => {
   const { collateralState } = useSystemFunctions();
   const {
-    loadingApproveBorrow,
     loadingApproveSupply,
     loadingBorrow,
     loadingSupply,
+    loadingRepay,
+    loadingApproveRepay,
+    loadingWithdraw,
   } = collateralState;
 
   return (
     <div className="flex justify-center items-center gap-2">
       <div className="animate-spin rounded-full h-[22px] w-[22px] border-b-4 border-blue-100" />
       <div className="text-grey-50 text-[9px] md:text-xs">
-
         {loadingBorrow && "Borrowing..."}
 
         {loadingApproveSupply && "Approving USDC..."}
 
         {loadingSupply && "Depositing USDC..."}
+
+        {loadingApproveRepay && "Approving xNGN..."}
+
+        {loadingRepay && "Repaying xNGN..."}
+
+        {loadingWithdraw && "Withdrawing USDC..."}
       </div>
     </div>
   );
