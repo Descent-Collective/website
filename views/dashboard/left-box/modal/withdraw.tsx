@@ -1,14 +1,56 @@
 import { useState } from "react";
 import { DescentButton, DescentInput } from "@/components";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
+import { formatAmount } from "@/utils";
+import useCollateralActions from "@/application/collateral/actions";
+import useUserActions from "@/application/user/actions";
+import useAlertActions from "@/application/alert/actions";
 
 const WithdrawModal = ({ close }: { close: () => void }) => {
+  const { userState, collateralState } = useSystemFunctions();
+  const { withdrawCollateral } = useCollateralActions();
+  const { getVaultInfo } = useUserActions();
+  const { alertUser } = useAlertActions();
+
   const [amount, setAmount] = useState("");
 
+  const { user } = userState;
+  const { loadingWithdraw } = collateralState;
+
   const valid = amount.length > 0;
+  const collateral = formatAmount(user?.availableCollateral);
+
+  const handleChange = (val: string) => {
+    if (!val) {
+      setAmount("");
+      return;
+    }
+
+    setAmount(Number(val).toLocaleString());
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(amount);
+
+    const amountWithoutComma = amount.replace(/,/g, "");
+
+    if (Number(amountWithoutComma) > Number(user?.availableCollateral)) {
+      return alertUser({
+        title: "Insufficient collateral balance",
+        variant: "error",
+        message: "You cannot withdraw more than your available collateral",
+      });
+    }
+
+    withdrawCollateral(amountWithoutComma, {
+      onSuccess: () => {
+        setAmount("");
+
+        setTimeout(() => {
+          getVaultInfo();
+        }, 4000);
+      },
+    });
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-6">
@@ -25,18 +67,24 @@ const WithdrawModal = ({ close }: { close: () => void }) => {
         <DescentInput
           name="amount"
           valueAlt={"0.00 USD"}
-          label="xNGN to Repay"
-          labelAlt="150,000.00 xNGN debt"
+          label="USDC to Withdraw"
+          labelAlt={`${collateral} USDC available`}
           placeholder="0.00"
           valid={valid}
-          max={() => null}
+          max={() => handleChange(user?.availableCollateral)}
           onChange={(val) => setAmount(val)}
+          value={amount}
         />
       </div>
 
       <div className="mt-2">
         <div>
-          <DescentButton disabled={!valid} type="submit" text="Continue" />
+          <DescentButton
+            loading={loadingWithdraw}
+            disabled={!valid || loadingWithdraw}
+            type="submit"
+            text="Continue"
+          />
         </div>
 
         <div className="mt-4">

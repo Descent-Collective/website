@@ -10,6 +10,10 @@ export interface CollateralState {
   loadingBorrow: boolean;
   loadingApproveSupply: boolean;
   loadingApproveBorrow: boolean;
+  loadingRepay: boolean;
+  loadingApproveRepay: boolean;
+  loadingWithdraw: boolean;
+  loadingApproveWithdraw: boolean;
   loading: boolean;
 }
 
@@ -19,6 +23,10 @@ const initialState: CollateralState = {
   loadingBorrow: false,
   loadingApproveSupply: false,
   loadingApproveBorrow: false,
+  loadingRepay: false,
+  loadingApproveRepay: false,
+  loadingWithdraw: false,
+  loadingApproveWithdraw: false,
   loading: false,
 };
 
@@ -46,6 +54,22 @@ export const collateralReducer = createSlice({
       state.loading = action.payload;
     },
 
+    setLoadingRepay: (state, action: PayloadAction<boolean>) => {
+      state.loadingRepay = action.payload;
+    },
+
+    setLoadingApproveRepay: (state, action: PayloadAction<boolean>) => {
+      state.loadingApproveRepay = action.payload;
+    },
+
+    setLoadingWithdraw: (state, action: PayloadAction<boolean>) => {
+      state.loadingWithdraw = action.payload;
+    },
+
+    setLoadingApproveWithdraw: (state, action: PayloadAction<boolean>) => {
+      state.loadingApproveWithdraw = action.payload;
+    },
+
     setCollateral: (state, action: PayloadAction<Collateral | undefined>) => {
       state.collateral = { ...state.collateral, ...action.payload };
     },
@@ -59,6 +83,10 @@ export const {
   setLoading,
   setLoadingApproveSupply,
   setLoadingApproveBorrow,
+  setLoadingRepay,
+  setLoadingApproveRepay,
+  setLoadingWithdraw,
+  setLoadingApproveWithdraw,
 } = collateralReducer.actions;
 
 export default collateralReducer.reducer;
