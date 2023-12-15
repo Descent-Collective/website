@@ -66,7 +66,6 @@ const WithdrawModal = ({ close }: { close: () => void }) => {
       <div>
         <DescentInput
           name="amount"
-          valueAlt={"0.00 USD"}
           label="USDC to Withdraw"
           labelAlt={`${collateral} USDC available`}
           placeholder="0.00"

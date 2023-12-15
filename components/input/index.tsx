@@ -84,10 +84,11 @@ const DescentInput = (props: Input) => {
             )}
             onChange={handleOnChange}
           />
-
+  {valueAlt &&
           <div className="text-grey-800 font-medium text-[8px] md:text-xs mt-1">
             ~ {valueAlt}
-          </div>
+            </div>
+          }
         </div>
 
         {max && (
