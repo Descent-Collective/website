@@ -63,6 +63,7 @@ const config: Config = {
           750: "#FAFAFA",
           800: "#B6B6B6",
           850: "#E7E7E7",
+          900: "#F6F6F6",
         },
         red: {
           50: "#FF7663",
