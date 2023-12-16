@@ -20,8 +20,7 @@ const DescentInput = (props: Input) => {
 
   const [valueText, setValue] = useState("");
 
-  const handleOnChange = (e: any) => {
-    const value = e.target.value;
+  const handleOnChange = (value: string) => {
     const valueWithoutComma = value.replace(/,/g, "");
 
     if (valueWithoutComma.length === 0 || Number(valueWithoutComma) === 0) {
@@ -87,7 +86,7 @@ const DescentInput = (props: Input) => {
                 "text-grey-500 placeholder:text-grey-500": disabled,
               }
             )}
-            onChange={handleOnChange}
+            onChange={(e) => handleOnChange(e.target.value)}
           />
           {valueAlt && (
             <div className="text-grey-800 font-medium text-[8px] md:text-xs mt-1">
@@ -97,7 +96,7 @@ const DescentInput = (props: Input) => {
         </div>
 
         {max && (
-          <DescentClickAnimation onClick={max}>
+          <DescentClickAnimation onClick={() => handleOnChange(max)}>
             <div
               className={classNames(
                 "py-1 px-[10px] bg-white-350 rounded text-[8px] md:text-xs cursor-pointer",

@@ -21,12 +21,6 @@ const SupplyTab = () => {
   const usdcBalance = formatAmount(user.usdcWalletBalance);
 
   const handleChange = (val: string) => {
-    if (!val) {
-      setAmount("");
-      setGenerated("");
-      return;
-    }
-
     setAmount(val);
     const valueWithoutComma = val.replace(/,/g, "");
 
@@ -76,9 +70,8 @@ const SupplyTab = () => {
         labelAlt={`Balance: ${usdcBalance}`}
         placeholder="0.00"
         valid={valid}
-        max={() => setAmount(user.usdcWalletBalance)}
+        max={user.usdcWalletBalance}
         onChange={handleChange}
-        value={amount}
       />
 
       <DescentInput

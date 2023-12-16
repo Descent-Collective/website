@@ -19,15 +19,6 @@ const RepayModal = ({ close }: { close: () => void }) => {
 
   const debt = formatAmount(user?.borrowedAmount);
 
-  const handleChange = (val: string) => {
-    if (!val) {
-      setAmount("");
-      return;
-    }
-
-    setAmount(val);
-  };
-
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -66,9 +57,8 @@ const RepayModal = ({ close }: { close: () => void }) => {
           labelAlt={`${debt} xNGN debt`}
           placeholder="0.00"
           valid={valid}
-          max={() => handleChange(user?.borrowedAmount)}
-          onChange={handleChange}
-          value={amount}
+          max={user?.borrowedAmount}
+          onChange={setAmount}
         />
       </div>
 

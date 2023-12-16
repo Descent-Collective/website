@@ -18,15 +18,6 @@ const WithdrawModal = ({ close }: { close: () => void }) => {
   const valid = amount.length > 0;
   const collateral = formatAmount(user?.availableCollateral);
 
-  const handleChange = (val: string) => {
-    if (!val) {
-      setAmount("");
-      return;
-    }
-
-    setAmount(val);
-  };
-
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -64,9 +55,8 @@ const WithdrawModal = ({ close }: { close: () => void }) => {
           labelAlt={`${collateral} USDC available`}
           placeholder="0.00"
           valid={valid}
-          max={() => handleChange(user?.availableCollateral)}
-          onChange={(val) => setAmount(val)}
-          value={amount}
+          max={user?.availableCollateral}
+          onChange={setAmount}
         />
       </div>
 

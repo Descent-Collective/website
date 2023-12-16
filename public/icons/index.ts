@@ -29,6 +29,7 @@ import DashboardBlob1 from "./dashboard-blob1.svg";
 import DashboardBlob2 from "./dashboard-blob2.svg";
 import DashboardBlob3 from "./dashboard-blob3.svg";
 import DashboardBlob4 from "./dashboard-blob4.svg";
+import GoIcon from "./go.svg";
 
 export {
   CancelIcon,
@@ -62,4 +63,5 @@ export {
   DashboardBlob2,
   DashboardBlob3,
   DashboardBlob4,
+  GoIcon,
 };

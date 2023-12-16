@@ -22,15 +22,6 @@ const BorrowTab = () => {
 
   const valid = amount.length > 0;
 
-  const handleChange = (val: string) => {
-    if (!val) {
-      setAmount("");
-      return;
-    }
-
-    setAmount(val);
-  };
-
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -70,9 +61,8 @@ const BorrowTab = () => {
           labelAlt={`${xNgn} xNGN available`}
           placeholder="0.00"
           valid={valid}
-          max={() => handleChange(availablexNGN)}
-          onChange={handleChange}
-          value={amount}
+          max={availablexNGN}
+          onChange={setAmount}
         />
 
         <div className="mt-3 rounded-xl py-3 px-2 flex gap-1 bg-red-100 text-red-150">
