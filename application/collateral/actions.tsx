@@ -16,11 +16,13 @@ import {
 } from ".";
 import { CallbackProps } from "../store";
 import useAlertActions from "../alert/actions";
+import useTransactionListener from "@/hooks/useTransaction";
 
 const useCollateralActions = () => {
   const { dispatch } = useSystemFunctions();
   const { connector: activeConnector } = useAccount();
   const { alertUser } = useAlertActions();
+  const { listener } = useTransactionListener();
 
   const _descentProvider = async () => {
     try {
@@ -65,29 +67,21 @@ const useCollateralActions = () => {
 
       const amountToApprove = Number(amount) + 0.1;
 
-      await descent.approveCollateral!(amountToApprove.toString());
+      await descent.approveCollateral!(amount);
       dispatch(setLoadingApproveSupply(false));
 
       dispatch(setLoadingSupply(true));
       const response = await descent.depositCollateral(amount);
 
-      alertUser({
-        title: "Bravo! Collateral deposited.",
-        variant: "success",
-        message: (
-          <div>
-            Your collateral deposit of{" "}
-            <span className="text-black-100">
-              {Number(amount).toLocaleString()} USDC
-            </span>{" "}
-            was successful.
-          </div>
-        ),
+      listener({
+        hash: response?.hash,
+        amount,
+        type: "deposit",
       });
 
       return callback?.onSuccess?.(response);
     } catch (error: any) {
-      console.log(error);
+      console.log("an error occured", error);
       callback?.onError?.(error);
 
       alertUser({
@@ -116,19 +110,11 @@ const useCollateralActions = () => {
       const descent = await _descentProvider();
 
       const response = await descent.borrowCurrency(amount);
-
-      alertUser({
-        title: "Bravo! xNGN borrowed.",
-        variant: "success",
-        message: (
-          <div>
-            Your loan of{" "}
-            <span className="text-black-100">
-              {Number(amount).toLocaleString()} xNGN
-            </span>{" "}
-            has been successfully disbursed. Congratulations!
-          </div>
-        ),
+      console.log(response);
+      listener({
+        hash: response?.hash,
+        amount,
+        type: "borrow",
       });
 
       return callback?.onSuccess?.(response);
@@ -141,7 +127,6 @@ const useCollateralActions = () => {
         variant: "error",
         message: (
           <div>
-            
             Your loan of{" "}
             <span className="text-black-100">
               {Number(amount).toLocaleString()} xNGN
@@ -158,28 +143,15 @@ const useCollateralActions = () => {
 
   const repayXNGN = async (amount: string, callback?: CallbackProps) => {
     try {
-      dispatch(setLoadingApproveRepay(true));
+      dispatch(setLoadingRepay(true));
       const descent = await _descentProvider();
 
-      const amountToApprove = Number(amount) + 0.1;
-      await descent.approvexNGN(amountToApprove.toString());
-      dispatch(setLoadingApproveRepay(false));
-
-      dispatch(setLoadingRepay(true));
       const response = await descent.repayCurrency(amount);
 
-      alertUser({
-        title: "Bravo! Loan Repayed.",
-        variant: "success",
-        message: (
-          <div>
-            Your loan of{" "}
-            <span className="text-black-100">
-              {Number(amount).toLocaleString()} xNGN
-            </span>{" "}
-            has been repayed successfully. Congratulations!
-          </div>
-        ),
+      listener({
+        hash: response?.hash,
+        amount,
+        type: "repay",
       });
 
       return callback?.onSuccess?.(response);
@@ -216,18 +188,10 @@ const useCollateralActions = () => {
       const descent = await _descentProvider();
       const response = await descent.withdrawCollateral(amount);
 
-      alertUser({
-        title: "Bravo! Collateral Withdrawn.",
-        variant: "success",
-        message: (
-          <div>
-            Your withdrawal request of{" "}
-            <span className="text-black-100">
-              {Number(amount).toLocaleString()} USDC
-            </span>{" "}
-            has been successful.
-          </div>
-        ),
+      listener({
+        hash: response?.hash,
+        amount,
+        type: "withdraw",
       });
 
       return callback?.onSuccess?.(response);
