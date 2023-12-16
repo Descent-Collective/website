@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { DescentButton, DescentInput } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
-import { formatAmount, roundupNumber } from "@/utils";
+import { formatAmount } from "@/utils";
 import useCollateralActions from "@/application/collateral/actions";
-import useUserActions from "@/application/user/actions";
 import useAlertActions from "@/application/alert/actions";
 
 const RepayModal = ({ close }: { close: () => void }) => {
   const { userState, collateralState } = useSystemFunctions();
   const { repayXNGN } = useCollateralActions();
-  const { getVaultInfo } = useUserActions();
   const { alertUser } = useAlertActions();
 
   const { user } = userState;
@@ -27,7 +25,7 @@ const RepayModal = ({ close }: { close: () => void }) => {
       return;
     }
 
-    setAmount(Number(val).toLocaleString());
+    setAmount(val);
   };
 
   const handleSubmit = async (e: any) => {
@@ -46,10 +44,6 @@ const RepayModal = ({ close }: { close: () => void }) => {
     repayXNGN(amountWithoutComma, {
       onSuccess: () => {
         setAmount("");
-
-        setTimeout(() => {
-          getVaultInfo();
-        }, 4000);
       },
     });
   };

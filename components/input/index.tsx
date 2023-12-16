@@ -20,13 +20,6 @@ const DescentInput = (props: Input) => {
 
   const [valueText, setValue] = useState("");
 
-  const checkIfNumber = (value: string) => {
-    if (value === "") return true;
-
-    const regex = /^[0-9]+\.?[0-9]*$/;
-    return regex.test(value);
-  };
-
   const handleOnChange = (e: any) => {
     const value = e.target.value;
     const valueWithoutComma = value.replace(/,/g, "");
@@ -37,12 +30,24 @@ const DescentInput = (props: Input) => {
       return;
     }
 
-    if (checkIfNumber(valueWithoutComma)) {
-      const val = Number(valueWithoutComma).toLocaleString();
-      setValue(val);
+    // Check if the input is a valid number (including decimals)
+    const isMatch = valueWithoutComma.match(/^(\d+\.?\d*|\.\d+)$/);
 
-      onChange && onChange(valueWithoutComma);
-    }
+    if (!isMatch) return;
+
+    if (isNaN(Number(valueWithoutComma))) return;
+
+    // Format the number with local thousand separators
+    // Temporarily remove the decimal part to format the integer part
+    const parts = valueWithoutComma.split(".");
+    const integerFormatted = parseInt(parts[0]).toLocaleString();
+
+    // Reconstruct the number including the decimal part if it exists
+    const newValue =
+      parts.length > 1 ? `${integerFormatted}.${parts[1]}` : integerFormatted;
+
+    setValue(newValue);
+    onChange && onChange(newValue);
   };
 
   useEffect(() => {
@@ -84,11 +89,11 @@ const DescentInput = (props: Input) => {
             )}
             onChange={handleOnChange}
           />
-  {valueAlt &&
-          <div className="text-grey-800 font-medium text-[8px] md:text-xs mt-1">
-            ~ {valueAlt}
+          {valueAlt && (
+            <div className="text-grey-800 font-medium text-[8px] md:text-xs mt-1">
+              ~ {valueAlt}
             </div>
-          }
+          )}
         </div>
 
         {max && (

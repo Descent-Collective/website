@@ -1,16 +1,14 @@
+import { useState } from "react";
 import useAlertActions from "@/application/alert/actions";
 import useCollateralActions from "@/application/collateral/actions";
-import useUserActions from "@/application/user/actions";
 import { DescentButton, DescentInput } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { formatAmount } from "@/utils";
-import { useState } from "react";
 
 const SupplyTab = () => {
   const { collateralState, userState } = useSystemFunctions();
   const { alertUser } = useAlertActions();
   const { depositCollateral } = useCollateralActions();
-  const { getVaultInfo } = useUserActions();
   const [amount, setAmount] = useState("");
   const [generated, setGenerated] = useState("");
 
@@ -29,12 +27,16 @@ const SupplyTab = () => {
       return;
     }
 
-    setAmount(Number(val).toLocaleString());
-    const _amount = Number(val);
-    const lt = Number(liquidationThreshold.replace("%", ""));
-    const _generated = !_amount ? "" : (_amount * Number(collateralPrice)) * (lt/100);
+    setAmount(val);
+    const valueWithoutComma = val.replace(/,/g, "");
 
-    setGenerated(_generated.toString());
+    const _amount = Number(valueWithoutComma);
+    const lt = Number(liquidationThreshold.replace("%", ""));
+    const _generated = !_amount
+      ? ""
+      : _amount * Number(collateralPrice) * (lt / 100);
+
+    setGenerated(_generated.toLocaleString());
   };
 
   const handleSubmit = async (e: any) => {
@@ -54,10 +56,6 @@ const SupplyTab = () => {
       onSuccess: () => {
         setAmount("");
         setGenerated("");
-
-        setTimeout(() => {
-          getVaultInfo();
-        }, 3000);
       },
     });
   };

@@ -3,13 +3,11 @@ import { DescentButton, DescentInput } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { formatAmount } from "@/utils";
 import useCollateralActions from "@/application/collateral/actions";
-import useUserActions from "@/application/user/actions";
 import useAlertActions from "@/application/alert/actions";
 
 const WithdrawModal = ({ close }: { close: () => void }) => {
   const { userState, collateralState } = useSystemFunctions();
   const { withdrawCollateral } = useCollateralActions();
-  const { getVaultInfo } = useUserActions();
   const { alertUser } = useAlertActions();
 
   const [amount, setAmount] = useState("");
@@ -26,7 +24,7 @@ const WithdrawModal = ({ close }: { close: () => void }) => {
       return;
     }
 
-    setAmount(Number(val).toLocaleString());
+    setAmount(val);
   };
 
   const handleSubmit = async (e: any) => {
@@ -45,10 +43,6 @@ const WithdrawModal = ({ close }: { close: () => void }) => {
     withdrawCollateral(amountWithoutComma, {
       onSuccess: () => {
         setAmount("");
-
-        setTimeout(() => {
-          getVaultInfo();
-        }, 4000);
       },
     });
   };

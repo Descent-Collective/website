@@ -1,4 +1,5 @@
 import useAlertActions from "@/application/alert/actions";
+import useUserActions from "@/application/user/actions";
 import React, { useState, useEffect } from "react";
 import { useWaitForTransaction } from "wagmi";
 
@@ -17,6 +18,8 @@ type Data = {
 
 const useTransactionListener = () => {
   const { alertUser } = useAlertActions();
+  const { getVaultInfo } = useUserActions();
+
   const [transactionHash, setTransactionHash] = useState<
     `0x${string}` | undefined
   >(undefined);
@@ -115,6 +118,7 @@ const useTransactionListener = () => {
 
       setTransactionHash(undefined);
       delete data?.[transactionHash!];
+      getVaultInfo();
     }
 
     if (isError) {

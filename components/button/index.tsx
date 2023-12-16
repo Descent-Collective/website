@@ -11,25 +11,21 @@ const ButtonLoading = () => {
     loadingBorrow,
     loadingSupply,
     loadingRepay,
-    loadingApproveRepay,
     loadingWithdraw,
   } = collateralState;
 
   return (
     <div className="flex justify-center items-center gap-2">
-      <div className="animate-spin rounded-full h-[22px] w-[22px] border-b-4 border-blue-100" />
-      <div className="text-grey-50 text-[9px] md:text-xs">
+      <div className="text-grey-50 text-sm md:text-base">
         {loadingBorrow && "Borrowing..."}
 
-        {loadingApproveSupply && "Approving USDC..."}
+        {loadingApproveSupply && "Approving..."}
 
-        {loadingSupply && "Depositing USDC..."}
+        {loadingSupply && "Depositing..."}
 
-        {loadingApproveRepay && "Approving xNGN..."}
+        {loadingRepay && "Repaying..."}
 
-        {loadingRepay && "Repaying xNGN..."}
-
-        {loadingWithdraw && "Withdrawing USDC..."}
+        {loadingWithdraw && "Withdrawing..."}
       </div>
     </div>
   );

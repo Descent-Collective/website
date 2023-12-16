@@ -1,6 +1,5 @@
 import useAlertActions from "@/application/alert/actions";
 import useCollateralActions from "@/application/collateral/actions";
-import useUserActions from "@/application/user/actions";
 import { DescentButton, DescentInput } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { InfoAltIcon } from "@/public/icons";
@@ -11,7 +10,6 @@ const BorrowTab = () => {
   const { collateralState, userState } = useSystemFunctions();
   const { alertUser } = useAlertActions();
   const { borrowXNGN } = useCollateralActions();
-  const { getVaultInfo } = useUserActions();
 
   const [amount, setAmount] = useState("");
 
@@ -30,7 +28,7 @@ const BorrowTab = () => {
       return;
     }
 
-    setAmount(Number(val).toLocaleString());
+    setAmount(val);
   };
 
   const handleSubmit = async (e: any) => {
@@ -49,10 +47,6 @@ const BorrowTab = () => {
     borrowXNGN(amountWithoutComma, {
       onSuccess: () => {
         setAmount("");
-
-        setTimeout(() => {
-          getVaultInfo();
-        }, 3000);
       },
     });
   };
@@ -86,13 +80,11 @@ const BorrowTab = () => {
             <InfoAltIcon />
           </div>
           <div className="text-[10px] md:text-sm">
-            
             Continuing with this amount may risk vault liquidation. Consider a
             lower value that takes you farther away from the minimum
             <span className="font-semibold"> Collateral Ratio</span>.
           </div>
-          </div>
-
+        </div>
       </div>
 
       <div className="mt-2">
