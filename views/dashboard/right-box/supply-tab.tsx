@@ -54,7 +54,10 @@ const SupplyTab = () => {
     });
   };
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-6">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-4 md:gap-6 relative z-10"
+    >
       <div>
         <div className="text-black-100 text-lg md:text-xl font-medium">
           Deposit collateral

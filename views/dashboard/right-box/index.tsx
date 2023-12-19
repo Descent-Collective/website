@@ -10,7 +10,7 @@ const RightBox = ({ active = 0 }: { active?: number }) => {
   const tabComponents = [<SupplyTab key={0} />, <BorrowTab key={1} />];
   return (
     <div className="flex flex-col gap-4 xl:gap-6 transition-all w-full">
-      <div className="rounded-lg tab h-8 p-[2px] flex">
+      <div className="rounded-lg tab h-8 p-[2px] flex relative z-10">
         {tabs.map((tab, index) => (
           <div
             key={index}

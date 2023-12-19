@@ -14,7 +14,9 @@ const LeftBox = () => {
   const firstItems = [
     {
       title: "Total Amount Minted",
-      value: `${formatAmount(roundupNumber(collateral?.totalBorrowedAmount))} xNGN`,
+      value: `${formatAmount(
+        roundupNumber(collateral?.totalBorrowedAmount)
+      )} xNGN`,
     },
     {
       title: "Debt Limit",
@@ -22,11 +24,11 @@ const LeftBox = () => {
     },
     {
       title: "Maximum Collateral Ratio",
-      value: `${(collateral.liquidationThreshold)}`,
+      value: `${collateral.liquidationThreshold}`,
     },
     {
       title: "Borrow Interest",
-      value:  `${Number(roundupNumber(collateral.rate)) + Number(1)}%`,
+      value: `${Number(roundupNumber(collateral.rate)) + Number(1)}%`,
     },
   ];
 
@@ -53,17 +55,16 @@ const LeftBox = () => {
     {
       title: "Available to Borrow",
       value: `${formatAmount(roundupNumber(user?.availablexNGN))} xNGN`,
-      
     },
-  
+
     {
       title: "Available Collateral",
       value: `${formatAmount(roundupNumber(user?.availableCollateral))} USDC`,
       buttonText: "Withdraw",
       disabled: Number(user?.availableCollateral) === 0,
     },
-  
-      {
+
+    {
       title: "Vault xNGN Debt",
       value: `${formatAmount(roundupNumber(user?.borrowedAmount))} xNGN`,
       buttonText: "Repay",
@@ -71,7 +72,7 @@ const LeftBox = () => {
     },
   ];
   return (
-    <div className="xl:w-[65%]">
+    <div className="xl:w-[65%] relative z-10">
       <div className="py-4 md:py-6 grid grid-cols-2 gap-[22px] xl:gap-0 xl:flex xl:items-center xl:justify-between rounded-xl bg-grey-750 xl:pr-6">
         {firstItems.map((item, index) => (
           <FirstItem key={index} item={item} index={index} items={firstItems} />
@@ -84,9 +85,13 @@ const LeftBox = () => {
             Overview
           </div>
           <div className="flex items-center gap-1">
-            <div className={`w-[7px] h-[7px] rounded-full ${user?.healthFactor === 'Safe'? 'bg-green-50': 'bg-red-50'} `} />
+            <div
+              className={`w-[7px] h-[7px] rounded-full ${
+                user?.healthFactor === "Safe" ? "bg-green-50" : "bg-red-50"
+              } `}
+            />
             <div className="text-[9px] md:text-sm font-medium text-grey-500">
-              {user?.healthFactor === 'Safe'? 'Healthy': 'Unsafe'}
+              {user?.healthFactor === "Safe" ? "Healthy" : "Unsafe"}
             </div>
             <div className="cursor-pointer">
               <InfoIcon />

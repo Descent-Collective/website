@@ -13,7 +13,7 @@ const Button = ({ setOpen }: { setOpen: (val: boolean) => void }) => {
   const {} = useDescent();
 
   return (
-    <div>
+    <div className="relative z-10">
       <div>
         {!isConnected && openConnectModal && (
           <div className="min-w-[120px] md:min-w-[180px]">
