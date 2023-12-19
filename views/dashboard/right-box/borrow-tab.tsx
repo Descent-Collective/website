@@ -1,14 +1,20 @@
-import useAlertActions from "@/application/alert/actions";
+import { useState } from "react";
+
 import useCollateralActions from "@/application/collateral/actions";
 import { DescentButton, DescentInput } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
-import { InfoAltIcon } from "@/public/icons";
 import { formatAmount } from "@/utils";
-import { useState } from "react";
+
+const errorMessage = (
+  <div>
+    Continuing with this amount may risk vault liquidation. Consider a lower
+    value that takes you farther away from the minimum
+    <span className="font-semibold underline ml-1">Collateral Ratio</span>.
+  </div>
+);
 
 const BorrowTab = () => {
   const { collateralState, userState } = useSystemFunctions();
-  const { alertUser } = useAlertActions();
   const { borrowXNGN } = useCollateralActions();
 
   const [amount, setAmount] = useState("");
@@ -20,20 +26,16 @@ const BorrowTab = () => {
   const loading = loadingApproveBorrow || loadingBorrow;
   const xNgn = formatAmount(availablexNGN);
 
+  const amountWithoutComma = amount.replace(/,/g, "");
+  const error =
+    Number(amountWithoutComma) > Number(availablexNGN) ? errorMessage : "";
+
   const valid = amount.length > 0;
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const amountWithoutComma = amount.replace(/,/g, "");
-
-    if (Number(amountWithoutComma) > Number(availablexNGN)) {
-      return alertUser({
-        title: "Insufficient xNGN available",
-        variant: "error",
-        message: "You do not have enough xNGN available to borrow",
-      });
-    }
 
     borrowXNGN(amountWithoutComma, {
       onSuccess: () => {
@@ -56,29 +58,16 @@ const BorrowTab = () => {
         </div>
       </div>
 
-      <div>
-        <DescentInput
-          name="amount"
-          valueAlt={"0.00 USD"}
-          label="xNGN to Borrow"
-          labelAlt={`${xNgn} xNGN available`}
-          placeholder="0.00"
-          valid={valid}
-          max={availablexNGN}
-          onChange={setAmount}
-        />
-
-        <div className="mt-3 rounded-xl py-3 px-2 flex gap-1 bg-red-100 text-red-150">
-          <div className="w-[17px]">
-            <InfoAltIcon />
-          </div>
-          <div className="text-[10px] md:text-sm">
-            Continuing with this amount may risk vault liquidation. Consider a
-            lower value that takes you farther away from the minimum
-            <span className="font-semibold"> Collateral Ratio</span>.
-          </div>
-        </div>
-      </div>
+      <DescentInput
+        name="amount"
+        valueAlt={"0.00 USD"}
+        label="xNGN to Borrow"
+        labelAlt={`${xNgn} xNGN available`}
+        placeholder="0.00"
+        max={availablexNGN}
+        onChange={setAmount}
+        error={error}
+      />
 
       <div className="mt-2">
         <DescentButton

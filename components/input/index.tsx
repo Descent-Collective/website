@@ -1,7 +1,10 @@
 import classNames from "classnames";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
 import { Input } from "./types";
 import { DescentClickAnimation } from "..";
+import { InfoAltIcon } from "@/public/icons";
 
 const DescentInput = (props: Input) => {
   const {
@@ -16,6 +19,7 @@ const DescentInput = (props: Input) => {
     valueAlt,
     value,
     onChange,
+    error,
   } = props;
 
   const [valueText, setValue] = useState("");
@@ -99,11 +103,7 @@ const DescentInput = (props: Input) => {
           <DescentClickAnimation onClick={() => handleOnChange(max)}>
             <div
               className={classNames(
-                "py-1 px-[10px] bg-white-350 rounded text-[8px] md:text-xs cursor-pointer",
-                {
-                  "text-black-100": valid,
-                  "text-grey-500": !valid,
-                }
+                "py-1 text-black-100 px-[10px] bg-white-350 rounded text-[8px] md:text-xs cursor-pointer"
               )}
             >
               Max
@@ -111,6 +111,22 @@ const DescentInput = (props: Input) => {
           </DescentClickAnimation>
         )}
       </div>
+
+      <AnimatePresence>
+        {error && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="mt-3 rounded-xl p-3 flex gap-1 bg-red-100 text-red-150"
+          >
+            <div className="w-[17px]">
+              <InfoAltIcon />
+            </div>
+            <div className="text-[10px] md:text-sm">{error}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

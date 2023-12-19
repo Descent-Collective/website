@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useAlertActions from "@/application/alert/actions";
+
 import useCollateralActions from "@/application/collateral/actions";
 import { DescentButton, DescentInput } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
@@ -7,7 +7,6 @@ import { formatAmount } from "@/utils";
 
 const SupplyTab = () => {
   const { collateralState, userState } = useSystemFunctions();
-  const { alertUser } = useAlertActions();
   const { depositCollateral } = useCollateralActions();
   const [amount, setAmount] = useState("");
   const [generated, setGenerated] = useState("");
@@ -17,7 +16,13 @@ const SupplyTab = () => {
   const { user } = userState;
 
   const loading = loadingApproveSupply || loadingSupply;
-  const valid = amount.length > 0;
+  const amountWithoutComma = amount.replace(/,/g, "");
+  const error =
+    Number(amountWithoutComma) > Number(user.usdcWalletBalance)
+      ? "You cannot deposit more collateral than the amount in your wallet."
+      : "";
+
+  const valid = amount.length > 0 && !error;
   const usdcBalance = formatAmount(user.usdcWalletBalance);
 
   const handleChange = (val: string) => {
@@ -37,14 +42,6 @@ const SupplyTab = () => {
     e.preventDefault();
 
     const amountWithoutComma = amount.replace(/,/g, "");
-
-    if (Number(amountWithoutComma) > Number(user.usdcWalletBalance)) {
-      return alertUser({
-        title: "Insufficient USDC balance.",
-        variant: "error",
-        message: "You do not have enough USDC in your wallet",
-      });
-    }
 
     depositCollateral(amountWithoutComma, {
       onSuccess: () => {
@@ -72,9 +69,9 @@ const SupplyTab = () => {
         label="USDC to Deposit"
         labelAlt={`Balance: ${usdcBalance}`}
         placeholder="0.00"
-        valid={valid}
         max={user.usdcWalletBalance}
         onChange={handleChange}
+        error={error}
       />
 
       <DescentInput

@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface Input {
   label: string;
   labelAlt?: string;
@@ -10,4 +12,5 @@ export interface Input {
   max?: string;
   value?: string;
   onChange?: (val: string) => void;
+  error?: string | React.ReactNode;
 }
