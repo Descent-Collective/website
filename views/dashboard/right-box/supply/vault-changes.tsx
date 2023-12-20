@@ -12,7 +12,7 @@ const VaultChanges = ({ amount, generated }: { amount: number, generated: number
 
   const collateralRatio = ((Number(user.borrowedAmount) + Number(user.accruedFees)) * 100 / collateralWorthInCurrency).toFixed(2)
 
-  const collateralDeposited = (Number(user.borrowedAmount) + Number(user.accruedFees)) * 100 / Number(collateral.liquidationThreshold);
+  const collateralDeposited = (Number(user.depositedCollateral) + Number(amount))
   
   const liquidationPrice = collateralWorthInCurrency / collateralDeposited
 
