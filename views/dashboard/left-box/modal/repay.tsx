@@ -52,7 +52,6 @@ const RepayModal = ({ close }: { close: () => void }) => {
       <div>
         <DescentInput
           name="amount"
-          valueAlt={"0.00 USD"}
           label="xNGN to Repay"
           labelAlt={`${debt} xNGN debt`}
           placeholder="0.00"
