@@ -33,7 +33,7 @@ const ThirdItem = () => {
     },
   ];
   return (
-    <div className="bg-white-50 rounded-lg py-6 flex justify-between xl:justify-start">
+    <div className="bg-white-50 rounded-lg py-6 flex justify-between">
       {items.map((item, index) => (
         <Item key={index} item={item} items={items} index={index} />
       ))}
@@ -62,8 +62,9 @@ const Item = ({
       <div
         className={classNames("", {
           "xl:border-r xl:border-grey-700": index < items.length - 1,
-          "px-3 md:pl-6 md:pr-10 xl:pr-12": index === 0,
-          "px-3 md:px-10 xl:px-12": index > 0,
+          "px-3 md:pl-6 md:pr-10 xl:pr-14": index === 0,
+          "px-3 md:px-10 xl:px-14": index > 0,
+          "xl:pr-6": index === items.length - 1,
         })}
       >
         <div className="flex items-center gap-3 xl:gap-5">

@@ -42,8 +42,9 @@ const FirstItem = () => {
           key={index}
           className={classNames("", {
             "pl-3 md:pl-6 pr-10": index === 0,
-            "px-3 md:px-10": index > 0,
+            "px-3 md:px-6 xl:px-10": index > 0,
             "xl:border-r xl:border-grey-700": index < items.length - 1,
+            "xl:pr-0": index === items.length - 1,
           })}
         >
           <div className="flex items-center xl:justify-center gap-1">
