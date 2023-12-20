@@ -3,7 +3,7 @@ import { useAccount } from "wagmi";
 import Descent from "@descent-protocol/sdk";
 
 import useSystemFunctions from "@/hooks/useSystemFunctions";
-import { setLoading, setUser } from ".";
+import { setLoading, setLoadingSetup, setUser } from ".";
 import { CallbackProps } from "../store";
 import { setCollateral } from "../collateral";
 
@@ -31,7 +31,7 @@ const useUserActions = () => {
 
   const setupVault = async (callback?: CallbackProps) => {
     try {
-      dispatch(setLoading(true));
+      dispatch(setLoadingSetup(true));
       const descent = await _descentProvider();
       await descent.setupVault();
 
@@ -41,7 +41,7 @@ const useUserActions = () => {
     } catch (error: any) {
       callback?.onError?.(error);
     } finally {
-      dispatch(setLoading(false));
+      dispatch(setLoadingSetup(false));
     }
   };
 

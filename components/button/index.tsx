@@ -5,7 +5,7 @@ import { Button } from "./types";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 
 const ButtonLoading = () => {
-  const { collateralState } = useSystemFunctions();
+  const { collateralState, userState } = useSystemFunctions();
   const {
     loadingApproveSupply,
     loadingBorrow,
@@ -13,6 +13,8 @@ const ButtonLoading = () => {
     loadingRepay,
     loadingWithdraw,
   } = collateralState;
+
+  const { loadingSetup } = userState;
 
   return (
     <div className="flex justify-center items-center gap-2">
@@ -26,6 +28,8 @@ const ButtonLoading = () => {
         {loadingRepay && "Repaying..."}
 
         {loadingWithdraw && "Withdrawing..."}
+
+        {loadingSetup && "Setting up..."}
       </div>
     </div>
   );
@@ -56,7 +60,7 @@ const DescentButton = ({
           disabled={disabled}
           type={type}
         >
-          {text}
+          <div>{loading ? <ButtonLoading /> : text}</div>
         </motion.button>
       </div>
     );

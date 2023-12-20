@@ -117,6 +117,9 @@ const useCollateralActions = () => {
 
       return callback?.onSuccess?.(response);
     } catch (error: any) {
+      console.log(
+        "hjjhghghghghgggfjhfggfhghggbguuuytuytuytyutuytuytytytytyyyytytytyy"
+      );
       console.log(error);
       callback?.onError?.(error);
 
