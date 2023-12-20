@@ -67,7 +67,7 @@ const DescentFooter = () => {
           "mt-16": isDashboardRoute,
         })}
       >
-        <div className="flex flex-col md:flex-row gap-16 xl:gap-0 justify-between relative z-10">
+        <div className="flex flex-col md:flex-row gap-16 xl:gap-0 justify-between xl:relative xl:z-10">
           <div>
             <LogoIcon />
             <div className="mt-3 pl-10 flex items-center gap-5">

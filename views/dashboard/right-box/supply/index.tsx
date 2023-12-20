@@ -4,6 +4,7 @@ import useCollateralActions from "@/application/collateral/actions";
 import { DescentButton, DescentInput } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { formatAmount } from "@/utils";
+import VaultChanges from "./vault-changes";
 
 const SupplyTab = () => {
   const { collateralState, userState } = useSystemFunctions();
@@ -81,6 +82,8 @@ const SupplyTab = () => {
         disabled
         value={generated}
       />
+
+      <VaultChanges amount={Number(amountWithoutComma)} />
 
       <div className="mt-2">
         <DescentButton

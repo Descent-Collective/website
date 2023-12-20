@@ -30,7 +30,7 @@ const AppHome = ({ children }: { children: ReactNode }) => {
       <DescentMenu />
 
       {isDashboardRoute && (
-        <>
+        <div className="hidden xl:block">
           <div className="absolute top-0 right-0">
             <DashboardBlob1 />
           </div>
@@ -43,7 +43,7 @@ const AppHome = ({ children }: { children: ReactNode }) => {
           <div className="absolute -bottom-52 right-0">
             <DashboardBlob4 />
           </div>
-        </>
+        </div>
       )}
     </main>
   );

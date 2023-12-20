@@ -1,7 +1,7 @@
 import { useState } from "react";
 import classNames from "classnames";
-import SupplyTab from "./supply-tab";
-import BorrowTab from "./borrow-tab";
+import SupplyTab from "./supply";
+import BorrowTab from "./borrow";
 
 const RightBox = ({ active = 0 }: { active?: number }) => {
   const [activeTab, setActiveTab] = useState(active);
