@@ -1,4 +1,5 @@
 import useAlertActions from "@/application/alert/actions";
+import useCollateralActions from "@/application/collateral/actions";
 import useUserActions from "@/application/user/actions";
 import React, { useState, useEffect } from "react";
 import { useWaitForTransaction } from "wagmi";
@@ -18,7 +19,7 @@ type Data = {
 
 const useTransactionListener = () => {
   const { alertUser } = useAlertActions();
-  const { getVaultInfo } = useUserActions();
+  const { getVaultInfo, getCollateralInfo } = useUserActions();
 
   const [transactionHash, setTransactionHash] = useState<
     `0x${string}` | undefined
@@ -45,6 +46,13 @@ const useTransactionListener = () => {
     });
   };
 
+  const reset = (hash: `0x${string}`) => {
+    setTransactionHash(undefined);
+    delete data?.[hash!];
+    getVaultInfo();
+    getCollateralInfo();
+  };
+
   const checkTransactionStatus = async () => {
     const hashDetails = data?.[transactionHash!];
     if (!hashDetails) return;
@@ -54,6 +62,7 @@ const useTransactionListener = () => {
     if (receipt) {
       switch (type) {
         case "deposit":
+          reset(transactionHash!);
           return alertUser({
             title: "Bravo! Collateral deposited.",
             variant: "success",
@@ -69,6 +78,7 @@ const useTransactionListener = () => {
           });
 
         case "borrow":
+          reset(transactionHash!);
           return alertUser({
             title: "Bravo! xNGN borrowed.",
             variant: "success",
@@ -84,6 +94,7 @@ const useTransactionListener = () => {
           });
 
         case "repay":
+          reset(transactionHash!);
           return alertUser({
             title: "Bravo! Loan Repayed.",
             variant: "success",
@@ -99,6 +110,7 @@ const useTransactionListener = () => {
           });
 
         case "withdraw":
+          reset(transactionHash!);
           return alertUser({
             title: "Bravo! Collateral Withdrawn.",
             variant: "success",
@@ -115,10 +127,6 @@ const useTransactionListener = () => {
         default:
           break;
       }
-
-      setTransactionHash(undefined);
-      delete data?.[transactionHash!];
-      getVaultInfo();
     }
 
     if (isError) {

@@ -42,7 +42,7 @@ const DescentButton = ({
 }: Button) => {
   if (variant === "secondary") {
     return (
-      <div className="relative w-full h-12 rounded-lg bg-black-100">
+      <div className="relative z-20 w-full h-12 rounded-lg bg-black-100">
         <motion.button
           onClick={onClick}
           whileHover={{ top: 0, left: 0 }}
@@ -69,7 +69,7 @@ const DescentButton = ({
       whileTap={{ scale: 0.9 }}
       transition={{ ease: "backOut" }}
       className={classNames(
-        "w-full rounded-lg flex justify-center items-center gap-1",
+        "w-full rounded-lg flex justify-center items-center gap-1 relative z-20",
         {
           "pointer-events-none": loading || disabled,
           "bg-blue-100 h-9 md:h-12 text-black-50 text-sm md:text-base border border-black-100":

@@ -21,7 +21,7 @@ export const alertReducer = createSlice({
         state.alert = undefined;
         return;
       }
-      state.alert = { ...state.alert, ...action.payload };
+      state.alert = action.payload;
     },
   },
 });
