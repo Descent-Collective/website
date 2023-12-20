@@ -1068,12 +1068,12 @@
     stream-browserify "^3.0.0"
     util "^0.12.4"
 
-"@descent-protocol/sdk@^0.1.18":
-  version "0.1.18"
-  resolved "https://registry.yarnpkg.com/@descent-protocol/sdk/-/sdk-0.1.18.tgz#26c30f27aa42cae99ba700a22fb8a52f01a307b7"
-  integrity sha512-ZFCvmC2HV45U51+3VsHNOQTgWHxvvhUXdAwHcrzD2+ZWFE0+OHrbjKOeiz6OhU+YbXp5KWyP27z0xD7zbIfSaw==
+"@descent-protocol/sdk@^0.1.19":
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/@descent-protocol/sdk/-/sdk-0.1.19.tgz#5f671a5d366b1ab815ba52f00417a16340155fb5"
+  integrity sha512-GpCNcjuGAUNYxaUE3NEhCHFU37mnRY6BMX2peDY0GtCHLbCV15Fb33WUN15tuZ7WBdOKshqdk1EAwit/osoUEQ==
   dependencies:
-    ethers "^6.7.1"
+    ethers "^6.9.1"
     ganache "^7.9.1"
 
 "@emotion/hash@^0.8.0":
@@ -3828,10 +3828,23 @@ eth-rpc-errors@^4.0.2:
   dependencies:
     fast-safe-stringify "^2.0.6"
 
-ethers@^6.7.1, ethers@^6.9.0:
+ethers@^6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/ethers/-/ethers-6.9.0.tgz#a4534bdcdfde306aee94ef32f3d5c70d7e33fcb9"
   integrity sha512-pmfNyQzc2mseLe91FnT2vmNaTt8dDzhxZ/xItAV7uGsF4dI4ek2ufMu3rAkgQETL/TIs0GS5A+U05g9QyWnv3Q==
+  dependencies:
+    "@adraffy/ens-normalize" "1.10.0"
+    "@noble/curves" "1.2.0"
+    "@noble/hashes" "1.3.2"
+    "@types/node" "18.15.13"
+    aes-js "4.0.0-beta.5"
+    tslib "2.4.0"
+    ws "8.5.0"
+
+ethers@^6.9.1:
+  version "6.9.1"
+  resolved "https://registry.yarnpkg.com/ethers/-/ethers-6.9.1.tgz#4d50c77b46b6661e00f5cc6292e6bcd933fe4cba"
+  integrity sha512-kuV8fGd4/8Gj7wkurbsuUsm1DCG6N5gKGYdw3fnWG/7QGknhy1xtHD7kbkCWQAcbAYmzLCLqCPedS3FYncFkKQ==
   dependencies:
     "@adraffy/ens-normalize" "1.10.0"
     "@noble/curves" "1.2.0"
