@@ -3,54 +3,28 @@ import { DescentButton, DescentInput } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { formatAmount } from "@/utils";
 import useCollateralActions from "@/application/collateral/actions";
-import useUserActions from "@/application/user/actions";
-import useAlertActions from "@/application/alert/actions";
 
 const WithdrawModal = ({ close }: { close: () => void }) => {
   const { userState, collateralState } = useSystemFunctions();
   const { withdrawCollateral } = useCollateralActions();
-  const { getVaultInfo } = useUserActions();
-  const { alertUser } = useAlertActions();
 
   const [amount, setAmount] = useState("");
 
   const { user } = userState;
   const { loadingWithdraw } = collateralState;
-
-  const valid = amount.length > 0;
   const collateral = formatAmount(user?.availableCollateral);
+  const amountWithoutComma = amount.replace(/,/g, "");
 
-  const handleChange = (val: string) => {
-    if (!val) {
-      setAmount("");
-      return;
-    }
-
-    setAmount(Number(val).toLocaleString());
-  };
+  const error =
+    Number(amountWithoutComma) > Number(user.availableCollateral)
+      ? "You cannot withdraw more than your available collateral."
+      : "";
+  const valid = amount.length > 0 && !error;
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    const amountWithoutComma = amount.replace(/,/g, "");
-
-    if (Number(amountWithoutComma) > Number(user?.availableCollateral)) {
-      return alertUser({
-        title: "Insufficient collateral balance",
-        variant: "error",
-        message: "You cannot withdraw more than your available collateral",
-      });
-    }
-
-    withdrawCollateral(amountWithoutComma, {
-      onSuccess: () => {
-        setAmount("");
-
-        setTimeout(() => {
-          getVaultInfo();
-        }, 4000);
-      },
-    });
+    withdrawCollateral(amountWithoutComma);
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-6">
@@ -66,14 +40,13 @@ const WithdrawModal = ({ close }: { close: () => void }) => {
       <div>
         <DescentInput
           name="amount"
-          valueAlt={"0.00 USD"}
           label="USDC to Withdraw"
           labelAlt={`${collateral} USDC available`}
           placeholder="0.00"
           valid={valid}
-          max={() => handleChange(user?.availableCollateral)}
-          onChange={(val) => setAmount(val)}
-          value={amount}
+          max={user?.availableCollateral}
+          onChange={setAmount}
+          error={error}
         />
       </div>
 

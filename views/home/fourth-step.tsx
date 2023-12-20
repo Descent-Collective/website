@@ -1,4 +1,5 @@
 import { DescentButton } from "@/components";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 import {
   ArgentinaFlag,
   BaseIcon,
@@ -6,14 +7,22 @@ import {
   NigeriaFlag,
   UsdcFlag,
 } from "@/public/icons";
+import { formatAmount } from "@/utils";
 import React from "react";
 
-const content = [
+
+const FourthStep = () => {
+  
+  const { collateralState } = useSystemFunctions();
+
+  const { collateral } = collateralState;
+
+  const content = [
   {
     title: "USDC - xNGN",
-    volume: "568,990",
-    tvl: "568,990",
-    borrowRate: "10.50%",
+    volume:  `${formatAmount(collateral.totalBorrowedAmount)} xNGN`,
+    tvl:  `${formatAmount(collateral.totalDepositedCollateral)} USDC`,
+    borrowRate: `${Number(collateral.rate).toPrecision(2)}%`,
     icon: <NigeriaFlag />,
   },
   {
@@ -34,7 +43,7 @@ const content = [
   },
 ];
 
-const FourthStep = () => {
+  
   return (
     <section className="bg-green-200 py-10 px-8 pb-14 md:p-12 md:pb-20 xl:pt-[61px] xl:pb-[91px] xl:px-20 2xl:px-44 mt-12 md:mt-[72px]">
       <h4 className="font-Space_Mono text-center text-3xl md:text-[40px]">

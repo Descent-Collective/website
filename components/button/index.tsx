@@ -5,31 +5,31 @@ import { Button } from "./types";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 
 const ButtonLoading = () => {
-  const { collateralState } = useSystemFunctions();
+  const { collateralState, userState } = useSystemFunctions();
   const {
     loadingApproveSupply,
     loadingBorrow,
     loadingSupply,
     loadingRepay,
-    loadingApproveRepay,
     loadingWithdraw,
   } = collateralState;
 
+  const { loadingSetup } = userState;
+
   return (
     <div className="flex justify-center items-center gap-2">
-      <div className="animate-spin rounded-full h-[22px] w-[22px] border-b-4 border-blue-100" />
-      <div className="text-grey-50 text-[9px] md:text-xs">
+      <div className="text-grey-50 text-sm md:text-base">
         {loadingBorrow && "Borrowing..."}
 
-        {loadingApproveSupply && "Approving USDC..."}
+        {loadingApproveSupply && "Approving..."}
 
-        {loadingSupply && "Depositing USDC..."}
+        {loadingSupply && "Depositing..."}
 
-        {loadingApproveRepay && "Approving xNGN..."}
+        {loadingRepay && "Repaying..."}
 
-        {loadingRepay && "Repaying xNGN..."}
+        {loadingWithdraw && "Withdrawing..."}
 
-        {loadingWithdraw && "Withdrawing USDC..."}
+        {loadingSetup && "Setting up..."}
       </div>
     </div>
   );
@@ -46,7 +46,7 @@ const DescentButton = ({
 }: Button) => {
   if (variant === "secondary") {
     return (
-      <div className="relative w-full h-12 rounded-lg bg-black-100">
+      <div className="relative z-20 w-full h-12 rounded-lg bg-black-100">
         <motion.button
           onClick={onClick}
           whileHover={{ top: 0, left: 0 }}
@@ -60,7 +60,7 @@ const DescentButton = ({
           disabled={disabled}
           type={type}
         >
-          {text}
+          <div>{loading ? <ButtonLoading /> : text}</div>
         </motion.button>
       </div>
     );
@@ -73,7 +73,7 @@ const DescentButton = ({
       whileTap={{ scale: 0.9 }}
       transition={{ ease: "backOut" }}
       className={classNames(
-        "w-full rounded-lg flex justify-center items-center gap-1",
+        "w-full rounded-lg flex justify-center items-center gap-1 relative z-20",
         {
           "pointer-events-none": loading || disabled,
           "bg-blue-100 h-9 md:h-12 text-black-50 text-sm md:text-base border border-black-100":

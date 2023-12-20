@@ -1,16 +1,14 @@
-import useAlertActions from "@/application/alert/actions";
+import { useState } from "react";
+
 import useCollateralActions from "@/application/collateral/actions";
-import useUserActions from "@/application/user/actions";
 import { DescentButton, DescentInput } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { formatAmount } from "@/utils";
-import { useState } from "react";
+import VaultChanges from "./vault-changes";
 
 const SupplyTab = () => {
   const { collateralState, userState } = useSystemFunctions();
-  const { alertUser } = useAlertActions();
   const { depositCollateral } = useCollateralActions();
-  const { getVaultInfo } = useUserActions();
   const [amount, setAmount] = useState("");
   const [generated, setGenerated] = useState("");
 
@@ -19,22 +17,33 @@ const SupplyTab = () => {
   const { user } = userState;
 
   const loading = loadingApproveSupply || loadingSupply;
-  const valid = amount.length > 0;
+  const amountWithoutComma = amount.replace(/,/g, "");
+  const _generated = !amountWithoutComma
+    ? ""
+    : Number(amountWithoutComma) *
+      Number(collateralPrice) *
+      (Number(liquidationThreshold) / 100);
+  const error =
+    Number(amountWithoutComma) > Number(user.usdcWalletBalance)
+      ? "You cannot deposit more collateral than the amount in your wallet."
+      : "";
+
+  const valid = amount.length > 0 && !error;
   const usdcBalance = formatAmount(user.usdcWalletBalance);
 
   const handleChange = (val: string) => {
-    if (!val) {
-      setAmount("");
-      setGenerated("");
-      return;
-    }
+    setAmount(val);
+    const valueWithoutComma = val.replace(/,/g, "");
 
-    setAmount(Number(val).toLocaleString());
-    const _amount = Number(val);
-    const lt = Number(liquidationThreshold.replace("%", ""));
-    const _generated = !_amount ? "" : (_amount * Number(collateralPrice)) / lt;
+    const _amount = Number(valueWithoutComma);
 
-    setGenerated(_generated.toString());
+    const _generated = !_amount
+      ? ""
+      : _amount *
+        Number(collateralPrice) *
+        (Number(liquidationThreshold) / 100);
+
+    setGenerated(_generated.toLocaleString());
   };
 
   const handleSubmit = async (e: any) => {
@@ -42,30 +51,14 @@ const SupplyTab = () => {
 
     const amountWithoutComma = amount.replace(/,/g, "");
 
-    if (Number(amountWithoutComma) > Number(user.usdcWalletBalance)) {
-      return alertUser({
-        title: "Insufficient USDC balance.",
-        variant: "error",
-        message: "You do not have enough USDC in your wallet",
-      });
-    }
-
-    depositCollateral(amountWithoutComma, {
-      onSuccess: () => {
-        setAmount("");
-        setGenerated("");
-
-        setTimeout(() => {
-          getVaultInfo();
-        }, 3000);
-      },
-    });
+    depositCollateral(amountWithoutComma);
   };
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-6">
       <div>
         <div className="text-black-100 text-lg md:text-xl font-medium">
-          Supply collateral
+          Deposit collateral
         </div>
         <div className="text-grey-500 font-medium text-xs md:text-sm">
           Fund your vault with USDC
@@ -74,23 +67,25 @@ const SupplyTab = () => {
 
       <DescentInput
         name="amount"
-        valueAlt={"0.00 USD"}
-        label="USDC to Supply"
-        labelAlt={`${usdcBalance} USDC available`}
+        label="USDC to Deposit"
+        labelAlt={`Balance: ${usdcBalance}`}
         placeholder="0.00"
-        valid={valid}
-        max={() => setAmount(user.usdcWalletBalance)}
+        max={user.usdcWalletBalance}
         onChange={handleChange}
-        value={amount}
+        error={error}
       />
 
       <DescentInput
         name="generated"
-        valueAlt={"0.00 USD"}
         label="Generated xNGN"
         placeholder="0.00"
         disabled
         value={generated}
+      />
+
+      <VaultChanges
+        amount={Number(amountWithoutComma)}
+        generated={Number(_generated)}
       />
 
       <div className="mt-2">

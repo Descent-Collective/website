@@ -25,6 +25,13 @@ import InfoIcon from "./info.svg";
 import InfoAltIcon from "./info-alt.svg";
 import SuccessIcon from "./success-icon.svg";
 import ErrorIcon from "./error-icon.svg";
+import DashboardBlob1 from "./dashboard-blob1.svg";
+import DashboardBlob2 from "./dashboard-blob2.svg";
+import DashboardBlob3 from "./dashboard-blob3.svg";
+import DashboardBlob4 from "./dashboard-blob4.svg";
+import GoIcon from "./go.svg";
+import HintIcon from "./hint.svg";
+import SuccessAltIcon from "./success-alt.svg";
 
 export {
   CancelIcon,
@@ -54,4 +61,11 @@ export {
   InfoAltIcon,
   SuccessIcon,
   ErrorIcon,
+  DashboardBlob1,
+  DashboardBlob2,
+  DashboardBlob3,
+  DashboardBlob4,
+  GoIcon,
+  HintIcon,
+  SuccessAltIcon,
 };

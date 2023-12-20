@@ -3,8 +3,9 @@ import { useAccount } from "wagmi";
 import Descent from "@descent-protocol/sdk";
 
 import useSystemFunctions from "@/hooks/useSystemFunctions";
-import { setLoading, setUser } from ".";
+import { setLoading, setLoadingSetup, setUser } from ".";
 import { CallbackProps } from "../store";
+import { setCollateral } from "../collateral";
 
 const useUserActions = () => {
   const { dispatch } = useSystemFunctions();
@@ -28,17 +29,19 @@ const useUserActions = () => {
     }
   };
 
-  const connect = async (callback?: CallbackProps) => {
+  const setupVault = async (callback?: CallbackProps) => {
     try {
-      dispatch(setLoading(true));
+      dispatch(setLoadingSetup(true));
       const descent = await _descentProvider();
       await descent.setupVault();
 
-      return;
+      getVaultInfo();
+
+      return callback?.onSuccess?.();
     } catch (error: any) {
       callback?.onError?.(error);
     } finally {
-      dispatch(setLoading(false));
+      dispatch(setLoadingSetup(false));
     }
   };
 
@@ -52,9 +55,9 @@ const useUserActions = () => {
         address
       );
 
-      return dispatch(
-        setUser({ ...vaultInfo, hasSetupVault, usdcWalletBalance })
-      );
+      const response = { ...vaultInfo, hasSetupVault, usdcWalletBalance };
+
+      return dispatch(setUser(response));
     } catch (error: any) {
       console.log(error);
       callback?.onError?.(error);
@@ -63,9 +66,24 @@ const useUserActions = () => {
     }
   };
 
+  const getCollateralInfo = async (callback?: CallbackProps) => {
+    try {
+      dispatch(setLoading(true));
+      const descent = await _descentProvider();
+      const response = await descent.getCollateralInfo();
+
+      return dispatch(setCollateral(response));
+    } catch (error: any) {
+      callback?.onError?.(error);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+
   return {
-    connect,
+    setupVault,
     getVaultInfo,
+    getCollateralInfo,
   };
 };
 

@@ -1,16 +1,16 @@
 import { useState } from "react";
 import classNames from "classnames";
-import SupplyTab from "./supply-tab";
-import BorrowTab from "./borrow-tab";
+import SupplyTab from "./supply";
+import BorrowTab from "./borrow";
 
 const RightBox = ({ active = 0 }: { active?: number }) => {
   const [activeTab, setActiveTab] = useState(active);
-  const tabs = ["Supply", "Borrow"];
+  const tabs = ["Deposit", "Borrow"];
 
   const tabComponents = [<SupplyTab key={0} />, <BorrowTab key={1} />];
   return (
     <div className="flex flex-col gap-4 xl:gap-6 transition-all w-full">
-      <div className="rounded-lg tab h-8 p-[2px] flex">
+      <div className="rounded-lg tab h-8 p-[2px] flex relative z-10">
         {tabs.map((tab, index) => (
           <div
             key={index}

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { DescentButton, DescentContainer } from "@/components";
 import { ArrowRightAccent, UsdcIcon } from "@/public/icons";
 import { useEffect, useState } from "react";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 
 interface IComponent {
   title: string;
@@ -19,21 +20,22 @@ const tabContents = [
     icon: <UsdcIcon />,
   },
   {
-    title: "Tellus at urna condimentum",
+    title: "Fully backed by collateral",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. In nibh mauris cursus mattis molestie.",
+      "Every Currency(xNGN) minted is backed by an underlying collateral(USDC). Descent Protocol's efficient liquidation mechanism allows users to get the most liquidity for their USDC.",
     icon: <UsdcIcon />,
   },
   {
-    title: "Quam lacus suspendisse fau",
+    title: "Unstoppable Stablecoin",
     description:
-      "Massa tincidunt nunc pulvinar sapien et. Urna et pharetra pharetra massa massa. Fames ac turpis egestas integer. Ut tortor pretium viverra suspendisse.",
+      "Currencies(xNGN) generated are decentralized and capable of resisting all kinds of censorship.",
     icon: <UsdcIcon />,
   },
 ];
 
 const SecondSection = () => {
   const [currentTab, setCurrentTab] = useState(0);
+
 
   const sections = [
     <Component key={0} {...tabContents[currentTab]} />,
@@ -69,8 +71,7 @@ const SecondSection = () => {
             1xNGN ≈ 1NGN
           </h4>
           <p className="text-sm md:text-lg md:leading-[30px]  text-black-100">
-            A digital currency independent from banks. Generate or buy at ease.
-            Spend on your own terms.
+            A digital currency independent from banks. Generate currencies anytime, anywhere!
           </p>
           <div className="min-w-[210px]">
             <DescentButton

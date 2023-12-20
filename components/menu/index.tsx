@@ -20,7 +20,7 @@ const DescentMenu = () => {
           <DescentButton
             onClick={handleSupply}
             variant="primary-alt"
-            text="Supply"
+            text="Deposit"
           />
         </div>
 

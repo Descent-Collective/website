@@ -16,11 +16,15 @@ import {
 } from ".";
 import { CallbackProps } from "../store";
 import useAlertActions from "../alert/actions";
+import useTransactionListener from "@/hooks/useTransaction";
+import { setClearInputs } from "../input";
+import { setLoadingAlert } from "../alert";
 
 const useCollateralActions = () => {
   const { dispatch } = useSystemFunctions();
   const { connector: activeConnector } = useAccount();
   const { alertUser } = useAlertActions();
+  const { listener } = useTransactionListener();
 
   const _descentProvider = async () => {
     try {
@@ -63,31 +67,24 @@ const useCollateralActions = () => {
 
       const descent = await _descentProvider();
 
-      const amountToApprove = Number(amount) + 0.1;
-
-      await descent.approveCollateral!(amountToApprove.toString());
+      await descent.approveCollateral!(amount);
       dispatch(setLoadingApproveSupply(false));
 
       dispatch(setLoadingSupply(true));
+      setTimeout(() => {
+        dispatch(setLoadingAlert(true));
+      }, 2800);
       const response = await descent.depositCollateral(amount);
 
-      alertUser({
-        title: "Bravo! Collateral deposited.",
-        variant: "success",
-        message: (
-          <div>
-            Your collateral deposit of{" "}
-            <span className="text-black-100">
-              {Number(amount).toLocaleString()} USDC
-            </span>{" "}
-            was successful.
-          </div>
-        ),
+      listener({
+        hash: response?.hash,
+        amount,
+        type: "deposit",
       });
-
+      _clearInputs();
       return callback?.onSuccess?.(response);
     } catch (error: any) {
-      console.log(error);
+      dispatch(setLoadingAlert(false));
       callback?.onError?.(error);
 
       alertUser({
@@ -115,29 +112,24 @@ const useCollateralActions = () => {
 
       const descent = await _descentProvider();
 
+      setTimeout(() => {
+        dispatch(setLoadingAlert(true));
+      }, 2800);
       const response = await descent.borrowCurrency(amount);
 
-      alertUser({
-        title: "Bravo! Loan Approved.",
-        variant: "success",
-        message: (
-          <div>
-            Your loan of{" "}
-            <span className="text-black-100">
-              {Number(amount).toLocaleString()} xNGN
-            </span>{" "}
-            has been approved and successfully disbursed. Congratulations!
-          </div>
-        ),
+      listener({
+        hash: response?.hash,
+        amount,
+        type: "borrow",
       });
-
+      _clearInputs();
       return callback?.onSuccess?.(response);
     } catch (error: any) {
-      console.log(error);
+      dispatch(setLoadingAlert(false));
       callback?.onError?.(error);
 
       alertUser({
-        title: "Loan request unsuccessful.",
+        title: "Borrow unsuccessful.",
         variant: "error",
         message: (
           <div>
@@ -157,33 +149,23 @@ const useCollateralActions = () => {
 
   const repayXNGN = async (amount: string, callback?: CallbackProps) => {
     try {
-      dispatch(setLoadingApproveRepay(true));
+      dispatch(setLoadingRepay(true));
       const descent = await _descentProvider();
 
-      const amountToApprove = Number(amount) + 0.1;
-      await descent.approvexNGN(amountToApprove.toString());
-      dispatch(setLoadingApproveRepay(false));
-
-      dispatch(setLoadingRepay(true));
+      setTimeout(() => {
+        dispatch(setLoadingAlert(true));
+      }, 2800);
       const response = await descent.repayCurrency(amount);
 
-      alertUser({
-        title: "Bravo! Loan Repayed.",
-        variant: "success",
-        message: (
-          <div>
-            Your loan of{" "}
-            <span className="text-black-100">
-              {Number(amount).toLocaleString()} xNGN
-            </span>{" "}
-            has been repayed successfully. Congratulations!
-          </div>
-        ),
+      listener({
+        hash: response?.hash,
+        amount,
+        type: "repay",
       });
-
+      _clearInputs();
       return callback?.onSuccess?.(response);
     } catch (error: any) {
-      console.log(error);
+      dispatch(setLoadingAlert(false));
       callback?.onError?.(error);
 
       alertUser({
@@ -213,25 +195,23 @@ const useCollateralActions = () => {
       dispatch(setLoadingWithdraw(true));
 
       const descent = await _descentProvider();
+
+      setTimeout(() => {
+        dispatch(setLoadingAlert(true));
+      }, 2800);
+
       const response = await descent.withdrawCollateral(amount);
 
-      alertUser({
-        title: "Bravo! Collateral Withdrawn.",
-        variant: "success",
-        message: (
-          <div>
-            Your withdrawal request of{" "}
-            <span className="text-black-100">
-              {Number(amount).toLocaleString()} USDC
-            </span>{" "}
-            has been successful.
-          </div>
-        ),
+      dispatch(setLoadingAlert(true));
+      listener({
+        hash: response?.hash,
+        amount,
+        type: "withdraw",
       });
-
+      _clearInputs();
       return callback?.onSuccess?.(response);
     } catch (error: any) {
-      console.log(error);
+      dispatch(setLoadingAlert(false));
       callback?.onError?.(error);
 
       alertUser({
@@ -250,6 +230,14 @@ const useCollateralActions = () => {
     } finally {
       dispatch(setLoadingWithdraw(false));
     }
+  };
+
+  const _clearInputs = () => {
+    dispatch(setClearInputs(true));
+
+    setTimeout(() => {
+      dispatch(setClearInputs(false));
+    }, 1000);
   };
 
   return {

@@ -24,7 +24,7 @@ const DescentModal = ({ close, children, variant = "normal" }: Modal) => {
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 50, opacity: 0 }}
-        onClick={close}
+        onClick={() => variant === "normal" && close()}
         className="z-10 absolute w-full h-full bg-black-100 bg-opacity-10 backdrop-blur-[0.8px]"
       />
       <motion.div
@@ -32,10 +32,10 @@ const DescentModal = ({ close, children, variant = "normal" }: Modal) => {
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 50, opacity: 0 }}
         className={classNames(
-          "z-20 max-h-[65%] overflow-y-auto bg-white-50 rounded-xl shadow-wide-box p-6 lg:p-12",
+          "z-20 max-h-[65%] md:max-h-[80%] overflow-y-auto bg-white-50 shadow-wide-box p-6 lg:p-12",
           {
-            "w-[72%] xl:w-[470px]": variant === "normal",
-            "w-[85%] xl:w-[78%]": variant === "large",
+            "w-[72%] xl:w-[470px] rounded-xl": variant === "normal",
+            "w-[85%] md:w-[90%] xl:w-[65%] rounded-3xl": variant === "large",
           }
         )}
       >

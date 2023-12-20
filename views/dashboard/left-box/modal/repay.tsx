@@ -1,57 +1,31 @@
 import { useState } from "react";
 import { DescentButton, DescentInput } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
-import { formatAmount, roundupNumber } from "@/utils";
+import { formatAmount } from "@/utils";
 import useCollateralActions from "@/application/collateral/actions";
-import useUserActions from "@/application/user/actions";
-import useAlertActions from "@/application/alert/actions";
 
 const RepayModal = ({ close }: { close: () => void }) => {
   const { userState, collateralState } = useSystemFunctions();
   const { repayXNGN } = useCollateralActions();
-  const { getVaultInfo } = useUserActions();
-  const { alertUser } = useAlertActions();
 
   const { user } = userState;
   const { loadingRepay, loadingApproveRepay } = collateralState;
   const [amount, setAmount] = useState("");
 
   const loading = loadingRepay || loadingApproveRepay;
-  const valid = amount.length > 0;
-
+  const amountWithoutComma = amount.replace(/,/g, "");
   const debt = formatAmount(user?.borrowedAmount);
 
-  const handleChange = (val: string) => {
-    if (!val) {
-      setAmount("");
-      return;
-    }
-
-    setAmount(Number(val).toLocaleString());
-  };
+  const error =
+    Number(amountWithoutComma) > Number(user.borrowedAmount)
+      ? "You cannot repay more than your debt."
+      : "";
+  const valid = amount.length > 0 && !error;
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    const amountWithoutComma = amount.replace(/,/g, "");
-
-    if (Number(amountWithoutComma) > Number(user?.borrowedAmount)) {
-      return alertUser({
-        title: "Cannot repay more than your debt",
-        variant: "error",
-        message: "You cannot repay more than your debt",
-      });
-    }
-
-    repayXNGN(amountWithoutComma, {
-      onSuccess: () => {
-        setAmount("");
-
-        setTimeout(() => {
-          getVaultInfo();
-        }, 4000);
-      },
-    });
+    repayXNGN(amountWithoutComma);
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-6">
@@ -67,14 +41,13 @@ const RepayModal = ({ close }: { close: () => void }) => {
       <div>
         <DescentInput
           name="amount"
-          valueAlt={"0.00 USD"}
           label="xNGN to Repay"
           labelAlt={`${debt} xNGN debt`}
           placeholder="0.00"
           valid={valid}
-          max={() => handleChange(user?.borrowedAmount)}
-          onChange={handleChange}
-          value={amount}
+          max={user?.borrowedAmount}
+          onChange={setAmount}
+          error={error}
         />
       </div>
 
