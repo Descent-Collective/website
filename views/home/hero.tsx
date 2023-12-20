@@ -17,24 +17,27 @@ import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import { useEffect, useState } from "react";
+import { formatAmount } from "@/utils";
 
 const HeroSection = () => {
-  const { navigate } = useSystemFunctions();
+  const { navigate, collateralState } = useSystemFunctions();
+  const { collateral } = collateralState;
+
   const { openConnectModal } = useConnectModal();
   const { address, isConnected } = useAccount();
 
   const [startedConnecting, setStartedConnecting] = useState(false);
   const content = [
     {
-      title: "- - -",
-      description: "xNGN total supply",
+      title: `${formatAmount(collateral.totalBorrowedAmount)} xNGN`,
+      description: "xNGN generated",
     },
     {
-      title: "₦990.50",
-      description: "xNGN price",
+      title:  `${formatAmount(collateral.collateralPrice)} xNGN`,
+      description: "xNGN/USDC price",
     },
     {
-      title: "- - -",
+    title: `${formatAmount(collateral.totalBorrowedAmount)} xNGN`,
       description: "xNGN volume",
     },
   ];

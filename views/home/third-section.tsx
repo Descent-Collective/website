@@ -1,9 +1,16 @@
+
 import { DescentContainer } from "@/components";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { useState } from "react";
 import Slider from "react-rangeslider";
 import "react-rangeslider/lib/index.css";
 
 const ThirdSection = () => {
+
+    const { collateralState } = useSystemFunctions();
+
+  const { collateral } = collateralState;
+  
   return (
     <DescentContainer>
       <section className="mt-16 md:mt-[100px] py-12 px-8 xl:py-[100px] xl:px-[92px] rounded-3xl border border-grey-350 bg-white-250">
@@ -39,13 +46,9 @@ const ThirdSection = () => {
 
             <div className="mt-8 md:mt-[60px]">
               <p className="text-base md:text-xl">Interest Rate</p>
-              <p className="text-xl md:text-2xl font-medium mt-2 pb-2">2.50%</p>
-              <p className="text-xs md:text-sm text-grey-500">
-                <span className="text-red-50">*</span>This is the amount that
-                you can generate at 150% collateralization ratio. We recommend
-                keeping you collateralization ratio higher and generating less
-                to keep your position open, in case the value of your USDC
-                collateral drops.
+              <p className="text-xl md:text-2xl font-medium mt-2 pb-2">{Number(collateral.rate).toPrecision(2)}%</p>
+              <p className="text-xs md:text-sm text-grey-500">This is an annual percentage yield calculated on top of how much Currency(xNGN) has been generated.
+                <span className="text-red-50">*</span>
               </p>
             </div>
           </div>
