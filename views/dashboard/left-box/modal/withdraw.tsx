@@ -3,33 +3,26 @@ import { DescentButton, DescentInput } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { formatAmount } from "@/utils";
 import useCollateralActions from "@/application/collateral/actions";
-import useAlertActions from "@/application/alert/actions";
 
 const WithdrawModal = ({ close }: { close: () => void }) => {
   const { userState, collateralState } = useSystemFunctions();
   const { withdrawCollateral } = useCollateralActions();
-  const { alertUser } = useAlertActions();
 
   const [amount, setAmount] = useState("");
 
   const { user } = userState;
   const { loadingWithdraw } = collateralState;
-
-  const valid = amount.length > 0;
   const collateral = formatAmount(user?.availableCollateral);
+  const amountWithoutComma = amount.replace(/,/g, "");
+
+  const error =
+    Number(amountWithoutComma) > Number(user.availableCollateral)
+      ? "You cannot withdraw more than your available collateral."
+      : "";
+  const valid = amount.length > 0 && !error;
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
-    const amountWithoutComma = amount.replace(/,/g, "");
-
-    if (Number(amountWithoutComma) > Number(user?.availableCollateral)) {
-      return alertUser({
-        title: "Insufficient collateral balance",
-        variant: "error",
-        message: "You cannot withdraw more than your available collateral",
-      });
-    }
 
     withdrawCollateral(amountWithoutComma);
   };
@@ -53,6 +46,7 @@ const WithdrawModal = ({ close }: { close: () => void }) => {
           valid={valid}
           max={user?.availableCollateral}
           onChange={setAmount}
+          error={error}
         />
       </div>
 

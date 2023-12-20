@@ -3,34 +3,27 @@ import { DescentButton, DescentInput } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { formatAmount } from "@/utils";
 import useCollateralActions from "@/application/collateral/actions";
-import useAlertActions from "@/application/alert/actions";
 
 const RepayModal = ({ close }: { close: () => void }) => {
   const { userState, collateralState } = useSystemFunctions();
   const { repayXNGN } = useCollateralActions();
-  const { alertUser } = useAlertActions();
 
   const { user } = userState;
   const { loadingRepay, loadingApproveRepay } = collateralState;
   const [amount, setAmount] = useState("");
 
   const loading = loadingRepay || loadingApproveRepay;
-  const valid = amount.length > 0;
-
+  const amountWithoutComma = amount.replace(/,/g, "");
   const debt = formatAmount(user?.borrowedAmount);
+
+  const error =
+    Number(amountWithoutComma) > Number(user.borrowedAmount)
+      ? "You cannot repay more than your debt."
+      : "";
+  const valid = amount.length > 0 && !error;
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
-    const amountWithoutComma = amount.replace(/,/g, "");
-
-    if (Number(amountWithoutComma) > Number(user?.borrowedAmount)) {
-      return alertUser({
-        title: "Cannot repay more than your debt",
-        variant: "error",
-        message: "You cannot repay more than your debt",
-      });
-    }
 
     repayXNGN(amountWithoutComma);
   };
@@ -54,6 +47,7 @@ const RepayModal = ({ close }: { close: () => void }) => {
           valid={valid}
           max={user?.borrowedAmount}
           onChange={setAmount}
+          error={error}
         />
       </div>
 
