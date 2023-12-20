@@ -31,6 +31,7 @@ import DashboardBlob3 from "./dashboard-blob3.svg";
 import DashboardBlob4 from "./dashboard-blob4.svg";
 import GoIcon from "./go.svg";
 import HintIcon from "./hint.svg";
+import SuccessAltIcon from "./success-alt.svg";
 
 export {
   CancelIcon,
@@ -66,4 +67,5 @@ export {
   DashboardBlob4,
   GoIcon,
   HintIcon,
+  SuccessAltIcon,
 };

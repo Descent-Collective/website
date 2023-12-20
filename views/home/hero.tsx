@@ -14,9 +14,16 @@ import {
 } from "@/public/icons";
 import classNames from "classnames";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { useAccount } from "wagmi";
+import { useEffect, useState } from "react";
 
 const HeroSection = () => {
   const { navigate } = useSystemFunctions();
+  const { openConnectModal } = useConnectModal();
+  const { address, isConnected } = useAccount();
+
+  const [startedConnecting, setStartedConnecting] = useState(false);
   const content = [
     {
       title: "- - -",
@@ -31,6 +38,24 @@ const HeroSection = () => {
       description: "xNGN volume",
     },
   ];
+
+  const handleEnterApp = () => {
+    if (isConnected && address) {
+      return navigate.push("/app");
+    }
+
+    if (!openConnectModal) return;
+
+    setStartedConnecting(true);
+    openConnectModal();
+  };
+
+  useEffect(() => {
+    if (startedConnecting && isConnected && address) {
+      navigate.push("/app");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startedConnecting, openConnectModal, isConnected, address]);
   return (
     <section className="relative mt-32 xl:mt-24">
       <DescentContainer>
@@ -64,10 +89,7 @@ const HeroSection = () => {
 
           <div className="mt-12 flex items-center justify-center gap-8">
             <div className="w-[150px]">
-              <DescentButton
-                onClick={() => navigate.push("/app")}
-                text="Enter App"
-              />
+              <DescentButton onClick={handleEnterApp} text="Enter App" />
             </div>
 
             <DescentClickAnimation>

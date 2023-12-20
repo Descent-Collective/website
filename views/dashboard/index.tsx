@@ -2,6 +2,7 @@
 import { DescentContainer } from "@/components";
 import RightBox from "./right-box";
 import LeftBox from "./left-box";
+import Onboarding from "./onboarding";
 
 const DashboardView = () => {
   return (
@@ -14,6 +15,8 @@ const DashboardView = () => {
           </div>
         </div>
       </DescentContainer>
+
+      <Onboarding />
     </>
   );
 };

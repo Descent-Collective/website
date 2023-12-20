@@ -141,7 +141,7 @@ const useTransactionListener = () => {
   };
 
   useEffect(() => {
-    checkTransactionStatus();
+    // checkTransactionStatus();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [receipt, isError, isLoading, transactionHash]);
 

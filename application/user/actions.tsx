@@ -29,13 +29,15 @@ const useUserActions = () => {
     }
   };
 
-  const connect = async (callback?: CallbackProps) => {
+  const setupVault = async (callback?: CallbackProps) => {
     try {
       dispatch(setLoading(true));
       const descent = await _descentProvider();
       await descent.setupVault();
 
-      return;
+      getVaultInfo();
+
+      return callback?.onSuccess?.();
     } catch (error: any) {
       callback?.onError?.(error);
     } finally {
@@ -79,7 +81,7 @@ const useUserActions = () => {
   };
 
   return {
-    connect,
+    setupVault,
     getVaultInfo,
     getCollateralInfo,
   };

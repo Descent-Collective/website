@@ -65,8 +65,6 @@ const useCollateralActions = () => {
 
       const descent = await _descentProvider();
 
-      const amountToApprove = Number(amount) + Number(0.1);
-
       await descent.approveCollateral!(amount);
       dispatch(setLoadingApproveSupply(false));
 
@@ -110,12 +108,12 @@ const useCollateralActions = () => {
       const descent = await _descentProvider();
 
       const response = await descent.borrowCurrency(amount);
-      console.log(response);
-      listener({
-        hash: response?.hash,
-        amount,
-        type: "borrow",
-      });
+
+      // listener({
+      //   hash: response?.hash,
+      //   amount,
+      //   type: "borrow",
+      // });
 
       return callback?.onSuccess?.(response);
     } catch (error: any) {
@@ -148,11 +146,11 @@ const useCollateralActions = () => {
 
       const response = await descent.repayCurrency(amount);
 
-      listener({
-        hash: response?.hash,
-        amount,
-        type: "repay",
-      });
+      // listener({
+      //   hash: response?.hash,
+      //   amount,
+      //   type: "repay",
+      // });
 
       return callback?.onSuccess?.(response);
     } catch (error: any) {
@@ -188,11 +186,11 @@ const useCollateralActions = () => {
       const descent = await _descentProvider();
       const response = await descent.withdrawCollateral(amount);
 
-      listener({
-        hash: response?.hash,
-        amount,
-        type: "withdraw",
-      });
+      // listener({
+      //   hash: response?.hash,
+      //   amount,
+      //   type: "withdraw",
+      // });
 
       return callback?.onSuccess?.(response);
     } catch (error: any) {
