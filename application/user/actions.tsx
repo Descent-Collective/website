@@ -5,6 +5,7 @@ import Descent from "@descent-protocol/sdk";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { setLoading, setUser } from ".";
 import { CallbackProps } from "../store";
+import { setCollateral } from "../collateral";
 
 const useUserActions = () => {
   const { dispatch } = useSystemFunctions();
@@ -52,11 +53,25 @@ const useUserActions = () => {
         address
       );
 
-      return dispatch(
-        setUser({ ...vaultInfo, hasSetupVault, usdcWalletBalance })
-      );
+      const response = { ...vaultInfo, hasSetupVault, usdcWalletBalance };
+
+      return dispatch(setUser(response));
     } catch (error: any) {
       console.log(error);
+      callback?.onError?.(error);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+
+  const getCollateralInfo = async (callback?: CallbackProps) => {
+    try {
+      dispatch(setLoading(true));
+      const descent = await _descentProvider();
+      const response = await descent.getCollateralInfo();
+
+      return dispatch(setCollateral(response));
+    } catch (error: any) {
       callback?.onError?.(error);
     } finally {
       dispatch(setLoading(false));
@@ -66,6 +81,7 @@ const useUserActions = () => {
   return {
     connect,
     getVaultInfo,
+    getCollateralInfo,
   };
 };
 

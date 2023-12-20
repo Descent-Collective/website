@@ -32,7 +32,7 @@ const DescentModal = ({ close, children, variant = "normal" }: Modal) => {
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 50, opacity: 0 }}
         className={classNames(
-          "z-20 max-h-[65%] overflow-y-auto bg-white-50 rounded-xl shadow-wide-box p-6 lg:p-12",
+          "z-20 max-h-[60%] md:max-h-[80%] overflow-y-auto bg-white-50 rounded-xl shadow-wide-box p-6 lg:p-12",
           {
             "w-[72%] xl:w-[470px]": variant === "normal",
             "w-[85%] xl:w-[78%]": variant === "large",

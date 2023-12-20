@@ -1,16 +1,14 @@
-import useAlertActions from "@/application/alert/actions";
+import { useState } from "react";
+
 import useCollateralActions from "@/application/collateral/actions";
-import useUserActions from "@/application/user/actions";
 import { DescentButton, DescentInput } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { formatAmount } from "@/utils";
-import { useState } from "react";
+import VaultChanges from "./vault-changes";
 
 const SupplyTab = () => {
   const { collateralState, userState } = useSystemFunctions();
-  const { alertUser } = useAlertActions();
   const { depositCollateral } = useCollateralActions();
-  const { getVaultInfo } = useUserActions();
   const [amount, setAmount] = useState("");
   const [generated, setGenerated] = useState("");
 
@@ -19,23 +17,25 @@ const SupplyTab = () => {
   const { user } = userState;
 
   const loading = loadingApproveSupply || loadingSupply;
-  const valid = amount.length > 0;
+  const amountWithoutComma = amount.replace(/,/g, "");
+  const error =
+    Number(amountWithoutComma) > Number(user.usdcWalletBalance)
+      ? "You cannot deposit more collateral than the amount in your wallet."
+      : "";
+
+  const valid = amount.length > 0 && !error;
   const usdcBalance = formatAmount(user.usdcWalletBalance);
 
   const handleChange = (val: string) => {
-    if (!val) {
-      setAmount("");
-      setGenerated("");
-      return;
-    }
+    setAmount(val);
+    const valueWithoutComma = val.replace(/,/g, "");
 
-    setAmount(Number(val).toLocaleString());
-    const _amount = Number(val);
+    const _amount = Number(valueWithoutComma);
     const lt = Number(liquidationThreshold.replace("%", ""));
     
     const _generated = !_amount ? "" : (_amount * Number(collateralPrice)) * (lt/100);
 
-    setGenerated(_generated.toString());
+    setGenerated(_generated.toLocaleString());
   };
 
   const handleSubmit = async (e: any) => {
@@ -43,22 +43,10 @@ const SupplyTab = () => {
 
     const amountWithoutComma = amount.replace(/,/g, "");
 
-    if (Number(amountWithoutComma) > Number(user.usdcWalletBalance)) {
-      return alertUser({
-        title: "Insufficient USDC balance.",
-        variant: "error",
-        message: "You do not have enough USDC in your wallet",
-      });
-    }
-
     depositCollateral(amountWithoutComma, {
       onSuccess: () => {
         setAmount("");
         setGenerated("");
-
-        setTimeout(() => {
-          getVaultInfo();
-        }, 3000);
       },
     });
   };
@@ -78,10 +66,9 @@ const SupplyTab = () => {
         label="USDC to Deposit"
         labelAlt={`Balance: ${usdcBalance}`}
         placeholder="0.00"
-        valid={valid}
-        max={() => setAmount(user.usdcWalletBalance)}
+        max={user.usdcWalletBalance}
         onChange={handleChange}
-        value={amount}
+        error={error}
       />
 
       <DescentInput
@@ -91,6 +78,8 @@ const SupplyTab = () => {
         disabled
         value={generated}
       />
+
+      <VaultChanges amount={Number(amountWithoutComma)} />
 
       <div className="mt-2">
         <DescentButton

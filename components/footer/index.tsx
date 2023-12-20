@@ -1,4 +1,10 @@
-import { DiscordIcon, GithubIcon, LogoIcon, TwiiterIcon } from "@/public/icons";
+import {
+  DiscordIcon,
+  GithubIcon,
+  GoIcon,
+  LogoIcon,
+  TwiiterIcon,
+} from "@/public/icons";
 import { DescentClickAnimation, DescentContainer } from "..";
 import classNames from "classnames";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
@@ -61,7 +67,7 @@ const DescentFooter = () => {
           "mt-16": isDashboardRoute,
         })}
       >
-        <div className="flex flex-col md:flex-row gap-16 xl:gap-0 justify-between">
+        <div className="flex flex-col md:flex-row gap-16 xl:gap-0 justify-between xl:relative xl:z-10">
           <div>
             <LogoIcon />
             <div className="mt-3 pl-10 flex items-center gap-5">
@@ -152,28 +158,7 @@ const DescentFooter = () => {
                       Subscribe
                     </div>
 
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="17"
-                      viewBox="0 0 16 17"
-                      fill="none"
-                    >
-                      <path
-                        d="M13.1641 8.31641L3.16406 8.31641"
-                        stroke="white"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M9.13281 4.30034L13.1661 8.31634L9.13281 12.333"
-                        stroke="white"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
+                    <GoIcon />
                   </button>
                 </DescentClickAnimation>
               </div>
@@ -202,28 +187,7 @@ const DescentFooter = () => {
                   Subscribe
                 </div>
 
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="17"
-                  viewBox="0 0 16 17"
-                  fill="none"
-                >
-                  <path
-                    d="M13.1641 8.31641L3.16406 8.31641"
-                    stroke="white"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M9.13281 4.30034L13.1661 8.31634L9.13281 12.333"
-                    stroke="white"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+                <GoIcon />
               </button>
             </DescentClickAnimation>
           </div>

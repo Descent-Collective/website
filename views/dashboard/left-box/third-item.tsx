@@ -1,10 +1,47 @@
 import { useState } from "react";
 import classNames from "classnames";
-import { DescentButton, DescentInput, DescentModal } from "@/components";
+
+import { DescentButton, DescentModal } from "@/components";
 import RepayModal from "./modal/repay";
 import WithdrawModal from "./modal/withdraw";
+import { formatAmount, roundupNumber } from "@/utils";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 
-const ThirdItem = ({
+const ThirdItem = () => {
+  const { userState } = useSystemFunctions();
+
+  const { user } = userState;
+
+  const items = [
+    {
+      title: "Available to Borrow",
+      value: `${formatAmount(roundupNumber(user?.availablexNGN))} xNGN`,
+    },
+
+    {
+      title: "Available Collateral",
+      value: `${formatAmount(roundupNumber(user?.availableCollateral))} USDC`,
+      buttonText: "Withdraw",
+      disabled: Number(user?.availableCollateral) === 0,
+    },
+
+    {
+      title: "Vault xNGN Debt",
+      value: `${formatAmount(roundupNumber(user?.borrowedAmount))} xNGN`,
+      buttonText: "Repay",
+      disabled: Number(user?.borrowedAmount) === 0,
+    },
+  ];
+  return (
+    <div className="bg-white-50 rounded-lg py-6 flex justify-between">
+      {items.map((item, index) => (
+        <Item key={index} item={item} items={items} index={index} />
+      ))}
+    </div>
+  );
+};
+
+const Item = ({
   item,
   index,
   items,
@@ -25,8 +62,9 @@ const ThirdItem = ({
       <div
         className={classNames("", {
           "xl:border-r xl:border-grey-700": index < items.length - 1,
-          "px-3 md:pl-6 md:pr-10 xl:pr-12": index === 0,
-          "px-3 md:px-10 xl:px-12": index > 0,
+          "px-3 md:pl-6 md:pr-10 xl:pr-14": index === 0,
+          "px-3 md:px-10 xl:px-14": index > 0,
+          "xl:pr-6": index === items.length - 1,
         })}
       >
         <div className="flex items-center gap-3 xl:gap-5">

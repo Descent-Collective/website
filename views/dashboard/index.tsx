@@ -9,7 +9,7 @@ const DashboardView = () => {
       <DescentContainer>
         <div className="mt-10 md:mt-16 flex flex-col xl:flex-row xl:justify-between gap-12 xl:gap-16">
           <LeftBox />
-          <div className="hidden xl:flex xl:w-[33%] xl:shadow-wide-box xl:-mt-3 xl:p-10 xl:rounded-xl bg-white-50 shadow-wide-box">
+          <div className="hidden xl:flex xl:w-[33%] xl:shadow-wide-box xl:p-10 xl:rounded-xl bg-white-50 shadow-wide-box self-start">
             <RightBox />
           </div>
         </div>

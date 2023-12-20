@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { DescentButton, DescentInput } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
-import { formatAmount, roundupNumber } from "@/utils";
+import { formatAmount } from "@/utils";
 import useCollateralActions from "@/application/collateral/actions";
-import useUserActions from "@/application/user/actions";
 import useAlertActions from "@/application/alert/actions";
 
 const RepayModal = ({ close }: { close: () => void }) => {
   const { userState, collateralState } = useSystemFunctions();
   const { repayXNGN } = useCollateralActions();
-  const { getVaultInfo } = useUserActions();
   const { alertUser } = useAlertActions();
 
   const { user } = userState;
@@ -20,15 +18,6 @@ const RepayModal = ({ close }: { close: () => void }) => {
   const valid = amount.length > 0;
 
   const debt = formatAmount(user?.borrowedAmount);
-
-  const handleChange = (val: string) => {
-    if (!val) {
-      setAmount("");
-      return;
-    }
-
-    setAmount(Number(val).toLocaleString());
-  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -46,10 +35,6 @@ const RepayModal = ({ close }: { close: () => void }) => {
     repayXNGN(amountWithoutComma, {
       onSuccess: () => {
         setAmount("");
-
-        setTimeout(() => {
-          getVaultInfo();
-        }, 4000);
       },
     });
   };
@@ -72,9 +57,8 @@ const RepayModal = ({ close }: { close: () => void }) => {
           labelAlt={`${debt} xNGN debt`}
           placeholder="0.00"
           valid={valid}
-          max={() => handleChange(user?.borrowedAmount)}
-          onChange={handleChange}
-          value={amount}
+          max={user?.borrowedAmount}
+          onChange={setAmount}
         />
       </div>
 

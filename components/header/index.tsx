@@ -36,7 +36,7 @@ const DescentHeader = () => {
           })}
         >
           <nav className="flex items-center justify-between pt-5">
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-6 relative z-10">
               <Link href="/">
                 <LogoIcon />
               </Link>

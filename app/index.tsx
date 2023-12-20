@@ -29,12 +29,12 @@ const AppHome = ({ children }: { children: ReactNode }) => {
       <DescentFooter />
       <DescentMenu />
 
-      {/* {isDashboardRoute && (
-        <>
+      {isDashboardRoute && (
+        <div className="hidden xl:block">
           <div className="absolute top-0 right-0">
             <DashboardBlob1 />
           </div>
-          <div className="absolute top-3 left-0">
+          <div className="absolute top-0 left-0">
             <DashboardBlob2 />
           </div>
           <div className="absolute -bottom-52 left-0">
@@ -43,8 +43,8 @@ const AppHome = ({ children }: { children: ReactNode }) => {
           <div className="absolute -bottom-52 right-0">
             <DashboardBlob4 />
           </div>
-        </>
-      )} */}
+        </div>
+      )}
     </main>
   );
 };

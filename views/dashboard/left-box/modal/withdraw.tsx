@@ -3,13 +3,11 @@ import { DescentButton, DescentInput } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { formatAmount } from "@/utils";
 import useCollateralActions from "@/application/collateral/actions";
-import useUserActions from "@/application/user/actions";
 import useAlertActions from "@/application/alert/actions";
 
 const WithdrawModal = ({ close }: { close: () => void }) => {
   const { userState, collateralState } = useSystemFunctions();
   const { withdrawCollateral } = useCollateralActions();
-  const { getVaultInfo } = useUserActions();
   const { alertUser } = useAlertActions();
 
   const [amount, setAmount] = useState("");
@@ -19,15 +17,6 @@ const WithdrawModal = ({ close }: { close: () => void }) => {
 
   const valid = amount.length > 0;
   const collateral = formatAmount(user?.availableCollateral);
-
-  const handleChange = (val: string) => {
-    if (!val) {
-      setAmount("");
-      return;
-    }
-
-    setAmount(Number(val).toLocaleString());
-  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -45,10 +34,6 @@ const WithdrawModal = ({ close }: { close: () => void }) => {
     withdrawCollateral(amountWithoutComma, {
       onSuccess: () => {
         setAmount("");
-
-        setTimeout(() => {
-          getVaultInfo();
-        }, 4000);
       },
     });
   };
@@ -70,9 +55,8 @@ const WithdrawModal = ({ close }: { close: () => void }) => {
           labelAlt={`${collateral} USDC available`}
           placeholder="0.00"
           valid={valid}
-          max={() => handleChange(user?.availableCollateral)}
-          onChange={(val) => setAmount(val)}
-          value={amount}
+          max={user?.availableCollateral}
+          onChange={setAmount}
         />
       </div>
 
