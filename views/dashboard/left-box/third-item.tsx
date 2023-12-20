@@ -1,7 +1,7 @@
 import { useState } from "react";
 import classNames from "classnames";
 
-import { DescentButton, DescentModal } from "@/components";
+import { DescentButton, DescentHint, DescentModal } from "@/components";
 import RepayModal from "./modal/repay";
 import WithdrawModal from "./modal/withdraw";
 import { formatAmount, roundupNumber } from "@/utils";
@@ -16,11 +16,13 @@ const ThirdItem = () => {
     {
       title: "Available to Borrow",
       value: `${formatAmount(roundupNumber(user?.availablexNGN))} xNGN`,
+      hint: "The maximum money a user can borrow based on their vault's collateral ratio and deposited collateral, without risking liquidation."
     },
 
     {
       title: "Available Collateral",
       value: `${formatAmount(roundupNumber(user?.availableCollateral))} USDC`,
+      hint: "The highest amount of collateral a user can remove from their vault, calculated from the collateral ratio and deposited collateral, without facing liquidation.",
       buttonText: "Withdraw",
       disabled: Number(user?.availableCollateral) === 0,
     },
@@ -69,9 +71,12 @@ const Item = ({
       >
         <div className="flex items-center gap-3 xl:gap-5">
           <div>
+                <div className="flex items-center xl:justify-center gap-1">
             <div className="text-[9px] md:text-sm font-medium text-grey-500 whitespace-nowrap">
               {item.title}
             </div>
+            {item?.hint && <DescentHint text={item?.hint} />}  
+              </div>
             <div className="mt-2 text-[9.5px] md:text-base font-medium md:font-bold whitespace-nowrap">
               {item.value}
             </div>

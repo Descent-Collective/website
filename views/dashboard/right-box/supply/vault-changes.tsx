@@ -2,7 +2,7 @@ import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { InfoIcon } from "@/public/icons";
 import { formatAmount } from "@/utils";
 
-const VaultChanges = ({ amount }: { amount: number }) => {
+const VaultChanges = ({ amount, generated }: { amount: number, generated: number }) => {
   const { collateralState, userState } = useSystemFunctions();
   const { user } = userState;
   const { collateral } = collateralState;
@@ -22,15 +22,15 @@ const VaultChanges = ({ amount }: { amount: number }) => {
     },
     {
       title: "Vault xNGN Debt",
-      value: `0.00 xNGN`,
+      value: `${formatAmount(user.borrowedAmount)} xNGN`,
     },
     {
       title: "Available Collateral",
-      value: `$0.00`,
+      value: `${formatAmount(Number(user.availableCollateral) + Number(amount))} USDC`,
     },
     {
       title: "Available to Borrow",
-      value: `0.00 xNGN`,
+      value: `${formatAmount(Number(user.availablexNGN) + generated)} xNGN`,
     },
   ];
 

@@ -18,6 +18,7 @@ const SupplyTab = () => {
 
   const loading = loadingApproveSupply || loadingSupply;
   const amountWithoutComma = amount.replace(/,/g, "");
+    const _generated = !amountWithoutComma ? "" : (Number(amountWithoutComma) * Number(collateralPrice)) * (Number(liquidationThreshold)/100);
   const error =
     Number(amountWithoutComma) > Number(user.usdcWalletBalance)
       ? "You cannot deposit more collateral than the amount in your wallet."
@@ -31,9 +32,8 @@ const SupplyTab = () => {
     const valueWithoutComma = val.replace(/,/g, "");
 
     const _amount = Number(valueWithoutComma);
-    const lt = Number(liquidationThreshold.replace("%", ""));
     
-    const _generated = !_amount ? "" : (_amount * Number(collateralPrice)) * (lt/100);
+    const _generated = !_amount ? "" : (_amount * Number(collateralPrice)) * (Number(liquidationThreshold)/100);
 
     setGenerated(_generated.toLocaleString());
   };
@@ -79,7 +79,7 @@ const SupplyTab = () => {
         value={generated}
       />
 
-      <VaultChanges amount={Number(amountWithoutComma)} />
+      <VaultChanges amount={Number(amountWithoutComma)} generated={Number(_generated)} />
 
       <div className="mt-2">
         <DescentButton

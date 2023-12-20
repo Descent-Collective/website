@@ -16,22 +16,22 @@ const FirstItem = () => {
       value: `${formatAmount(
         roundupNumber(collateral?.totalBorrowedAmount)
       )} xNGN`,
-      hint: "This is the maximum amount of xNGN that can be minted/borrowed. The value is being set by the protocol.",
+      hint: "The complete sum of currency created by all users.",
     },
     {
       title: "Debt Limit",
       value: `${formatLargeNumber(collateral.debtCeiling)} xNGN`,
-      hint: "This is the cost you pay for the xNGN loan taken. Basically, you’ll repay the borrowed xNGN together with the interest amount.",
+      hint: "The highest total amount of currency all users can collectively borrow.",
     },
     {
-      title: "Maximum Collateral Ratio",
-      value: `${collateral.liquidationThreshold}`,
-      hint: "It represents the minimum percentage of collateral that a borrower must maintain in relation to the value of the assets they have borrowed. E.g. If the minimum collateral ratio is 80% it means you can only borrow 80% worth of your collateral. It is advisable to keep you collateral ratio below the minimum collateral ratio.",
+      title: "Liqudiation Threshold",
+      value: `${collateral.liquidationThreshold}%`,
+      hint: "The specific collateral ratio at which a vault can be liquidated. It is advisable to keep you collateral ratio below the Liquidation Threshold.",
     },
     {
       title: "Borrow Interest",
-      value: `${Number(roundupNumber(collateral.rate)) + Number(1)}%`,
-      hint: "This is the cost you pay for the xNGN loan taken. Basically, you’ll repay the borrowed xNGN together with the interest amount.",
+      value: `${Number(roundupNumber(collateral.rate))}%`,
+      hint: "This is an annual percentage yield calculated on top of how much Currency(xNGN) has been generated.",
     },
   ];
 

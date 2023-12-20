@@ -3,6 +3,7 @@ import FirstItem from "./first-item";
 import SecondItem from "./second-item";
 import ThirdItem from "./third-item";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
+import { DescentHint } from "@/components";
 
 const LeftBox = () => {
   const { userState } = useSystemFunctions();
@@ -27,9 +28,7 @@ const LeftBox = () => {
             <div className="text-[9px] md:text-sm font-medium text-grey-500">
               {user?.healthFactor === "Safe" ? "Healthy" : "Unsafe"}
             </div>
-            <div className="cursor-pointer">
-              <InfoIcon />
-            </div>
+         
           </div>
         </div>
 
