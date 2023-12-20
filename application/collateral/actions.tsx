@@ -65,7 +65,7 @@ const useCollateralActions = () => {
 
       const descent = await _descentProvider();
 
-      const amountToApprove = Number(amount) + 0.1;
+      const amountToApprove = Number(amount) + Number(0.1);
 
       await descent.approveCollateral!(amount);
       dispatch(setLoadingApproveSupply(false));
@@ -73,11 +73,11 @@ const useCollateralActions = () => {
       dispatch(setLoadingSupply(true));
       const response = await descent.depositCollateral(amount);
 
-      listener({
-        hash: response?.hash,
-        amount,
-        type: "deposit",
-      });
+      // listener({
+      //   hash: response?.hash,
+      //   amount,
+      //   type: "deposit",
+      // });
 
       return callback?.onSuccess?.(response);
     } catch (error: any) {

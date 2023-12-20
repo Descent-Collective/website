@@ -32,6 +32,7 @@ const SupplyTab = () => {
     setAmount(Number(val).toLocaleString());
     const _amount = Number(val);
     const lt = Number(liquidationThreshold.replace("%", ""));
+    
     const _generated = !_amount ? "" : (_amount * Number(collateralPrice)) * (lt/100);
 
     setGenerated(_generated.toString());
