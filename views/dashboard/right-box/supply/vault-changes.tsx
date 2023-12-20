@@ -1,3 +1,4 @@
+import { DescentHint } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { InfoIcon } from "@/public/icons";
 import { formatAmount } from "@/utils";
@@ -14,7 +15,8 @@ const VaultChanges = ({ amount, generated }: { amount: number, generated: number
     },
     {
       title: "Collateral Ratio",
-      value: `${user.currentCollateralRatio}%`,
+       // borrowed amount / deposited collateral * collateral price
+      value: `${(Number(user.borrowedAmount) / ((Number(user.availableCollateral) + Number(amount)) * Number(collateral.collateralPrice)) * 100).toFixed(2)}%`,
     },
     {
       title: "Liquidation Price",
@@ -41,7 +43,7 @@ const VaultChanges = ({ amount, generated }: { amount: number, generated: number
           <h3 className="font-semibold text-[10px] md:text-xs text-black-50">
             Vault Changes
           </h3>
-          <InfoIcon />
+          <DescentHint text={'New vault changes based on deposited amount'} />
         </div>
 
         <div className="gap-[18px] grid grid-cols-1">
