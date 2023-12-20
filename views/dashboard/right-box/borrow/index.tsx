@@ -12,9 +12,9 @@ const liquidationWarning = (
   </div>
 );
 
-const errorMessage = ( <div>
-   You cannot borrow more than available xNGN generatable
-  </div>)
+const errorMessage = (
+  <div>You cannot borrow more than available xNGN generatable</div>
+);
 
 const BorrowTab = () => {
   const { collateralState, userState } = useSystemFunctions();
@@ -31,11 +31,12 @@ const BorrowTab = () => {
 
   const amountWithoutComma = amount.replace(/,/g, "");
   const error =
-    Number(amountWithoutComma) > Number(availablexNGN) ? errorMessage : '';
-  
-  const liquidatableAmount = Number(0.8) * Number(availablexNGN)
-  
-  const liquidationError =  Number(amountWithoutComma) > liquidatableAmount ? liquidationWarning : '';
+    Number(amountWithoutComma) > Number(availablexNGN) ? errorMessage : "";
+
+  const liquidatableAmount = Number(0.8) * Number(availablexNGN);
+
+  const liquidationError =
+    Number(amountWithoutComma) > liquidatableAmount ? liquidationWarning : "";
 
   const valid = amount.length > 0;
 
@@ -44,11 +45,7 @@ const BorrowTab = () => {
 
     const amountWithoutComma = amount.replace(/,/g, "");
 
-    borrowXNGN(amountWithoutComma, {
-      onSuccess: () => {
-        setAmount("");
-      },
-    });
+    borrowXNGN(amountWithoutComma);
   };
 
   return (

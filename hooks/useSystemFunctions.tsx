@@ -19,6 +19,7 @@ const useSystemFunctions = () => {
   const menuState = useAppSelector((state) => state.menu);
   const collateralState = useAppSelector((state) => state.collateral);
   const alertState = useAppSelector((state) => state.alert);
+  const inputState = useAppSelector((state) => state.input);
 
   return {
     dispatch,
@@ -30,6 +31,7 @@ const useSystemFunctions = () => {
     menuState,
     collateralState,
     alertState,
+    inputState,
   };
 };
 

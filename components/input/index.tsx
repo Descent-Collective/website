@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "./types";
 import { DescentClickAnimation } from "..";
 import { InfoAltIcon } from "@/public/icons";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 
 const DescentInput = (props: Input) => {
   const {
@@ -22,6 +23,7 @@ const DescentInput = (props: Input) => {
     error,
   } = props;
 
+  const { inputState } = useSystemFunctions();
   const [valueText, setValue] = useState("");
 
   const handleOnChange = (value: string) => {
@@ -54,8 +56,12 @@ const DescentInput = (props: Input) => {
   };
 
   useEffect(() => {
-    if (value === "") setValue("");
-  }, [value]);
+    if (inputState.clear) {
+      setValue("");
+      onChange && onChange("");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputState.clear]);
 
   return (
     <div>

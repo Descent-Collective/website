@@ -31,11 +31,7 @@ const WithdrawModal = ({ close }: { close: () => void }) => {
       });
     }
 
-    withdrawCollateral(amountWithoutComma, {
-      onSuccess: () => {
-        setAmount("");
-      },
-    });
+    withdrawCollateral(amountWithoutComma);
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-6">

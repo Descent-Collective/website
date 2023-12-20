@@ -32,11 +32,7 @@ const RepayModal = ({ close }: { close: () => void }) => {
       });
     }
 
-    repayXNGN(amountWithoutComma, {
-      onSuccess: () => {
-        setAmount("");
-      },
-    });
+    repayXNGN(amountWithoutComma);
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-6">

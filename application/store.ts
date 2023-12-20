@@ -5,6 +5,7 @@ import userReducer from "./user";
 import menuReducer from "./menu";
 import collateralReducer from "./collateral";
 import alertReducer from "./alert";
+import inputReducer from "./input";
 
 export interface CallbackProps {
   onSuccess?: Function;
@@ -17,6 +18,7 @@ export const store = configureStore({
     menu: menuReducer,
     collateral: collateralReducer,
     alert: alertReducer,
+    input: inputReducer,
   },
 });
 
