@@ -76,7 +76,7 @@ const DescentInput = (props: Input) => {
           }
         )}
       >
-        <div>
+        <div className="z-20">
           <input
             id={name}
             type={type}
@@ -100,15 +100,17 @@ const DescentInput = (props: Input) => {
         </div>
 
         {max && (
-          <DescentClickAnimation onClick={() => handleOnChange(max)}>
-            <div
-              className={classNames(
-                "py-1 text-black-100 px-[10px] bg-white-350 rounded text-[8px] md:text-xs cursor-pointer"
-              )}
-            >
-              Max
-            </div>
-          </DescentClickAnimation>
+          <div className="z-20">
+            <DescentClickAnimation onClick={() => handleOnChange(max)}>
+              <div
+                className={classNames(
+                  "py-1 text-black-100 px-[10px] bg-white-350 rounded text-[8px] md:text-xs cursor-pointer"
+                )}
+              >
+                Max
+              </div>
+            </DescentClickAnimation>
+          </div>
         )}
       </div>
 

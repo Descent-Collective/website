@@ -1,3 +1,4 @@
+import { DescentHint } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { InfoIcon } from "@/public/icons";
 import classNames from "classnames";
@@ -26,9 +27,7 @@ const FirstItem = ({
         <div className="text-[9px] md:text-sm font-medium text-grey-500 whitespace-nowrap">
           {item.title}
         </div>
-        <div className="cursor-pointer">
-          <InfoIcon />
-        </div>
+        <DescentHint text={item?.hint} />
       </div>
       <div className="mt-2 text-[9.5px] md:text-base font-medium md:font-bold">
         {item.value}
