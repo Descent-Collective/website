@@ -1,10 +1,47 @@
 import { useState } from "react";
 import classNames from "classnames";
-import { DescentButton, DescentInput, DescentModal } from "@/components";
+
+import { DescentButton, DescentModal } from "@/components";
 import RepayModal from "./modal/repay";
 import WithdrawModal from "./modal/withdraw";
+import { formatAmount, roundupNumber } from "@/utils";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 
-const ThirdItem = ({
+const ThirdItem = () => {
+  const { userState } = useSystemFunctions();
+
+  const { user } = userState;
+
+  const items = [
+    {
+      title: "Available to Borrow",
+      value: `${formatAmount(roundupNumber(user?.availablexNGN))} xNGN`,
+    },
+
+    {
+      title: "Available Collateral",
+      value: `${formatAmount(roundupNumber(user?.availableCollateral))} USDC`,
+      buttonText: "Withdraw",
+      disabled: Number(user?.availableCollateral) === 0,
+    },
+
+    {
+      title: "Vault xNGN Debt",
+      value: `${formatAmount(roundupNumber(user?.borrowedAmount))} xNGN`,
+      buttonText: "Repay",
+      disabled: Number(user?.borrowedAmount) === 0,
+    },
+  ];
+  return (
+    <div className="bg-white-50 rounded-lg py-6 flex justify-between xl:justify-start">
+      {items.map((item, index) => (
+        <Item key={index} item={item} items={items} index={index} />
+      ))}
+    </div>
+  );
+};
+
+const Item = ({
   item,
   index,
   items,
