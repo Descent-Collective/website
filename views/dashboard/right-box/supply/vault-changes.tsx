@@ -8,6 +8,14 @@ const VaultChanges = ({ amount, generated }: { amount: number, generated: number
   const { user } = userState;
   const { collateral } = collateralState;
 
+  const collateralWorthInCurrency = ((Number(user.availableCollateral) + Number(amount)) * Number(collateral.collateralPrice))
+
+  const collateralRatio = ((Number(user.borrowedAmount) + Number(user.accruedFees)) * 100 / collateralWorthInCurrency).toFixed(2)
+
+  const collateralDeposited = (Number(user.borrowedAmount) + Number(user.accruedFees)) * 100 / Number(collateral.liquidationThreshold);
+  
+  const liquidationPrice = collateralWorthInCurrency / collateralDeposited
+
   const vaultChanges = [
     {
       title: "Collateral Locked",
@@ -16,11 +24,11 @@ const VaultChanges = ({ amount, generated }: { amount: number, generated: number
     {
       title: "Collateral Ratio",
        // borrowed amount / deposited collateral * collateral price
-      value: `${((Number(user.borrowedAmount) + Number(user.accruedFees)) / ((Number(user.availableCollateral) + Number(amount)) * Number(collateral.collateralPrice)) * 100).toFixed(2)}%`,
+      value: `${collateralRatio}%`,
     },
     {
       title: "Liquidation Price",
-      value: `₦0.00/USDC`,
+      value: `₦${liquidationPrice.toFixed(2)}/USDC`,
     },
     {
       title: "Vault xNGN Debt",
