@@ -7,7 +7,7 @@ import { Hint } from "./types";
 const DescentHint = ({ text }: Hint) => {
   const [showHint, setShowHint] = useState(false);
   return (
-    <div className="relative z-50">
+    <div>
       <div
         onMouseLeave={() => setShowHint(false)}
         onMouseEnter={() => setShowHint(true)}
@@ -22,7 +22,7 @@ const DescentHint = ({ text }: Hint) => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.2 }}
-          className="relative top-10 md:top-12 -left-20 md:-left-28"
+          className="relative z-50 top-10 md:top-12 -left-20 md:-left-28"
         >
           <div className="absolute rotate-180 -top-6 z-50 left-7">
             <HintIcon />

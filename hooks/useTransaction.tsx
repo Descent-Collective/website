@@ -3,6 +3,8 @@ import useCollateralActions from "@/application/collateral/actions";
 import useUserActions from "@/application/user/actions";
 import React, { useState, useEffect } from "react";
 import { useWaitForTransaction } from "wagmi";
+import useSystemFunctions from "./useSystemFunctions";
+import { setLoadingAlert } from "@/application/alert";
 
 type TransactionStatus = {
   type: "deposit" | "borrow" | "repay" | "withdraw";
@@ -18,6 +20,7 @@ type Data = {
 };
 
 const useTransactionListener = () => {
+  const { dispatch } = useSystemFunctions();
   const { alertUser } = useAlertActions();
   const { getVaultInfo, getCollateralInfo } = useUserActions();
 
@@ -47,6 +50,7 @@ const useTransactionListener = () => {
   };
 
   const reset = (hash: `0x${string}`) => {
+    dispatch(setLoadingAlert(false));
     setTransactionHash(undefined);
     delete data?.[hash!];
     getVaultInfo();

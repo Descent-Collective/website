@@ -18,6 +18,7 @@ import { CallbackProps } from "../store";
 import useAlertActions from "../alert/actions";
 import useTransactionListener from "@/hooks/useTransaction";
 import { setClearInputs } from "../input";
+import { setLoadingAlert } from "../alert";
 
 const useCollateralActions = () => {
   const { dispatch } = useSystemFunctions();
@@ -70,6 +71,9 @@ const useCollateralActions = () => {
       dispatch(setLoadingApproveSupply(false));
 
       dispatch(setLoadingSupply(true));
+      setTimeout(() => {
+        dispatch(setLoadingAlert(true));
+      }, 2800);
       const response = await descent.depositCollateral(amount);
 
       listener({
@@ -80,7 +84,7 @@ const useCollateralActions = () => {
       _clearInputs();
       return callback?.onSuccess?.(response);
     } catch (error: any) {
-      console.log("an error occured", error);
+      dispatch(setLoadingAlert(false));
       callback?.onError?.(error);
 
       alertUser({
@@ -108,6 +112,9 @@ const useCollateralActions = () => {
 
       const descent = await _descentProvider();
 
+      setTimeout(() => {
+        dispatch(setLoadingAlert(true));
+      }, 2800);
       const response = await descent.borrowCurrency(amount);
 
       listener({
@@ -118,7 +125,7 @@ const useCollateralActions = () => {
       _clearInputs();
       return callback?.onSuccess?.(response);
     } catch (error: any) {
-      console.log(error);
+      dispatch(setLoadingAlert(false));
       callback?.onError?.(error);
 
       alertUser({
@@ -145,6 +152,9 @@ const useCollateralActions = () => {
       dispatch(setLoadingRepay(true));
       const descent = await _descentProvider();
 
+      setTimeout(() => {
+        dispatch(setLoadingAlert(true));
+      }, 2800);
       const response = await descent.repayCurrency(amount);
 
       listener({
@@ -155,7 +165,7 @@ const useCollateralActions = () => {
       _clearInputs();
       return callback?.onSuccess?.(response);
     } catch (error: any) {
-      console.log(error);
+      dispatch(setLoadingAlert(false));
       callback?.onError?.(error);
 
       alertUser({
@@ -185,8 +195,14 @@ const useCollateralActions = () => {
       dispatch(setLoadingWithdraw(true));
 
       const descent = await _descentProvider();
+
+      setTimeout(() => {
+        dispatch(setLoadingAlert(true));
+      }, 2800);
+
       const response = await descent.withdrawCollateral(amount);
 
+      dispatch(setLoadingAlert(true));
       listener({
         hash: response?.hash,
         amount,
@@ -195,7 +211,7 @@ const useCollateralActions = () => {
       _clearInputs();
       return callback?.onSuccess?.(response);
     } catch (error: any) {
-      console.log(error);
+      dispatch(setLoadingAlert(false));
       callback?.onError?.(error);
 
       alertUser({

@@ -67,10 +67,10 @@ const DescentFooter = () => {
           "mt-16": isDashboardRoute,
         })}
       >
-        <div className="flex flex-col md:flex-row gap-16 xl:gap-0 justify-between xl:relative xl:z-10">
+        <div className="flex flex-col md:flex-row gap-16 xl:gap-0 justify-between xl:z-10">
           <div>
             <LogoIcon />
-            <div className="mt-3 pl-10 flex items-center gap-5">
+            <div className="mt-3 pl-10 flex items-center gap-5 relative z-10">
               <DescentClickAnimation>
                 <a
                   href="https://github.com/Descent-Collective"
@@ -144,7 +144,7 @@ const DescentFooter = () => {
               <div className="text-sm xl:text-base mb-6">
                 Subscribe to the newsletter for Descent updates
               </div>
-              <div className="flex items-center justify-between rounded-[32px] pl-5 pr-2 h-14 border border-grey-650 md:w-[370px] xl:w-auto">
+              <div className="flex items-center justify-between rounded-[32px] pl-5 pr-2 h-14 border border-grey-650 md:w-[370px] xl:w-auto xl:relative xl:z-10">
                 <input
                   className="w-full h-full bg-transparent outline-none text-sm md:text-base text-grey-650"
                   placeholder="Enter email address here"
@@ -173,7 +173,7 @@ const DescentFooter = () => {
           <div className="text-sm xl:text-base">
             Subscribe to the newsletter for Descent updates
           </div>
-          <div className="flex items-center justify-between rounded-[32px] pl-5 pr-2 h-14 border border-grey-650 md:w-[370px] xl:w-auto">
+          <div className="flex items-center justify-between rounded-[32px] pl-5 pr-2 h-14 border border-grey-650 md:w-[370px] xl:w-auto relative">
             <input
               className="w-full h-full bg-transparent outline-none text-sm md:text-base text-grey-650"
               placeholder="Enter email address here"
