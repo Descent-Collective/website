@@ -16,7 +16,7 @@ const VaultChanges = ({ amount, generated }: { amount: number, generated: number
     {
       title: "Collateral Ratio",
        // borrowed amount / deposited collateral * collateral price
-      value: `${(Number(user.borrowedAmount) / ((Number(user.availableCollateral) + Number(amount)) * Number(collateral.collateralPrice)) * 100).toFixed(2)}%`,
+      value: `${((Number(user.borrowedAmount) + Number(user.accruedFees)) / ((Number(user.availableCollateral) + Number(amount)) * Number(collateral.collateralPrice)) * 100).toFixed(2)}%`,
     },
     {
       title: "Liquidation Price",
