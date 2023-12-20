@@ -5,13 +5,16 @@ import { DescentButton, DescentInput } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { formatAmount } from "@/utils";
 
-const errorMessage = (
+const liquidationWarning = (
   <div>
     Continuing with this amount may risk vault liquidation. Consider a lower
-    value that takes you farther away from the minimum
-    <span className="font-semibold underline ml-1">Collateral Ratio</span>.
+    value that takes you farther away from the Liquidation Threshold
   </div>
 );
+
+const errorMessage = ( <div>
+   You cannot borrow more than available xNGN generatable
+  </div>)
 
 const BorrowTab = () => {
   const { collateralState, userState } = useSystemFunctions();
@@ -19,7 +22,7 @@ const BorrowTab = () => {
 
   const [amount, setAmount] = useState("");
 
-  const { loadingBorrow, loadingApproveBorrow } = collateralState;
+  const { loadingBorrow, loadingApproveBorrow, collateral } = collateralState;
   const { user } = userState;
   const { availablexNGN } = user;
 
@@ -28,7 +31,11 @@ const BorrowTab = () => {
 
   const amountWithoutComma = amount.replace(/,/g, "");
   const error =
-    Number(amountWithoutComma) > Number(availablexNGN) ? errorMessage : "";
+    Number(amountWithoutComma) > Number(availablexNGN) ? errorMessage : '';
+  
+  const liquidatableAmount = Number(0.8) * Number(availablexNGN)
+  
+  const liquidationError =  Number(amountWithoutComma) > liquidatableAmount ? liquidationWarning : '';
 
   const valid = amount.length > 0;
 
@@ -57,19 +64,18 @@ const BorrowTab = () => {
 
       <DescentInput
         name="amount"
-        valueAlt={"0.00 USD"}
         label="xNGN to Borrow"
         labelAlt={`${xNgn} xNGN available`}
         placeholder="0.00"
         max={availablexNGN}
         onChange={setAmount}
-        error={error}
+        error={error || liquidationError}
       />
 
       <div className="mt-2">
         <DescentButton
           loading={loading}
-          disabled={!valid || loading}
+          disabled={!valid || loading || error.toString().length > 0}
           type="submit"
           text="Continue"
         />
