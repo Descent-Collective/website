@@ -14,21 +14,21 @@ interface IComponent {
 
 const tabContents = [
   {
-    title: "Fully backed by collateral",
+    title: "Capital Efficient",
     description:
-      "xNGN uses algorithmic mechanisms to maintain it's peg to the price of Naira. Descent Protocol's efficient liquidation mechanism allows users to get the most liquidity for their USDC.",
+      "Capital Efficient Buy xNGN on the market or generate xNGN with Descent protocol. Generate xNGN and keep your exposure to the whole collateral. Pay a low, fixed interest rate.",
     icon: <UsdcIcon />,
   },
   {
     title: "Fully backed by collateral",
     description:
-      "Every Currency(xNGN) minted is backed by an underlying collateral(USDC). Descent Protocol's efficient liquidation mechanism allows users to get the most liquidity for their USDC.",
+      "Every Currency (xNGN) minted is backed by an underlying collateral(USDC). Descent Protocol's efficient liquidation mechanism allows users to get the most liquidity for their USDC.",
     icon: <UsdcIcon />,
   },
   {
     title: "Unstoppable Stablecoin",
     description:
-      "Currencies(xNGN) generated are decentralized and capable of resisting all kinds of censorship.",
+      "Currencies (xNGN) generated are decentralized and capable of resisting all kinds of censorship.",
     icon: <UsdcIcon />,
   },
 ];
@@ -71,7 +71,7 @@ const SecondSection = () => {
             1xNGN ≈ 1NGN
           </h4>
           <p className="text-sm md:text-lg md:leading-[30px]  text-black-100">
-            A digital currency independent from banks. Generate currencies anytime, anywhere!
+            A digital currency for a new internet financial system. Generate currencies (xNGN) anytime, anywhere!
           </p>
           <div className="min-w-[210px]">
             <DescentButton
