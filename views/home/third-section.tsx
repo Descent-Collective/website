@@ -60,12 +60,12 @@ const ThirdSection = () => {
 
 const SliderComponent = ({
   title,
-  isPercentage
+  isPercentage,
 }: {
   title: string;
-    isPercentage?: boolean
+  isPercentage?: boolean;
 }) => {
-  const [value, setValue] = useState(isPercentage ? 30 : 1000)
+  const [value, setValue] = useState(isPercentage ? 30 : 1000);
 
   const handleChangeStart = () => {
     console.log("Change event started");
