@@ -33,11 +33,11 @@ const HeroSection = () => {
       description: "xNGN generated",
     },
     {
-      title:  `${formatAmount(collateral.collateralPrice)} xNGN`,
+      title: `${formatAmount(collateral.collateralPrice)} xNGN`,
       description: "xNGN/USDC price",
     },
     {
-    title: `${formatAmount(collateral.totalBorrowedAmount)} xNGN`,
+      title: `${formatAmount(collateral.totalBorrowedAmount)} xNGN`,
       description: "xNGN volume",
     },
   ];
@@ -91,9 +91,16 @@ const HeroSection = () => {
           </h3>
 
           <div className="mt-12 flex items-center justify-center gap-8">
-            <div className="w-[150px]">
-              <DescentButton onClick={handleEnterApp} text="Enter App" />
-            </div>
+            <a
+              href="https://interface-opal-nine.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="no-underline"
+            >
+              <div className="w-[150px]">
+                <DescentButton text="Enter App" />
+              </div>
+            </a>
 
             <DescentClickAnimation>
               <Link href="https://docs.descentdao.com/" className="flex">

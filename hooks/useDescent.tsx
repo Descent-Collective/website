@@ -30,7 +30,7 @@ const useDescent = () => {
       const isAcceptedChain = availableChains.find((chain) => chain.id === id);
 
       if (isConnected && !isAcceptedChain) {
-        switchNetwork && switchNetwork(availableChains[0].id);
+        // switchNetwork && switchNetwork(availableChains[0].id);
       }
 
       const show = !isConnected || isDisconnected;

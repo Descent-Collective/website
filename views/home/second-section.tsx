@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { DescentButton, DescentContainer } from "@/components";
 import { ArrowRightAccent, UsdcIcon } from "@/public/icons";
 import { useEffect, useState } from "react";
-import useSystemFunctions from "@/hooks/useSystemFunctions";
 
 interface IComponent {
   title: string;
@@ -35,7 +34,6 @@ const tabContents = [
 
 const SecondSection = () => {
   const [currentTab, setCurrentTab] = useState(0);
-
 
   const sections = [
     <Component key={0} {...tabContents[currentTab]} />,
@@ -71,7 +69,8 @@ const SecondSection = () => {
             1xNGN ≈ 1NGN
           </h4>
           <p className="text-sm md:text-lg md:leading-[30px]  text-black-100">
-            A digital currency for a new internet financial system. Generate currencies (xNGN) anytime, anywhere!
+            A digital currency for a new internet financial system. Generate
+            currencies (xNGN) anytime, anywhere!
           </p>
           <div className="min-w-[210px]">
             <DescentButton
