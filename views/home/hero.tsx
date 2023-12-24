@@ -14,13 +14,10 @@ import {
 } from "@/public/icons";
 import classNames from "classnames";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
-import { useConnectModal } from "@rainbow-me/rainbowkit";
-import { useAccount } from "wagmi";
-import { useEffect, useState } from "react";
 import { formatAmount } from "@/utils";
 
 const HeroSection = () => {
-  const { navigate, collateralState } = useSystemFunctions();
+  const { collateralState } = useSystemFunctions();
   const { collateral } = collateralState;
   const content = [
     {
