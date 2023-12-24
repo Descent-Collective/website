@@ -9,26 +9,28 @@ const Button = ({ setOpen }: { setOpen: (val: boolean) => void }) => {
 
   return (
     <div className="relative z-10">
-      <div>
+      <div className="max-lg:hidden">
         <a
-          href="https://interface-opal-nine.vercel.app/"
+          href="https://app.descentdao.com/"
           target="_blank"
           rel="noopener noreferrer"
           className="no-underline"
         >
-          <div className="min-w-[100px] md:min-w-[160px]">
+          
+          <div className="min-w-[100px] md:min-w-[160px] ">
             <DescentButton variant="info" text="Enter App" />
           </div>
         </a>
 
         <div className="flex items-center justify-end gap-2">
-          <DescentClickAnimation>
+       
+        </div>
+      </div>
+         <DescentClickAnimation>
             <div onClick={() => setOpen(true)} className="md:hidden">
               <MenuIcon />
             </div>
           </DescentClickAnimation>
-        </div>
-      </div>
     </div>
   );
 };

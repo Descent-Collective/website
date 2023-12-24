@@ -17,6 +17,8 @@ const FourthStep = () => {
 
   const { collateral } = collateralState;
 
+  console.log(collateral)
+
   const content = [
   {
     title: "USDC - xNGN",

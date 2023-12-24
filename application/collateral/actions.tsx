@@ -1,6 +1,5 @@
 "use client";
 import Descent from "@descent-protocol/sdk";
-import { useAccount } from "wagmi";
 
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import {
@@ -22,21 +21,20 @@ import { setLoadingAlert } from "../alert";
 
 const useCollateralActions = () => {
   const { dispatch } = useSystemFunctions();
-  const { connector: activeConnector } = useAccount();
   const { alertUser } = useAlertActions();
   const { listener } = useTransactionListener();
 
   const _descentProvider = async () => {
     try {
-      if (!activeConnector) return;
 
-      await activeConnector.connect();
-
-      const connectedProvider = await activeConnector.getProvider();
-      const descentApp = await Descent.create("browser", {
+           console.log(process.env.BASE_TESTNET_RPC_URL, "descent")
+      const descentApp = await Descent.create("https", {
         collateral: "USDC",
-        ethereum: connectedProvider,
+        rpcUrl: process.env.BASE_TESTNET_RPC_URL,
+         privateKey: process.env.PRIVATE_KEY,
       });
+
+ 
 
       return descentApp;
     } catch (error) {

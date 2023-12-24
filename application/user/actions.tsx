@@ -9,21 +9,19 @@ import { setCollateral } from "../collateral";
 
 const useUserActions = () => {
   const { dispatch } = useSystemFunctions();
-  const { address, connector: activeConnector } = useAccount();
+  const address = '0x459D7FB72ac3dFB0666227B30F25A424A5583E9c'
 
   const _descentProvider = async () => {
     try {
-      if (!activeConnector) return;
-
-      await activeConnector.connect();
-
-      const connectedProvider = await activeConnector.getProvider();
-      const descent = await Descent.create("browser", {
-        collateral: "USDC",
-        ethereum: connectedProvider,
+   
+   const descent = await Descent.create("https", {
+         collateral: "USDC",
+         rpcUrl: process.env.BASE_TESTNET_RPC_URL,
+         privateKey: process.env.PRIVATE_KEY,
       });
 
       return descent;
+      
     } catch (error) {
       console.log(error);
     }
