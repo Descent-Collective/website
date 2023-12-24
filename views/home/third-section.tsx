@@ -37,7 +37,7 @@ const ThirdSection = () => {
           <div className="md:pl-8 xl:pl-16 md:border-l border-grey-450">
             <div className="md:pt-5">
               <p className="text-base md:text-xl">
-                How much can your collateral generate?
+                How much can you collateral generate?
               </p>
               <p className="text-xl md:text-2xl font-medium mt-2">
                 220,000 xNGN
@@ -60,12 +60,12 @@ const ThirdSection = () => {
 
 const SliderComponent = ({
   title,
-  isPercentage,
+  isPercentage
 }: {
   title: string;
-  isPercentage?: boolean;
+    isPercentage?: boolean
 }) => {
-  const [value, setValue] = useState(isPercentage ? 30 : 1000);
+  const [value, setValue] = useState(isPercentage ? 30 : 1000)
 
   const handleChangeStart = () => {
     console.log("Change event started");
@@ -76,6 +76,10 @@ const SliderComponent = ({
   };
 
   const handleChangeComplete = () => {
+    if (isPercentage) {
+      
+    }
+  
     console.log("Change event completed");
   };
   return (
