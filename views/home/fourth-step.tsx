@@ -10,40 +10,37 @@ import {
 import { formatAmount } from "@/utils";
 import React from "react";
 
-
 const FourthStep = () => {
-  
   const { collateralState } = useSystemFunctions();
 
   const { collateral } = collateralState;
 
   const content = [
-  {
-    title: "USDC - xNGN",
-    volume:  `${formatAmount(collateral.totalBorrowedAmount)} xNGN`,
-    tvl:  `${formatAmount(collateral.totalDepositedCollateral)} USDC`,
-    borrowRate: `${Number(collateral.rate).toPrecision(2)}%`,
-    icon: <NigeriaFlag />,
-  },
-  {
-    title: "USDC - xARS",
-    volume: "-",
-    tvl: "-",
-    borrowRate: "0%",
-    icon: <ArgentinaFlag />,
-    isComingSoon: true,
-  },
-  {
-    title: "USDC - xKES",
-    volume: "-",
-    tvl: "-",
-    borrowRate: "0%",
-    icon: <KenyaFlag />,
-    isComingSoon: true,
-  },
-];
+    {
+      title: "USDC - xNGN",
+      volume: `${formatAmount(collateral.totalBorrowedAmount)} xNGN`,
+      tvl: `${formatAmount(collateral.totalDepositedCollateral)} USDC`,
+      borrowRate: `${Number(collateral.rate).toPrecision(2)}%`,
+      icon: <NigeriaFlag />,
+    },
+    {
+      title: "USDC - xARS",
+      volume: "-",
+      tvl: "-",
+      borrowRate: "0%",
+      icon: <ArgentinaFlag />,
+      isComingSoon: true,
+    },
+    {
+      title: "USDC - xKES",
+      volume: "-",
+      tvl: "-",
+      borrowRate: "0%",
+      icon: <KenyaFlag />,
+      isComingSoon: true,
+    },
+  ];
 
-  
   return (
     <section className="bg-green-200 py-10 px-8 pb-14 md:p-12 md:pb-20 xl:pt-[61px] xl:pb-[91px] xl:px-20 2xl:px-44 mt-12 md:mt-[72px]">
       <h4 className="font-Space_Mono text-center text-3xl md:text-[40px]">
@@ -110,7 +107,26 @@ const Box = (props: IBox) => {
         </div>
       </div>
 
-      <DescentButton disabled={isComingSoon} variant="tertiary" text="Borrow" />
+      {isComingSoon ? (
+        <DescentButton
+          disabled={isComingSoon}
+          variant="tertiary"
+          text="Borrow"
+        />
+      ) : (
+        <a
+          href="https://app.descentdao.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="no-underline"
+        >
+          <DescentButton
+            disabled={isComingSoon}
+            variant="tertiary"
+            text="Borrow"
+          />
+        </a>
+      )}
     </div>
   );
 };
