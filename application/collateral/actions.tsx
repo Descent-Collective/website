@@ -27,14 +27,11 @@ const useCollateralActions = () => {
   const _descentProvider = async () => {
     try {
 
-           console.log(process.env.BASE_TESTNET_RPC_URL, "descent")
       const descentApp = await Descent.create("https", {
         collateral: "USDC",
-        rpcUrl: process.env.BASE_TESTNET_RPC_URL,
-         privateKey: process.env.PRIVATE_KEY,
+        rpcUrl: process.env.NEXT_PUBLIC_BASE_TESTNET_RPC_URL,
+        privateKey: process.env.NEXT_PUBLIC_PRIVATE_KEY,
       });
-
- 
 
       return descentApp;
     } catch (error) {

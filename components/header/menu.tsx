@@ -59,8 +59,7 @@ const MenuComponent = ({ isOpen, setIsOpen }: IMenu) => {
           ))}
         </div>
       </div>
-
-      <DescentButton variant="danger" text="Disconnect" />
+ 
     </motion.div>
   );
 };

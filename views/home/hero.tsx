@@ -22,11 +22,6 @@ import { formatAmount } from "@/utils";
 const HeroSection = () => {
   const { navigate, collateralState } = useSystemFunctions();
   const { collateral } = collateralState;
-
-  const { openConnectModal } = useConnectModal();
-  const { address, isConnected } = useAccount();
-
-  const [startedConnecting, setStartedConnecting] = useState(false);
   const content = [
     {
       title: `${formatAmount(collateral.totalBorrowedAmount)} xNGN`,
@@ -41,24 +36,6 @@ const HeroSection = () => {
       description: "xNGN volume",
     },
   ];
-
-  const handleEnterApp = () => {
-    if (isConnected && address) {
-      return navigate.push("/app");
-    }
-
-    if (!openConnectModal) return;
-
-    setStartedConnecting(true);
-    openConnectModal();
-  };
-
-  useEffect(() => {
-    if (startedConnecting && isConnected && address) {
-      navigate.push("/app");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startedConnecting, openConnectModal, isConnected, address]);
   return (
     <section className="relative mt-32 xl:mt-24">
       <DescentContainer>
