@@ -44,7 +44,7 @@ const content = [
     links: [
       {
         title: "Borrow",
-        link: "https://interface-opal-nine.vercel.app/",
+        link: "https://app.descentdao.com/",
       },
       {
         title: "Earn",

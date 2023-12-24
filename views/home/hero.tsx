@@ -92,7 +92,7 @@ const HeroSection = () => {
 
           <div className="mt-12 flex items-center justify-center gap-8">
             <a
-              href="https://interface-opal-nine.vercel.app/"
+              href="https://app.descentdao.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="no-underline"
