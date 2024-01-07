@@ -11,7 +11,7 @@ const Button = ({ setOpen }: { setOpen: (val: boolean) => void }) => {
     <div className="relative z-10">
       <div className="max-lg:hidden">
         <a
-          href="https://app.descentdao.com/"
+          href="https://testnet.descentdao.com/"
           target="_blank"
           rel="noopener noreferrer"
           className="no-underline"

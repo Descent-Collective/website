@@ -44,7 +44,7 @@ const content = [
     links: [
       {
         title: "Borrow",
-        link: "https://app.descentdao.com/",
+        link: "https://testnet.descentdao.com/",
       },
       {
         title: "Earn",
