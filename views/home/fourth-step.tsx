@@ -115,7 +115,7 @@ const Box = (props: IBox) => {
         />
       ) : (
         <a
-          href="https://app.descentdao.com/"
+          href="https://testnet.descentdao.com/"
           target="_blank"
           rel="noopener noreferrer"
           className="no-underline"
