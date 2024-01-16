@@ -38,7 +38,7 @@ const HeroSection = () => {
       <DescentContainer>
         <div className="w-full flex flex-col justify-center items-center">
           <Link
-            href="#"
+            href="https://mirror.xyz/0x6Ffd015F2F6F1392D8fB0a50cBf4D67825ac28fe/d2tWaEYo7uWNnZdloQsD5lEjifX_zqdRJKEu3dvldOo"
             className="rounded-3xl group py-2 px-4 flex items-center gap-4 bg-white-50 shadow-alt cursor-pointer"
           >
             <BaseIcon />
