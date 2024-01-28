@@ -56,7 +56,11 @@ const SecondSection = () => {
         <div className="flex items-center gap-6 md:w-[60%] h-56">
           <div className="flex flex-col items-center justify-center gap-2">
             {sections.map((_, index) => (
-              <AnimatedTab key={index} isActive={index === currentTab} />
+              <AnimatedTab
+                key={index}
+                onClick={() => setCurrentTab(index)}
+                isActive={index === currentTab}
+              />
             ))}
           </div>
 
@@ -85,16 +89,23 @@ const SecondSection = () => {
   );
 };
 
-const AnimatedTab = ({ isActive }: { isActive: boolean }) => {
+const AnimatedTab = ({
+  isActive,
+  onClick,
+}: {
+  isActive: boolean;
+  onClick: () => void;
+}) => {
   return (
     <motion.div
-      className="w-1 md:w-[6px] rounded bg-green-50"
+      className="w-1 md:w-[6px] rounded bg-green-50 cursor-pointer"
       animate={{
         y: isActive ? 0 : -2,
         opacity: isActive ? 1 : 0.2,
         height: isActive ? 48 : 32,
       }}
       transition={{ duration: 0.5, ease: "linear" }}
+      onClick={onClick}
     />
   );
 };
