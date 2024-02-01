@@ -82,7 +82,7 @@ const DescentButton = ({
           "bg-blue-100 h-9 md:h-12 text-black-50 text-sm md:text-base":
             variant === "primary-alt",
 
-          "bg-transparent h-9 md:h-12 text-green-50 text-sm md:text-base border-[1.5px] border-green-500":
+          "bg-transparent h-9 md:h-12 text-black-250 text-sm md:text-base border-[1.5px] border-black-250":
             variant === "accent",
 
           "bg-transparent h-9 md:h-12 text-red-50 text-sm md:text-base border-[1.5px] border-red-50":
