@@ -94,11 +94,13 @@ const HeroSection = () => {
                   "flex flex-col justify-center items-center gap-4 md:w-1/4",
                   {
                     "md:border-x md:border-grey-300": index === 1,
+                    "xl:pr-20": index === 0,
+                    "xl:pl-20": index === 2,
                   }
                 )}
                 key={index}
               >
-                <div className="font-Space_Mono text-lg md:text-2xl lg:text-[32px] text-white-50 text-center">
+                <div className="font-Space_Mono text-lg md:text-2xl lg:text-[32px] text-white-50 text-center xl:whitespace-nowrap">
                   {item.title}
                 </div>
                 <div className="text-[10px] md:text-sm lg:text-base text-white-50 text-center">

@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 
 import { DescentButton, DescentContainer } from "@/components";
-import { ArrowRightAccent, UsdcIcon } from "@/public/icons";
+import { ArrowRightAccent, First, Second, Third } from "@/public/icons";
 import { useEffect, useState } from "react";
 
 interface IComponent {
@@ -15,20 +15,20 @@ const tabContents = [
   {
     title: "Capital Efficient",
     description:
-      "Capital Efficient Buy xNGN on the market or generate xNGN with Descent protocol. Generate xNGN and keep your exposure to the whole collateral. Pay a low, fixed interest rate.",
-    icon: <UsdcIcon />,
+      "Buy xNGN on the market or generate xNGN with Descent protocol. Generate xNGN and keep your exposure to the whole collateral. Pay a low, fixed interest rate.",
+    icon: <First />,
   },
   {
     title: "Fully backed by collateral",
     description:
-      "Every Currency (xNGN) minted is backed by an underlying collateral(USDC). Descent Protocol's efficient liquidation mechanism allows users to get the most liquidity for their USDC.",
-    icon: <UsdcIcon />,
+      "xNGN uses algorithmic mechanisms to maintain its peg to the Naira. Descent Protocol's efficient liquidation mechanism allows users to get the most liquidity for their USDC.",
+    icon: <Second />,
   },
   {
     title: "Unstoppable Stablecoin",
     description:
-      "Currencies (xNGN) generated are decentralized and capable of resisting all kinds of censorship.",
-    icon: <UsdcIcon />,
+      "xNGN is a decentralised stablecoin pegged to the Nigerian Naira (NGN) and also capable of resisting all kinds of censorship, especially from central banks.",
+    icon: <Third />,
   },
 ];
 
@@ -56,19 +56,23 @@ const SecondSection = () => {
         <div className="flex items-center gap-6 md:w-[60%] h-56">
           <div className="flex flex-col items-center justify-center gap-2">
             {sections.map((_, index) => (
-              <AnimatedTab key={index} isActive={index === currentTab} />
+              <AnimatedTab
+                key={index}
+                onClick={() => setCurrentTab(index)}
+                isActive={index === currentTab}
+              />
             ))}
           </div>
 
           {sections[currentTab]}
         </div>
 
-        <div className="border-[0.5px] border-green-50 bg-white-200 rounded-3xl p-9 xl:p-[58px] flex flex-col justify-center items-start gap-5 md:w-[40%]">
+        <div className="border-[0.5px] border-green-600 bg-green-550 rounded-3xl p-9 xl:p-[58px] flex flex-col justify-center items-start gap-5 md:w-[40%]">
           <p className="text-base font-bold text-grey-400">Discover xNGN</p>
           <h4 className="font-Space_Mono text-2xl md:text-3xl xl:text-[40px] font-bold text-black-100">
             1xNGN ≈ 1NGN
           </h4>
-          <p className="text-sm md:text-lg md:leading-[30px]  text-black-100">
+          <p className="text-sm md:text-lg md:leading-[30px] text-black-250">
             A digital currency for a new internet financial system. Generate
             currencies (xNGN) anytime, anywhere!
           </p>
@@ -85,16 +89,23 @@ const SecondSection = () => {
   );
 };
 
-const AnimatedTab = ({ isActive }: { isActive: boolean }) => {
+const AnimatedTab = ({
+  isActive,
+  onClick,
+}: {
+  isActive: boolean;
+  onClick: () => void;
+}) => {
   return (
     <motion.div
-      className="w-1 md:w-[6px] rounded bg-green-50"
+      className="w-1 md:w-[6px] rounded bg-green-450 cursor-pointer"
       animate={{
         y: isActive ? 0 : -2,
-        opacity: isActive ? 1 : 0.2,
+        opacity: isActive ? 1 : 0.3,
         height: isActive ? 48 : 32,
       }}
       transition={{ duration: 0.5, ease: "linear" }}
+      onClick={onClick}
     />
   );
 };
