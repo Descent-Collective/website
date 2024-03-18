@@ -4,6 +4,7 @@ import {
   DescentHeader,
 } from "@/components";
 import { LogoIcon } from "@/public/icons";
+import Image from "next/image";
 import Link from "next/link";
 
 const HomeView = () => {
@@ -15,7 +16,7 @@ const HomeView = () => {
       />
       <div className="absolute top-0 left-0 bottom-0 right-0 h-full white-bg z-10" />
 
-      <div className="relative z-50">
+      <div className="relative z-20">
         <DescentHeader />
 
         <div className="mt-[40%] md:mt-[10%] flex flex-col items-center justify-center gap-5">
@@ -46,6 +47,22 @@ const HomeView = () => {
             </Link>
           </DescentClickAnimation>
         </div>
+      </div>
+
+      <div className="hidden lg:flex absolute top-28 right-0 z-30">
+        <Image alt="frame" src="/frame1.svg" width={190} height={200} />
+      </div>
+
+      <div className="hidden lg:flex absolute top-28 left-0 z-30">
+        <Image alt="frame" src="/frame2.svg" width={190} height={200} />
+      </div>
+
+      <div className="hidden lg:flex absolute top-[530px] right-0 z-20">
+        <Image alt="frame" src="/frame3.svg" width={190} height={200} />
+      </div>
+
+      <div className="hidden lg:flex absolute top-[590px] left-0 z-20">
+        <Image alt="frame" src="/frame4.svg" width={190} height={200} />
       </div>
     </div>
   );
