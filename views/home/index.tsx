@@ -1,30 +1,18 @@
-import HeroSection from "./hero";
-import SecondSection from "./second-section";
-import ThirdSection from "./third-section";
-import FourthStep from "./fourth-step";
-import useCollateralActions from "@/application/collateral/actions";
-import useUserActions from "@/application/user/actions";
-import { useEffect } from "react";
+import { DescentContainer, DescentHeader } from "@/components";
+import { LogoIcon } from "@/public/icons";
 
 const HomeView = () => {
-  const { getCollateralInfo } = useCollateralActions();
-
-  const connectToDescent = async () => {
-  
-      getCollateralInfo();
-    
-  };
-
-  useEffect(() => {
-    connectToDescent();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   return (
-    <div>
-      <HeroSection />
-      <SecondSection />
-      <ThirdSection />
-      <FourthStep />
+    <div id="vertical" className="relative min-h-screen bg-white-50">
+      <div
+        id="horizontal"
+        className="absolute top-0 left-0 bottom-0 right-0 h-full"
+      />
+      <div className="absolute top-0 left-0 bottom-0 right-0 h-full white-bg z-10" />
+
+      <div className="relative z-50">
+        <DescentHeader />
+      </div>
     </div>
   );
 };

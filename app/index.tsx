@@ -7,9 +7,7 @@ import { ReactNode } from "react";
 const AppHome = ({ children }: { children: ReactNode }) => {
   return (
     <main className="font-SF_UI_Display">
-      <DescentHeader />
       <div>{children}</div>
-      <DescentFooter />
     </main>
   );
 };

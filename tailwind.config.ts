@@ -71,6 +71,7 @@ const config: Config = {
           850: "#E7E7E7",
           900: "#F6F6F6",
           950: "#D9D9D9",
+          1000: "#6F6F6F",
         },
         red: {
           50: "#FF7663",
