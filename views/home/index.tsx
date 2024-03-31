@@ -49,20 +49,46 @@ const HomeView = () => {
         </div>
       </div>
 
-      <div className="hidden lg:flex absolute top-28 right-0 z-30">
+      <div className="hidden xl:flex absolute top-24 right-0 z-50">
         <Image alt="frame" src="/frame1.svg" width={190} height={200} />
       </div>
 
-      <div className="hidden lg:flex absolute top-28 left-0 z-30">
+      <div className="gradient-background z-[99999] w-full absolute bottom-0 left-0 right-0 h-1/3" />
+
+      <div className="hidden xl:flex absolute top-24 left-0 z-50">
         <Image alt="frame" src="/frame2.svg" width={190} height={200} />
       </div>
 
-      <div className="hidden lg:flex absolute top-[530px] right-0 z-20">
+      <div className="hidden xl:flex absolute top-[510px] right-0 z-40">
         <Image alt="frame" src="/frame3.svg" width={190} height={200} />
       </div>
 
-      <div className="hidden lg:flex absolute top-[590px] left-0 z-20">
-        <Image alt="frame" src="/frame4.svg" width={190} height={200} />
+      <div className="hidden xl:flex absolute top-[570px] left-0 z-40">
+        <Image alt="frame" src="/frame4.svg" width={170} height={100} />
+      </div>
+
+      <div className="hidden xl:flex absolute -bottom-9 left-0 z-40">
+        <Image alt="frame" src="/frame5.svg" width={190} height={200} />
+      </div>
+
+      <div className="hidden xl:flex absolute -bottom-16 right-0 z-30">
+        <Image alt="frame" src="/frame6.svg" width={330} height={200} />
+      </div>
+
+      <div className="hidden xl:flex absolute -bottom-5 left-[140px] z-40">
+        <Image alt="frame" src="/frame7.svg" width={285} height={200} />
+      </div>
+
+      <div className="hidden xl:flex absolute -bottom-11 right-[270px] z-20">
+        <Image alt="frame" src="/frame8.svg" width={295} height={200} />
+      </div>
+
+      <div className="hidden xl:flex absolute -bottom-12 right-[500px] z-50">
+        <Image alt="frame" src="/frame9.svg" width={340} height={200} />
+      </div>
+
+      <div className="hidden xl:flex absolute -bottom-20 left-[330px] z-40">
+        <Image alt="frame" src="/frame10.svg" width={500} height={200} />
       </div>
     </div>
   );
