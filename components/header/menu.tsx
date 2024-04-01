@@ -9,10 +9,22 @@ interface IMenu {
 
 const links = [
   {
-    title: "Docs",
-    link: "https://docs.descentdao.com",
+    title: "Frames explorer",
+    link: "#",
   },
-
+  {
+    title: "Farcaster",
+    link: "#",
+  },
+  {
+    title: "Resources",
+    link: "#",
+    items: [1],
+  },
+  {
+    title: "Twitter",
+    link: "#",
+  },
 ];
 
 const MenuComponent = ({ isOpen, setIsOpen }: IMenu) => {
@@ -59,7 +71,6 @@ const MenuComponent = ({ isOpen, setIsOpen }: IMenu) => {
           ))}
         </div>
       </div>
- 
     </motion.div>
   );
 };

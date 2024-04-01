@@ -1,11 +1,30 @@
 "use client";
 import { useState } from "react";
+
+import { LogoIcon, MenuIcon } from "@/public/icons";
+import { DescentClickAnimation, DescentContainer } from "..";
+import MenuComponent from "./menu";
 import Link from "next/link";
 
-import { LogoIcon } from "@/public/icons";
-import { DescentAlert, DescentContainer } from "..";
-import MenuComponent from "./menu";
-import Button from "./button";
+const menuItems = [
+  {
+    title: "Frames explorer",
+    link: "#",
+  },
+  {
+    title: "Farcaster",
+    link: "#",
+  },
+  {
+    title: "Resources",
+    link: "#",
+    items: [1],
+  },
+  {
+    title: "Twitter",
+    link: "#",
+  },
+];
 
 const DescentHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,28 +32,32 @@ const DescentHeader = () => {
   return (
     <>
       <DescentContainer>
-        <header className="bg-white-50">
-          <nav className="flex items-center justify-between pt-5">
-            <div className="flex items-center gap-6 relative z-10">
-              <Link href="/">
-                <LogoIcon />
-              </Link>
-              <div className="items-center gap-6 hidden md:flex">
-                <div className="w-[1px] h-[39px] bg-grey-100" />
+        <header className="flex items-center justify-between pt-10">
+          <LogoIcon />
+
+          <div className="hidden lg:flex gap-8">
+            {menuItems.map((item, index) => (
+              <DescentClickAnimation key={index}>
                 <Link
-                  className="text-base xl:text-lg font-medium"
-                  href="https://docs.descentdao.com"
+                  href={item.link}
+                  className="no-underline flex items-center gap-1"
                 >
-                  Docs
+                  <div className="text-base font-medium text-grey-1000">
+                    {item.title}
+                  </div>
                 </Link>
+              </DescentClickAnimation>
+            ))}
+          </div>
+
+          <div className="lg:hidden">
+            <DescentClickAnimation>
+              <div onClick={() => setIsOpen(true)}>
+                <MenuIcon />
               </div>
-            </div>
-
-            <Button setOpen={setIsOpen} />
-          </nav>
+            </DescentClickAnimation>
+          </div>
         </header>
-
-        <DescentAlert />
       </DescentContainer>
 
       <MenuComponent isOpen={isOpen} setIsOpen={setIsOpen} />

@@ -7,6 +7,7 @@ const DescentClickAnimation = ({ children, onClick }: ClickAnimation) => {
       onClick={onClick}
       whileHover={{ scale: 1.04 }}
       whileTap={{ scale: 0.9 }}
+      className="cursor-pointer"
     >
       {children}
     </motion.div>
